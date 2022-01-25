@@ -3,6 +3,7 @@ const dayjs = require('dayjs')
 const BlogSchema = new mongoose.Schema({
     blogName: String,
     userName: String,
+    defcoverPicture: String,
     startTime: {
         type: String,
         set(){

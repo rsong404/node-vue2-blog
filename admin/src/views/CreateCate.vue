@@ -15,18 +15,20 @@ export default {
     data() {
         return {
             category:{
-                cateName: ''
+                cateName: '',
+                time:'',
             }
         }
     },
     methods: {
         async handle(){
             if(this.category.cateName == ''){
-                console.log('不能为空')
+                this.$message.error("分类名不能为空！")
                 return
             }
             const result = await this.$http.post('/category',this.category)
-            console.log(result)
+            this.$message.success(result.data.cateName + '分类存入成功！')
+            this.$router.push({name:'catelist'})
         }
     },
 }

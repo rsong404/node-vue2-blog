@@ -1,27 +1,28 @@
 <template>
   <el-container style="height: 705px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu router :default-openeds="['2']">
+      <el-menu router :default-active="this.$route.path" :default-openeds="['/catelist']">
         <el-submenu index="1">
           <template slot="title"
             ><i class="el-icon-user-solid"></i>用户</template
           >
           <el-menu-item-group>
             <template slot="title">分组一</template>
-            <el-menu-item index="userlist">用户列表</el-menu-item>
-            <el-menu-item index="createuser">新建用户</el-menu-item>
+            <el-menu-item index="/userlist">用户列表</el-menu-item>
+            <el-menu-item index="/createuser">新建用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-submenu index="2">
-          <template slot="title"><i class="el-icon-menu"></i>分类</template>
+         <el-menu-item index="/catelist"><i class="el-icon-menu"></i>分类</el-menu-item>
+        <el-submenu index="3">
+          <template slot="title"><i class="el-icon-menu"></i>文章</template>
           <el-menu-item-group>
-            <el-menu-item index="catelist">分类列表</el-menu-item>
-            <el-menu-item index="createcate">新建分类</el-menu-item>
+            <el-menu-item index="/articlelist">文章列表</el-menu-item>
+            <el-menu-item index="/createarticle">新建文章</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title"
-            ><i class="el-icon-setting"></i>标签</template
+            ><i class="el-icon-setting"></i>文章</template
           >
           <el-menu-item-group>
             <el-menu-item index="3-1">选项1</el-menu-item>
@@ -36,7 +37,10 @@
 
       </el-header>
       <el-main>
-        <router-view></router-view>
+        <!-- 路由显示 -->
+        <div v-if="isShowRouterView">
+          <router-view></router-view>
+        </div>
       </el-main>
     </el-container>
   </el-container>
@@ -45,9 +49,20 @@
 <script>
 export default {
   name:"Container",
+  provide(){
+    return {reload: this.reload}
+  },
   data() {
     return {
-      
+      isShowRouterView: true
+    }
+  },
+  methods: {
+    reload(){
+      this.isShowRouterView = false
+      this.$nextTick(() => {
+        this.isShowRouterView = true
+      })
     }
   },
 };

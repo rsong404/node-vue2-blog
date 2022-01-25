@@ -19,18 +19,19 @@ module.exports = app => {
 
     //修改数据
     router.put('/', async(req,res) => {
-        await req.model.deleteOne({_id:req.body.id})
-        const data = await req.model.create(req.body)
+        const data = await req.model.updateOne({_id:req.query._id},req.body)
         res.send(data)
         console.log('修改数据' + data)
     })
 
     //删除数据
     router.delete('/', async(req,res) => {
-        const data = await req.model.deleteOne({_id:req.body.id})
+        const data = await req.model.deleteOne({_id:req.query._id})
         res.send(data)
-        console.log('删除数据：'+ data)
+        console.log('删除数据：'+ JSON.stringify(data))
     })
+    //分类另起路由
+    // app.use('/admin/api/category')
 
     app.use('/admin/api/:type',modelware,router)
 }

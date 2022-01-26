@@ -8,6 +8,6 @@ const CateSchema = new mongoose.Schema({
             return dayjs().format('YYYY-MM-DD');
         }
     },
-    items:[{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
+    // items:[{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 })
 module.exports = mongoose.model('Categroy',CateSchema)

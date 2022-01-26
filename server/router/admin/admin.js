@@ -7,6 +7,7 @@ module.exports = app => {
 
     //查询数据
     router.get('/', async(req,res) => {
+        
         res.send(await req.model.find({}))
     })
 
@@ -15,12 +16,13 @@ module.exports = app => {
         const data = await req.model.create(req.body)
         res.send(data)
         console.log('添加数据' + data)
+        
     })
 
     //修改数据
     router.put('/', async(req,res) => {
         const data = await req.model.updateOne({_id:req.query._id},req.body)
-        res.send(data)
+        res.status(200).send(data)
         console.log('修改数据' + data)
     })
 

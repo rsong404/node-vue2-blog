@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 705px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu router :default-active="this.$route.path" :default-openeds="['/catelist']">
+      <el-menu router :default-active="this.$route.path" :default-openeds="['/createArticle']">
         <el-submenu index="1">
           <template slot="title"
             ><i class="el-icon-user-solid"></i>用户</template
@@ -16,13 +16,13 @@
         <el-submenu index="3">
           <template slot="title"><i class="el-icon-menu"></i>文章</template>
           <el-menu-item-group>
-            <el-menu-item index="/articlelist">文章列表</el-menu-item>
-            <el-menu-item index="/createarticle">新建文章</el-menu-item>
+            <el-menu-item index="/articleList">文章列表</el-menu-item>
+            <el-menu-item index="/createArticle">新建文章</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
           <template slot="title"
-            ><i class="el-icon-setting"></i>文章</template
+            ><i class="el-icon-setting"></i>说说</template
           >
           <el-menu-item-group>
             <el-menu-item index="3-1">选项1</el-menu-item>

@@ -3,9 +3,14 @@ import App from './App.vue'
 import router from './router'
 import http from './http'
 Vue.prototype.$http = http
-import {Button, MessageBox, Message, Tag, Input, Table, TableColumn, Popover, Aside,Container,MenuItem,Menu,Submenu,MenuItemGroup,Header,Main } from 'element-ui';
+import {Button, Option, Col, Select, Form, FormItem, MessageBox, Message, Tag, Input, Table, TableColumn, Popover, Aside,Container,MenuItem,Menu,Submenu,MenuItemGroup,Header,Main } from 'element-ui';
 Vue.use(Aside)
 Vue.use(Main)
+Vue.use(Option)
+Vue.use(Select)
+Vue.use(Col)
+Vue.use(Form)
+Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Tag)
 Vue.use(Menu)

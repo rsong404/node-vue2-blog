@@ -12,7 +12,7 @@
         </el-col>
       </el-form-item>
       <el-form-item label="分类">
-        <el-select v-model="form.cid" placeholder="请选择分类">
+        <el-select v-model="form.cid" placeholder="请选择分类" @change="CateSelect">
           <el-option
             v-for="item in this.categoryData"
             :key="item._id"
@@ -58,14 +58,25 @@ export default {
       form: {
         title: "",
         userName: "",
+        cateName:'',
         cid: "",
         tags: [],
         coverPicture: "",
         contents: "",
+        time: 'default',
       },
     };
   },
   methods: {
+    CateSelect(value){
+      for (let index = 0; index < this.categoryData.length; index++) {
+        if(this.categoryData[index]._id == value){
+          this.form.cateName = this.categoryData[index].cateName
+        } 
+        
+      }
+      console.log(this.form.cateName  )
+    },
     async GetCateData() {
       let result = await this.$http.get("/category");
       this.categoryData = result.data;
@@ -76,6 +87,7 @@ export default {
         this.form = {
           title: "",
           userName: "",
+          cateName: '',
           cid: "",
           tags: [],
           coverPicture: "",

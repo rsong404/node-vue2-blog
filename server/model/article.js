@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const dayjs = require('dayjs')
 const ArticleSchema = new mongoose.Schema({
     title: String,
+    cateName: String,
     cid: {
         type: mongoose.Schema.Types.ObjectId
     },

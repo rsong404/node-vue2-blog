@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import http from './http'
+import './globalStyle.css'
 Vue.prototype.$http = http
 import {Button, Option, Col, Select, Form, FormItem, MessageBox, Message, Tag, Input, Table, TableColumn, Popover, Aside,Container,MenuItem,Menu,Submenu,MenuItemGroup,Header,Main } from 'element-ui';
 Vue.use(Aside)

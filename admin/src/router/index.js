@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import CateList from '../views/CateList'
 import CreateArticle from '../views/CreateArticle'
+import ArticleList from '../views/ArticleList'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,11 @@ const routes = [
     name:'catelist',
     path: '/catelist',
     component: CateList
+  },
+  {
+    name:'articleList',
+    path: '/articleList',
+    component: ArticleList
   },
   {
     name:'createArticle',

@@ -12,7 +12,11 @@
         </el-col>
       </el-form-item>
       <el-form-item label="分类">
-        <el-select v-model="form.cid" placeholder="请选择分类" @change="CateSelect">
+        <el-select
+          v-model="form.cid"
+          placeholder="请选择分类"
+          @change="CateSelect"
+        >
           <el-option
             v-for="item in this.categoryData"
             :key="item._id"
@@ -58,48 +62,46 @@ export default {
       form: {
         title: "",
         userName: "",
-        cateName:'',
+        cateName: "",
         cid: "",
         tags: [],
-        tagsID: [],
+        tagsId: [],
         coverPicture: "",
         contents: "",
-        time: 'default',
+        time: "default",
       },
     };
   },
   methods: {
-    CateSelect(value){
+    CateSelect(value) {
+      console.log(value);
       for (let index = 0; index < this.categoryData.length; index++) {
-        if(this.categoryData[index]._id == value){
-          this.form.cateName = this.categoryData[index].cateName
-        } 
-        
+        if (this.categoryData[index]._id == value) {
+          this.form.cateName = this.categoryData[index].cateName;
+        }
       }
-      console.log(this.form.cateName  )
+      console.log(this.form.cateName);
     },
     async GetCateData() {
       let result = await this.$http.get("/category");
       this.categoryData = result.data;
     },
     async onSubmit() {
+      console.log(this.form);
       if (this.if_obj_is_null(this.form) == 0) {
         //向数据库添加tag
-        if (this.form.tags.length >= 1) {
-          for (let i = 0; i < this.form.tags.length; i++) {
-            let tag = {
-              tagName: this.form.tags[i],
-              // articleId: result.data._id,
-            };
-            let result = await this.$http.post("/tag", tag);
-            this.form.tagsID[i] = result.data._id
-          }
+        for (let index = 0; index < this.form.tags.length; index++) {
+          let tag = {
+            tagName: this.form.tags[index],
+          };
+          let result = await this.$http.post("/tag", tag);
+          this.form.tagsId[index] = result.data._id;
         }
+        //添加文章
         await this.$http.post("/article", this.form);
-        
-        this.$router.push('/articleList')
         this.$message.success("文章发表成功！");
-        
+        //跳转到文章列表页面
+        this.$router.push("/articleList");
       } else {
         this.$message.error("表格不能为空，请检查！");
       }
@@ -111,15 +113,15 @@ export default {
     },
     // 判断一个对象下是否有空属性
     if_obj_is_null(obj) {
-        let i = 0;
+      let i = 0;
       for (const key in obj) {
         if (obj.hasOwnProperty(key)) {
           if (obj[key] === null || obj[key] === "") {
             i++;
-          } 
+          }
         }
       }
-      return i
+      return i;
     },
   },
   created() {

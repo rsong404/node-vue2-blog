@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item label="分类">
         <el-select
-          v-model="form.cid"
+          v-model="form.cateName"
           placeholder="请选择分类"
           @change="CateSelect"
         >
@@ -27,6 +27,7 @@
       </el-form-item>
       <el-form-item label="添加标签">
         <el-select
+          disabled
           v-model="form.tags"
           multiple
           filterable
@@ -57,8 +58,8 @@ export default {
   data() {
     return {
       categoryData: [],
-      tagValue: [],
-      cateId:'',
+      oriTag: "",
+      cateId: "",
       editor: null,
       form: {
         title: "",
@@ -66,6 +67,7 @@ export default {
         cateName: "",
         cid: "",
         tags: [],
+        tagsId: [],
         coverPicture: "",
         contents: "",
         time: "default",
@@ -74,15 +76,15 @@ export default {
   },
   methods: {
     InitArticleData() {
-      //将路由传过来的数据实现浅复制，再f赋值给form
-      // this.form = this.$route.params;
+      //将路由传过来的数据实现浅复制，再赋值给form
       for (const key in this.$route.params) {
-        this.form[key] = this.$route.params[key]
+        this.form[key] = this.$route.params[key];
       }
-      console.log(this.form)
-      //让分类正常显示
-      this.cateId =  this.form.cid
-      this.form.cid = this.form.cateName
+
+      // //让分类正常显示
+      this.cateId = this.form.cid;
+      this.form.cid = this.form.cateName;
+      this.oriTag = this.form.tags;
     },
     CateSelect(value) {
       for (let index = 0; index < this.categoryData.length; index++) {
@@ -98,34 +100,28 @@ export default {
     },
     async onSubmit() {
       if (this.if_obj_is_null(this.form) == 0) {
-        if(this.form.cid === this.form.cateName){
-          this.form.cid = this.cateId
+        if (this.form.cid === this.form.cateName) {
+          this.form.cid = this.cateId;
         }
-        let _id = this.$route.params
-        //console.log(this.CompareObj(this.$route.params,this.form))
-        // return
-        let result = await this.$http.put("/article",this.CompareObj(this.$route.params,this.form), {params:{_id}},);
-        // this.form = {
-        //   title: "",
-        //   userName: "",
-        //   cateName: "",
-        //   cid: "",
-        //   tags: [],
-        //   coverPicture: "",
-        //   contents: "",
-        // };
+        //如果文章tag被修改则向数据库删除旧的tag并添加新tag
+        // if (this.oriTag !== this.form.tag) {
+        //   //删除旧tag
+        //   await this.$http.delete('/tag',{params:{_id:this.form.tagId}})
+        //   //添加新tag
+        //   let tag = {tagName: this.form.tag, };
+        //   let result = await this.$http.post("/tag", tag);
+        //   //将新tagId赋值给form
+        //   this.form.tagId = result.data._id
+        // }
+        await this.$http.put(
+          "/article",
+          this.CompareObj(this.$route.params, this.form),
+          { params: { _id: this.form._id } }
+        );
+
         this.reload();
         this.$message.success("文章修改成功！");
-        //向数据库修改tag
-        if (result.data.tags.length >= 1) {
-          for (let i = 0; i < result.data.tags.length; i++) {
-            let tag = {
-              tagName: result.data.tags[i],
-              articleId: result.data._id,
-            };
-            this.$http.put("/tag", );
-          }
-        }
+        this.$router.push("/articleList");
       } else {
         this.$message.error("表格不能为空，请检查！");
       }
@@ -141,7 +137,7 @@ export default {
       editor.config.onchange = (newHtml) => {
         this.form.contents = newHtml;
       };
-      editor.txt.html(this.form.contents)
+      editor.txt.html(this.form.contents);
       this.editor = editor;
     },
     // 判断一个对象下是否有空属性
@@ -156,24 +152,22 @@ export default {
       }
       return i;
     },
-    CompareObj(oriObj,newObj){
-      let obj = {}
+    CompareObj(oriObj, newObj) {
+      let obj = {};
       for (const key in oriObj) {
         if (JSON.stringify(oriObj[key]) !== JSON.stringify(newObj[key])) {
-          obj[key] = newObj[key]
+          obj[key] = newObj[key];
         }
-        
-
       }
-      return obj
-    }
+      return obj;
+    },
   },
   created() {
     this.GetCateData();
-    this.InitArticleData()
+    this.InitArticleData();
   },
   mounted() {
-    this.InitEditor()
+    this.InitEditor();
   },
   beforeDestroy() {
     // 调用销毁 API 对当前编辑器实例进行销毁

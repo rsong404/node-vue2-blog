@@ -1,7 +1,7 @@
 const dayjs = require('dayjs')
 const mongoose = require('mongoose')
 const CateSchema = new mongoose.Schema({
-    cateName: String,
+    cateName: {type:String,ref:'Article'},
     time:{
         type:String,
         set(){
@@ -10,4 +10,5 @@ const CateSchema = new mongoose.Schema({
     },
     // items:[{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 })
+
 module.exports = mongoose.model('Categroy',CateSchema)

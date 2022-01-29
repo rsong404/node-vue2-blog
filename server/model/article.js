@@ -6,8 +6,8 @@ const ArticleSchema = new mongoose.Schema({
     cid: {
         type: mongoose.Schema.Types.ObjectId
     },
-    tags: [],
-    tagsID:[{type:mongoose.Schema.Types.ObjectId}],
+    tags:[],
+    tagsId:[{type:mongoose.Schema.Types.ObjectId}],
     coverPicture: String,
     userName: String,
     contents: String,

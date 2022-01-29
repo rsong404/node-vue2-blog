@@ -57,8 +57,8 @@ export default {
           /[\u4e00-\u9fa5-a-zA-Z0-9]{2,4}/,
         inputErrorMessage: "只能包含中文或英文或数字，长度大于2小于10",
       })
-        .then(({ value }) => {
-          this.$http.post('/category',{cateName:value,time:''})
+        .then(async ({ value }) => {
+          await  this.$http.post('/category',{cateName:value,time:''})
           this.$message({
             type: "success",
             message: "你的新分类是: " + value,

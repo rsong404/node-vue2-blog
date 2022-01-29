@@ -5,17 +5,20 @@
         <img :src="item.coverPicture" alt="" />
       </div>
       <div id="main">
-        <div id="deleteButton"><a href="javascript:;">删除</a></div>
+        <div id="deleteButton">
+          <a style="color:green" href="javascript:;" @click="EditorArticle(item)" >修改</a>
+          <a href="javascript:;" @click="DeleteArticle(item._id)">删除</a>
+        </div>
         <div id="main_content">
           <div id="content_title">
             <strong>{{ item.title }}</strong>
           </div>
           <div id="content" v-html="item.contents"></div>
           <div id="main_content_foot">
-              <span><i class="el-icon-user"></i> {{ item.userName }} </span> 
-              <span><i class="el-icon-help"></i> {{ item.cateName }} </span> 
-              <!-- <span><i class="el-icon-price-tag"></i> {{ item.tags[0] }} </span>  -->
-              <span><i class="el-icon-time"></i> {{ item.time }} </span> 
+            <span><i class="el-icon-user"></i> {{ item.userName }} </span>
+            <span><i class="el-icon-help"></i> {{ item.cateName }} </span>
+            <!-- <span><i class="el-icon-price-tag"></i> {{ item.tags[0] }} </span>  -->
+            <span><i class="el-icon-time"></i> {{ item.time }} </span>
           </div>
         </div>
       </div>
@@ -25,12 +28,39 @@
 
 <script>
 export default {
+    inject:['reload'],
   data() {
     return {
       articleData: [],
     };
   },
   methods: {
+      //修改文章
+      EditorArticle(item){
+          this.$router.push({name:'editorArticle',params:item})
+      },
+      //删除文章
+    async DeleteArticle(_id) {
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$http.delete("/article", { params: { _id } });
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
+          this.reload();
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
     async GetArticleData() {
       let result = await this.$http.get("/article");
       this.articleData = result.data;
@@ -50,6 +80,7 @@ export default {
   overflow: hidden;
 }
 #article {
+  cursor: pointer;
   width: 600px;
   height: 230px;
   margin: 10px;
@@ -75,6 +106,8 @@ export default {
     background-color: rgb(238, 238, 238);
     #deleteButton {
       overflow: hidden;
+      display: flex;
+      justify-content: space-between;
       a {
         display: block;
         text-decoration: none;
@@ -87,7 +120,7 @@ export default {
     }
     #main_content {
       height: 190px;
-        background-color: tan;
+      background-color: tan;
       div {
         margin: 0 8px;
       }

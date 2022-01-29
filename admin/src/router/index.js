@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import CateList from '../views/CateList'
 import CreateArticle from '../views/CreateArticle'
 import ArticleList from '../views/ArticleList'
+import EditorArticle from '../views/EditorArticle'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,12 @@ const routes = [
     name:'createArticle',
     path: '/createArticle',
     component: CreateArticle
+  },
+  {
+    name:'editorArticle',
+    path: '/editorArticle',
+    component: EditorArticle,
+    props: true
   }
 ]
 

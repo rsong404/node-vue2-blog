@@ -61,6 +61,7 @@ export default {
         cateName:'',
         cid: "",
         tags: [],
+        tagsID: [],
         coverPicture: "",
         contents: "",
         time: 'default',
@@ -83,28 +84,22 @@ export default {
     },
     async onSubmit() {
       if (this.if_obj_is_null(this.form) == 0) {
-        let result = await this.$http.post("/article", this.form);
-        this.form = {
-          title: "",
-          userName: "",
-          cateName: '',
-          cid: "",
-          tags: [],
-          coverPicture: "",
-          contents: "",
-        };
-        this.reload();
-        this.$message.success("文章发表成功！");
         //向数据库添加tag
-        if (result.data.tags.length >= 1) {
-          for (let i = 0; i < result.data.tags.length; i++) {
+        if (this.form.tags.length >= 1) {
+          for (let i = 0; i < this.form.tags.length; i++) {
             let tag = {
-              tagName: result.data.tags[i],
-              articleId: result.data._id,
+              tagName: this.form.tags[i],
+              // articleId: result.data._id,
             };
-            this.$http.post("/tag", tag);
+            let result = await this.$http.post("/tag", tag);
+            this.form.tagsID[i] = result.data._id
           }
         }
+        await this.$http.post("/article", this.form);
+        
+        this.$router.push('/articleList')
+        this.$message.success("文章发表成功！");
+        
       } else {
         this.$message.error("表格不能为空，请检查！");
       }

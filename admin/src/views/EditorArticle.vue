@@ -74,13 +74,12 @@ export default {
   },
   methods: {
     InitArticleData() {
-      //将路由传过来的数据赋值为form
-      this.form = this.$route.params;
-      console.log(this.$route.params)
-      console.log(123)
+      //将路由传过来的数据实现浅复制，再f赋值给form
+      // this.form = this.$route.params;
+      for (const key in this.$route.params) {
+        this.form[key] = this.$route.params[key]
+      }
       console.log(this.form)
-      console.log(123)
-
       //让分类正常显示
       this.cateId =  this.form.cid
       this.form.cid = this.form.cateName
@@ -103,18 +102,18 @@ export default {
           this.form.cid = this.cateId
         }
         let _id = this.$route.params
-        console.log(this.CompareObj(this.$route.params,this.form))
-        return
-        let result = await this.$http.put("/article", {_id},this.form);
-        this.form = {
-          title: "",
-          userName: "",
-          cateName: "",
-          cid: "",
-          tags: [],
-          coverPicture: "",
-          contents: "",
-        };
+        //console.log(this.CompareObj(this.$route.params,this.form))
+        // return
+        let result = await this.$http.put("/article",this.CompareObj(this.$route.params,this.form), {params:{_id}},);
+        // this.form = {
+        //   title: "",
+        //   userName: "",
+        //   cateName: "",
+        //   cid: "",
+        //   tags: [],
+        //   coverPicture: "",
+        //   contents: "",
+        // };
         this.reload();
         this.$message.success("文章修改成功！");
         //向数据库修改tag
@@ -124,7 +123,7 @@ export default {
               tagName: result.data.tags[i],
               articleId: result.data._id,
             };
-            this.$http.post("/tag", tag);
+            this.$http.put("/tag", );
           }
         }
       } else {
@@ -161,9 +160,10 @@ export default {
       let obj = {}
       for (const key in oriObj) {
         if (JSON.stringify(oriObj[key]) !== JSON.stringify(newObj[key])) {
-          obj.key = newObj[key]
-          
+          obj[key] = newObj[key]
         }
+        
+
       }
       return obj
     }

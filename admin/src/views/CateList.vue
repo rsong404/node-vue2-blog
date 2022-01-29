@@ -104,8 +104,8 @@ export default {
         cancelButtonText: "取消",
         type: "warning",
       })
-        .then(() => {
-          this.$http.delete("/category", { params: { _id } });
+        .then(async () => {
+          await this.$http.delete("/category", { params: { _id } });
           this.$message({
             type: "success",
             message: "删除成功!",

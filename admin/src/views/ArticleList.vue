@@ -7,7 +7,7 @@
       <div id="main">
         <div id="deleteButton">
           <a style="color:green" href="javascript:;" @click="EditorArticle(item)" >修改</a>
-          <a href="javascript:;" @click="DeleteArticle(item._id)">删除</a>
+          <a href="javascript:;" @click="DeleteArticle(item)">删除</a>
         </div>
         <div id="main_content">
           <div id="content_title">
@@ -40,19 +40,35 @@ export default {
           this.$router.push({name:'editorArticle',params:item})
       },
       //删除文章
-    async DeleteArticle(_id) {
+    async DeleteArticle(item) {
       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
-        .then(() => {
-          this.$http.delete("/article", { params: { _id } });
+        .then(async () => {
+          this.$http.delete("/article", { params: { _id:item._id } });
           this.$message({
             type: "success",
             message: "删除成功!",
           });
           this.reload();
+          //删除文章的时候同时删除标签
+          for (let index = 0; index < item.tags.length; index++) {
+            let result = await this.$http.get("/tag", {
+              params: { tagName: item.tags[index] },
+            });
+            //如果该标签下只有一篇文章与之关联，则可以将该标签删掉
+            if (
+              JSON.stringify(result.data) !== "[]" &&
+              result.data[0].items.length <= 1
+            ) {
+              await this.$http.delete("/tag", { params: { tagName: item.tags[index] } });
+            }else{
+              await this.$http.delete("/tag", { params: { tagName: item.tags[index] } });
+            }
+          }
+          
         })
         .catch(() => {
           this.$message({

@@ -3,11 +3,8 @@ const dayjs = require('dayjs')
 const ArticleSchema = new mongoose.Schema({
     title: String,
     cateName: String,
-    cid: {
-        type: mongoose.Schema.Types.ObjectId
-    },
+    
     tags:[],
-    tagsId:[{type:mongoose.Schema.Types.ObjectId}],
     coverPicture: String,
     userName: String,
     contents: String,

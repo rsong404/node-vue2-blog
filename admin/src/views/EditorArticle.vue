@@ -15,24 +15,24 @@
         <el-select
           v-model="form.cateName"
           placeholder="请选择分类"
-          @change="CateSelect"
+         
         >
           <el-option
             v-for="item in this.categoryData"
             :key="item._id"
             :label="item.cateName"
-            :value="item._id"
+            :value="item.cateName"
           ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="添加标签">
         <el-select
-          disabled
           v-model="form.tags"
           multiple
           filterable
           allow-create
           placeholder="输入标签并选中"
+          @remove-tag="RemoveSelect"
         >
         </el-select>
       </el-form-item>
@@ -59,15 +59,12 @@ export default {
     return {
       categoryData: [],
       oriTag: "",
-      cateId: "",
       editor: null,
       form: {
         title: "",
         userName: "",
         cateName: "",
-        cid: "",
         tags: [],
-        tagsId: [],
         coverPicture: "",
         contents: "",
         time: "default",
@@ -81,38 +78,37 @@ export default {
         this.form[key] = this.$route.params[key];
       }
 
-      // //让分类正常显示
-      this.cateId = this.form.cid;
-      this.form.cid = this.form.cateName;
-      this.oriTag = this.form.tags;
+      this.oriTags = JSON.stringify(this.form.tags);
     },
-    CateSelect(value) {
-      for (let index = 0; index < this.categoryData.length; index++) {
-        if (this.categoryData[index]._id == value) {
-          this.form.cateName = this.categoryData[index].cateName;
-        }
-      }
-      console.log(this.form.cateName);
+    async RemoveSelect(value) {
+      let result = await this.$http.get("/tag", {
+            params: { tagName: value },
+          });
+      //如果该标签下只有一篇文章与之关联，则可以将该标签删掉
+      if(result.data[0].items.length <= 1){
+        await this.$http.delete('/tag',{params:{'tagName':value}})
+      }    
+        
     },
     async GetCateData() {
       let result = await this.$http.get("/category");
-      this.categoryData = result.data;
+      this.categoryData = result.data.reverse();
     },
     async onSubmit() {
       if (this.if_obj_is_null(this.form) == 0) {
-        if (this.form.cid === this.form.cateName) {
-          this.form.cid = this.cateId;
+        //添加tag
+       for (let index = 0; index < this.form.tags.length; index++) {
+          //查看数据库是否已存在该标签
+          let result = await this.$http.get("/tag", {
+            params: { tagName: this.form.tags[index] },
+          });
+          if (result.data.length == 0) {
+            let tag = {
+              tagName: this.form.tags[index],
+            };
+            await this.$http.post("/tag", tag);
+          }
         }
-        //如果文章tag被修改则向数据库删除旧的tag并添加新tag
-        // if (this.oriTag !== this.form.tag) {
-        //   //删除旧tag
-        //   await this.$http.delete('/tag',{params:{_id:this.form.tagId}})
-        //   //添加新tag
-        //   let tag = {tagName: this.form.tag, };
-        //   let result = await this.$http.post("/tag", tag);
-        //   //将新tagId赋值给form
-        //   this.form.tagId = result.data._id
-        // }
         await this.$http.put(
           "/article",
           this.CompareObj(this.$route.params, this.form),

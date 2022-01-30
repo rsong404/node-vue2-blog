@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item label="分类">
         <el-select
-          v-model="form.cid"
+          v-model="form.cateName"
           placeholder="请选择分类"
           @change="CateSelect"
         >
@@ -21,7 +21,7 @@
             v-for="item in this.categoryData"
             :key="item._id"
             :label="item.cateName"
-            :value="item._id"
+            :value="item.cateName"
           ></el-option>
         </el-select>
       </el-form-item>
@@ -63,9 +63,7 @@ export default {
         title: "",
         userName: "",
         cateName: "",
-        cid: "",
         tags: [],
-        tagsId: [],
         coverPicture: "",
         contents: "",
         time: "default",
@@ -74,28 +72,26 @@ export default {
   },
   methods: {
     CateSelect(value) {
-      console.log(value);
-      for (let index = 0; index < this.categoryData.length; index++) {
-        if (this.categoryData[index]._id == value) {
-          this.form.cateName = this.categoryData[index].cateName;
-        }
-      }
-      console.log(this.form.cateName);
+    
     },
     async GetCateData() {
       let result = await this.$http.get("/category");
-      this.categoryData = result.data;
+      this.categoryData = result.data.reverse();
     },
     async onSubmit() {
-      console.log(this.form);
       if (this.if_obj_is_null(this.form) == 0) {
         //向数据库添加tag
         for (let index = 0; index < this.form.tags.length; index++) {
-          let tag = {
-            tagName: this.form.tags[index],
-          };
-          let result = await this.$http.post("/tag", tag);
-          this.form.tagsId[index] = result.data._id;
+          //查看数据库是否已存在该标签
+          let result = await this.$http.get("/tag", {
+            params: { tagName: this.form.tags[index] },
+          });
+          if (result.data.length == 0) {
+            let tag = {
+              tagName: this.form.tags[index],
+            };
+            await this.$http.post("/tag", tag);
+          }
         }
         //添加文章
         await this.$http.post("/article", this.form);

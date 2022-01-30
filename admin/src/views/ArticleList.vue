@@ -63,7 +63,7 @@ export default {
     },
     async GetArticleData() {
       let result = await this.$http.get("/article");
-      this.articleData = result.data;
+      this.articleData = result.data.reverse();
     },
   },
   created() {

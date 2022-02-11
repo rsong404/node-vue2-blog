@@ -1,7 +1,12 @@
 <template>
   <el-container style="height: 705px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu router :default-active="this.$route.path" :default-openeds="['3']">
+      <el-menu
+        router
+        :default-active="this.$route.path"
+        :default-openeds="['3']"
+        
+      >
         <el-submenu index="1">
           <template slot="title"
             ><i class="el-icon-user-solid"></i>用户</template
@@ -12,7 +17,9 @@
             <el-menu-item index="/createuser">新建用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-         <el-menu-item index="/catelist"><i class="el-icon-menu"></i>分类</el-menu-item>
+        <el-menu-item index="/catelist"
+          ><i class="el-icon-menu"></i>分类</el-menu-item
+        >
         <el-submenu index="2">
           <template slot="title"><i class="el-icon-menu"></i>文章</template>
           <el-menu-item-group>
@@ -21,9 +28,7 @@
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
-          <template slot="title"
-            ><i class="el-icon-setting"></i>说说</template
-          >
+          <template slot="title"><i class="el-icon-setting"></i>说说</template>
           <el-menu-item-group>
             <el-menu-item index="3-1">选项1</el-menu-item>
             <el-menu-item index="3-2">选项2</el-menu-item>
@@ -33,9 +38,7 @@
     </el-aside>
 
     <el-container>
-      <el-header style="text-align: right; font-size: 12px"> 
-
-      </el-header>
+      <el-header style="text-align: right; font-size: 12px;"> </el-header>
       <el-main>
         <!-- 路由显示 -->
         <div v-if="isShowRouterView">
@@ -48,22 +51,22 @@
 
 <script>
 export default {
-  name:"Container",
-  provide(){
-    return {reload: this.reload}
+  name: "Container",
+  provide() {
+    return { reload: this.reload };
   },
   data() {
     return {
-      isShowRouterView: true
-    }
+      isShowRouterView: true,
+    };
   },
   methods: {
-    reload(){
-      this.isShowRouterView = false
+    reload() {
+      this.isShowRouterView = false;
       this.$nextTick(() => {
-        this.isShowRouterView = true
-      })
-    }
+        this.isShowRouterView = true;
+      });
+    },
   },
 };
 </script>

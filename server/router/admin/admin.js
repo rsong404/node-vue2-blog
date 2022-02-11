@@ -38,6 +38,7 @@ module.exports = app => {
     })
     //分类和tag查询另起路由
     require('./tag')(app)
+    require('./category')(app)
 
     app.use('/admin/api/:type',modelware,router)
 }

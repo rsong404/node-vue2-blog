@@ -13,48 +13,56 @@
           >
         </el-row>
       </el-header>
-      <!-- <el-container> -->
-        <!-- <el-main> -->
-          <div id="article" v-for="item in articleData" :key="item._id">
-            <div id="picture">
-              <img :src="item.coverPicture" alt="" />
-            </div>
-            <div id="main">
-              <div id="deleteButton">
-                <a
-                  style="color: green"
-                  href="javascript:;"
-                  @click="EditorArticle(item)"
-                  >修改</a
-                >
-                <a href="javascript:;" @click="DeleteArticle(item)">删除</a>
+      <el-row>
+        <el-col>
+          <div id="articleContainer">
+            <div id="article" v-for="item in articleData" :key="item._id">
+              <div id="picture">
+                <img :src="item.coverPicture" alt="" />
               </div>
-              <div id="main_content">
-                <div id="content_title">
-                  <b>{{ item.title }}</b>
+              <div id="main">
+                <div id="deleteButton">
+                  <a
+                    style="color: green"
+                    href="javascript:;"
+                    @click="EditorArticle(item)"
+                    >修改</a
+                  >
+                  <a href="javascript:;" @click="DeleteArticle(item)">删除</a>
                 </div>
-                <div id="content" v-html="item.contents"></div>
-                <div id="main_content_foot">
-                  <span><i class="el-icon-user"></i> {{ item.userName }} </span>
-                  <span><i class="el-icon-help"></i> {{ item.cateName }} </span>
-                  <!-- <span><i class="el-icon-price-tag"></i> {{ item.tags[0] }} </span>  -->
-                  <span><i class="el-icon-time"></i> {{ item.time }} </span>
+                <div id="main_content">
+                  <div id="content_title">
+                    <b>{{ item.title }}</b>
+                  </div>
+                  <div id="content" v-html="item.contents"></div>
+                  <div id="main_content_foot">
+                    <span
+                      ><i class="el-icon-user"></i> {{ item.userName }}
+                    </span>
+                    <span
+                      ><i class="el-icon-help"></i> {{ item.cateName }}
+                    </span>
+                    <!-- <span><i class="el-icon-price-tag"></i> {{ item.tags[0] }} </span>  -->
+                    <span><i class="el-icon-time"></i> {{ item.time }} </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-           <el-empty v-if="articleData.length == 0" description="暂时还没有文章，快去添加文章吧。"></el-empty>
-        <!-- </el-main> -->
-        <!-- <el-aside width="160px" style="backgroundcolor: #99ccff">
-         
-        </el-aside> -->
-        <div :class="drawerClass ? tagContainer : tagContainer2">
-          <div id="drawerHandel"  @click="Drawer">标签</div>
-          <div id="tagMain">
-             <div class="label" v-for="item in tagData" :key="item._id">
+          <el-empty
+            v-if="articleData.length == 0"
+            description="暂时还没有文章，快去添加文章吧。"
+          ></el-empty>
+        </el-col>
+      </el-row>
+      <!-- tag抽屉 -->
+      <div :class="drawerClass ? tagContainer : tagContainer2">
+        <div id="drawerHandel" @click="Drawer">标签</div>
+        <div id="tagMain">
+          <div class="label" v-for="item in tagData" :key="item._id">
             <span
-            class="label"
-            style="padding:4px"
+              class="label"
+              style="padding: 4px"
               :style="{
                 'background-color': colorStyle[Math.floor(Math.random() * 8)],
               }"
@@ -62,8 +70,8 @@
               >{{ item.tagName }}</span
             >
           </div>
-          </div>
         </div>
+      </div>
       <!-- </el-container> -->
     </el-container>
   </div>
@@ -78,9 +86,9 @@ export default {
       originArticleData: [],
       cateData: [],
       tagData: [],
-      drawerClass:true,
-      tagContainer:'tagContainer',
-      tagContainer2:'tagContainer2',
+      drawerClass: true,
+      tagContainer: "tagContainer",
+      tagContainer2: "tagContainer2",
       colorStyle: [
         "#66CCCC",
         "##99CC66",
@@ -167,9 +175,9 @@ export default {
       let result = await this.$http.get("/tag", { params: { tagName } });
       this.articleData = result.data[0].items.reverse();
     },
-    Drawer(){
-      this.drawerClass = !this.drawerClass
-    }
+    Drawer() {
+      this.drawerClass = !this.drawerClass;
+    },
   },
   computed: {
     // async GetArticleData() {
@@ -187,13 +195,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#container {
+#articleContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   overflow: hidden;
 }
-.tagContainer2{
+.tagContainer2 {
   position: fixed;
   top: 50%;
   right: 0;
@@ -201,7 +209,7 @@ export default {
   display: flex;
   align-items: center;
   transition: 0.7s;
-  #drawerHandel{
+  #drawerHandel {
     cursor: pointer;
     width: 50px;
     height: 80px;
@@ -211,15 +219,15 @@ export default {
     color: white;
     padding: 4px;
     padding-top: 0;
-    background-color: #6699CC;
+    background-color: #6699cc;
   }
-  #tagMain{
+  #tagMain {
     width: 140px;
     // height: 200px;
-    background-color: #99CCFF;
+    background-color: #99ccff;
   }
 }
-.tagContainer{
+.tagContainer {
   position: fixed;
   top: 50%;
   right: 0;
@@ -228,7 +236,7 @@ export default {
   display: flex;
   align-items: center;
   transition: 0.7s;
-  #drawerHandel{
+  #drawerHandel {
     cursor: pointer;
     width: 50px;
     height: 80px;
@@ -238,11 +246,11 @@ export default {
     color: white;
     padding: 4px;
     padding-top: 0;
-    background-color: #6699CC;
+    background-color: #6699cc;
   }
-  #tagMain{
+  #tagMain {
     width: 140px;
-    background-color: #99CCFF;
+    background-color: #99ccff;
   }
 }
 .label {

@@ -4,16 +4,16 @@
       <el-menu
         router
         :default-active="this.$route.path"
-        :default-openeds="['3']"
+        :default-openeds="['2']"
+        unique-opened
         
       >
-        <el-submenu index="1">
+        <el-submenu>
           <template slot="title"
             ><i class="el-icon-user-solid"></i>用户</template
           >
           <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="/userlist">用户列表</el-menu-item>
+            <el-menu-item index="/userlist">用户信息</el-menu-item>
             <el-menu-item index="/createuser">新建用户</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
@@ -21,17 +21,27 @@
           ><i class="el-icon-menu"></i>分类</el-menu-item
         >
         <el-submenu index="2">
-          <template slot="title"><i class="el-icon-menu"></i>文章</template>
+          <template slot="title"><i class="el-icon-s-management"></i>文章</template>
           <el-menu-item-group>
             <el-menu-item index="/articleList">文章列表</el-menu-item>
             <el-menu-item index="/createArticle">新建文章</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
-          <template slot="title"><i class="el-icon-setting"></i>说说</template>
+          <template slot="title"><i class="el-icon-s-comment"></i>说说</template>
           <el-menu-item-group>
-            <el-menu-item index="3-1">选项1</el-menu-item>
-            <el-menu-item index="3-2">选项2</el-menu-item>
+            <el-menu-item index="/commentList">说说列表</el-menu-item>
+            <el-menu-item index="/createComment">发表说说</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-menu-item index="/message"
+          ><i class="el-icon-s-order"></i>留言</el-menu-item
+        >
+        <el-submenu index="4">
+          <template slot="title"><i class="el-icon-picture"></i>轮播图</template>
+          <el-menu-item-group>
+            <el-menu-item index="4-1">流播图</el-menu-item>
+            <el-menu-item index="4-2">更换轮播图</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>

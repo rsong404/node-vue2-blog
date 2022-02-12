@@ -71,9 +71,7 @@ export default {
     };
   },
   methods: {
-    CateSelect(value) {
-    
-    },
+
     async GetCateData() {
       let result = await this.$http.get("/category");
       this.categoryData = result.data.reverse();

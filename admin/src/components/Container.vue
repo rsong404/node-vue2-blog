@@ -46,6 +46,9 @@
             <el-menu-item index="createCarousel">添加轮播图</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
+        <el-menu-item index="/websiteList"
+          ><i class="el-icon-star-on"></i>站点</el-menu-item
+        >
         <el-menu-item index="/blogInformation"
           ><i class="el-icon-s-tools"></i>博客信息</el-menu-item
         >

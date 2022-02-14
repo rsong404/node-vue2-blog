@@ -13,6 +13,8 @@ import BlogInformation from '../views/BlogInformation'
 import EditorBlogInfor from '../views/EditorBlogInfor'
 import BlogUser from '../views/BlogUser'
 import EditorBlogUser from '../views/EditorBlogUser'
+import WebsiteList from '../views/website/WebsiteList'
+import CreateWebsite from '../views/website/CreateWebsite'
 
 Vue.use(VueRouter)
 
@@ -91,10 +93,21 @@ const routes = [
     component: BlogUser
   },
   {
-    name:'editorBlogUser',
-    path: '/editorBlogUser',
+    name:'editorBloguser',
+    path: '/editorBloguser',
     component: EditorBlogUser,
     props: true
+  },
+  //站点
+  {
+    name:'websiteList',
+    path: '/websiteList',
+    component: WebsiteList
+  },
+  {
+    name:'createWebsite',
+    path: '/createWebsite',
+    component: CreateWebsite,
   },
 ]
 

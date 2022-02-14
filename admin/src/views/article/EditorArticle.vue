@@ -61,6 +61,8 @@
 <script>
 import E from "wangeditor";
 import hljs from "highlight.js";
+import 'highlight.js/styles/monokai-sublime.css'
+
 export default {
   inject: ["reload"],
   data() {

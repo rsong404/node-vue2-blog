@@ -1,14 +1,15 @@
 const dayjs = require('dayjs')
 const mongoose = require('mongoose')
-const CateSchema = new mongoose.Schema({
-    cateName :String,
+const WebsiteSchema = new mongoose.Schema({
+    websiteName: String,
+    type: String,
+    website: String,
     time:{
         type:String,
         set(){
             return dayjs().format('YYYY-MM-DD');
         }
     },
-    // items:[{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}]
 })
 
-module.exports = mongoose.model('Categroy',CateSchema)
+module.exports = mongoose.model('Website',WebsiteSchema)

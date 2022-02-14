@@ -107,6 +107,5 @@ export default {
   transform: translate(-30%, -50%);
   background-size: cover;
 }
-#pictureCard {
-}
+
 </style>

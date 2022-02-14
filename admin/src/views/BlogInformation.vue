@@ -101,8 +101,5 @@ export default {
   background-position: center;
 
 }
-#pictureCard{
-    
-  
-}
+
 </style>

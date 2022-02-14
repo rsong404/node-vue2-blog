@@ -55,7 +55,6 @@ export default {
 .box-card {
   position: absolute;
   width: 480px;
-  height: 270px;
   top: 50%;
   left: 50%;
   transform: translate(-30%, -50%);

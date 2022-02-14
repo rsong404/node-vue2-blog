@@ -37,6 +37,18 @@
           <el-input v-model="form.coverPicture"></el-input>
         </el-col>
       </el-form-item>
+      <el-form-item label="置顶数">
+        <el-col :span="12">
+        <el-input
+          type="number"
+          placeholder="数字越小排列越前，最小为1，默认为0为无"
+          v-model="form.stick"
+          maxlength="1"
+          show-word-limit
+        >
+        </el-input>
+        </el-col>
+      </el-form-item>
       <el-form-item label="文章内容">
         <div id="editor"></div>
       </el-form-item>
@@ -61,6 +73,7 @@ export default {
         title: "",
         userName: "",
         cateName: "",
+        stick: 0,
         tags: [],
         coverPicture: "",
         contents: "",

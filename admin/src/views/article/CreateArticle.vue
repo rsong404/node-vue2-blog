@@ -15,7 +15,7 @@
         <el-select
           v-model="form.cateName"
           placeholder="请选择分类"
-          @change="CateSelect"
+          
         >
           <el-option
             v-for="item in this.categoryData"
@@ -38,6 +38,18 @@
       <el-form-item label="文章封面图地址">
         <el-col :span="12">
           <el-input v-model="form.coverPicture"></el-input>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="置顶数">
+        <el-col :span="12">
+        <el-input
+          type="number"
+          placeholder="数字越小排列越前，最小为1，默认为0为无"
+          v-model="form.stick"
+          maxlength="1"
+          show-word-limit
+        >
+        </el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="文章内容">
@@ -63,6 +75,7 @@ export default {
         title: "",
         userName: "",
         cateName: "",
+        stick: 0,
         tags: [],
         coverPicture: "",
         contents: "",
@@ -71,12 +84,12 @@ export default {
     };
   },
   methods: {
-
     async GetCateData() {
       let result = await this.$http.get("/category");
       this.categoryData = result.data.reverse();
     },
     async onSubmit() {
+      
       if (this.if_obj_is_null(this.form) == 0) {
         //向数据库添加tag
         for (let index = 0; index < this.form.tags.length; index++) {

@@ -5,7 +5,7 @@
         <div id="editor"></div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即创建</el-button>
+        <el-button type="primary" @click="onSubmit">立即修改</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -19,7 +19,6 @@ export default {
       editor: null,
       form: {
         content: "",
-        time: "default",
       },
     };
   },
@@ -36,17 +35,18 @@ export default {
       editor.create();
       // 配置 onchange 回调函数，将数据同步到 vue 中
       editor.config.onchange = (newHtml) => {
-        this.form.contents = newHtml;
+        this.form.content = newHtml;
       };
       //将原内容添加到编辑器中
       editor.txt.html(this.form.content);
       this.editor = editor;
     },
     async onSubmit() {
+        console.log(this.form)
       if (this.form.content !== "") {
         //添加说说
-        await this.$http.post("/comment", this.form);
-        this.$message.success("说说发表成功！");
+        await this.$http.put("/comment", this.form,{params:{_id:this.$route.params._id}});
+        this.$message.success("说说修改成功！");
         //跳转到文章列表页面
         this.$router.push("/commentList");
       } else {
@@ -57,6 +57,7 @@ export default {
   },
   created() {
     this.InitData();
+    console.log(this.$route.params)
   },
   mounted() {
     this.InitEditor();

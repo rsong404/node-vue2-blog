@@ -4,11 +4,13 @@
       <el-menu
         router
         :default-active="this.$route.path"
-        :default-openeds="['2']"
         unique-opened
         
       >
-        <el-submenu>
+      <el-menu-item index="/bloguser"
+          ><i class="el-icon-s-custom"></i>博主信息</el-menu-item
+        >
+        <el-submenu  index="1">
           <template slot="title"
             ><i class="el-icon-user-solid"></i>用户</template
           >
@@ -40,10 +42,13 @@
         <el-submenu index="4">
           <template slot="title"><i class="el-icon-picture"></i>轮播图</template>
           <el-menu-item-group>
-            <el-menu-item index="4-1">流播图</el-menu-item>
-            <el-menu-item index="4-2">更换轮播图</el-menu-item>
+            <el-menu-item index="/carouselList">流播图</el-menu-item>
+            <el-menu-item index="createCarousel">添加轮播图</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
+        <el-menu-item index="/blogInformation"
+          ><i class="el-icon-s-tools"></i>博客信息</el-menu-item
+        >
       </el-menu>
     </el-aside>
 

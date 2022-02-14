@@ -52,7 +52,7 @@ export default {
 
     //修改说说
     async handleEdit(_id, content) {
-      this.$router.push({ name: "editorComment", params:  {'content':content} });
+      this.$router.push({ name: "editorComment", params:  {'_id':_id,'content':content} });
     },
     //删除说说
     async handleDelete(_id) {

@@ -150,8 +150,9 @@ export default {
     //获取文章
     async GetArticleData() {
       let result = await this.$http.get("/article");
-      this.originArticleData = result.data.reverse();
+      this.originArticleData = result.data;
       this.articleData = this.originArticleData;
+      console.log(result.data.reverse())
     },
     AllArticle() {
       this.articleData = this.originArticleData;
@@ -179,13 +180,7 @@ export default {
       this.drawerClass = !this.drawerClass;
     },
   },
-  computed: {
-    // async GetArticleData() {
-    //   let result = await this.$http.get("/article");
-    //   // this.articleData = result.data.reverse();
-    //   return result.data.reverse();
-    // },
-  },
+
   created() {
     this.GetArticleData();
     this.GetCateData();

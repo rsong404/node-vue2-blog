@@ -10,4 +10,4 @@ const TalkSchema = new mongoose.Schema({
     }
 
 })
-module.exports = mongoose.model('Talk',TalkSchema)
+module.exports = mongoose.model('Comment',TalkSchema)

@@ -3,7 +3,7 @@ const dayjs = require('dayjs')
 const ArticleSchema = new mongoose.Schema({
     title: String,
     cateName: String,
-    
+    stick: Number,
     tags:[],
     coverPicture: String,
     userName: String,

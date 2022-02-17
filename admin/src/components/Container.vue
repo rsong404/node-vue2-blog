@@ -10,15 +10,12 @@
       <el-menu-item index="/bloguser"
           ><i class="el-icon-s-custom"></i>博主信息</el-menu-item
         >
-        <el-submenu  index="1">
+        <el-menu-item  index="/accountList">
           <template slot="title"
             ><i class="el-icon-user-solid"></i>用户</template
           >
-          <el-menu-item-group>
-            <el-menu-item index="/userlist">用户信息</el-menu-item>
-            <el-menu-item index="/createuser">新建用户</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
+          
+        </el-menu-item>
         <el-menu-item index="/catelist"
           ><i class="el-icon-menu"></i>分类</el-menu-item
         >

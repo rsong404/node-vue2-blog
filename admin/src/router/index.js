@@ -15,106 +15,143 @@ import BlogUser from '../views/BlogUser'
 import EditorBlogUser from '../views/EditorBlogUser'
 import WebsiteList from '../views/website/WebsiteList'
 import CreateWebsite from '../views/website/CreateWebsite'
+import CreateAccount from '../views/account/CreateAccount'
+import AccountList from '../views/account/AccountList'
+import Login from '../components/Login'
+import Container from '../components/Container'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect:'/articleList'
-  },
-  //分类
-  {
-    name:'catelist',
-    path: '/catelist',
-    component: CateList
-  },
-  //文章
-  {
-    name:'articleList',
-    path: '/articleList',
-    component: ArticleList
+    redirect: '/login'
   },
   {
-    name:'createArticle',
-    path: '/createArticle',
-    component: CreateArticle
+    path:'/container',
+    component: Container,
+    children:[
+      //分类
+      {
+        name:'catelist',
+        path: '/catelist',
+        component: CateList
+      },
+      //文章
+      {
+        name:'articleList',
+        path: '/articleList',
+        component: ArticleList
+      },
+      {
+        name:'createArticle',
+        path: '/createArticle',
+        component: CreateArticle
+      },
+      {
+        name:'editorArticle',
+        path: '/editorArticle',
+        component: EditorArticle,
+        props: true
+      },
+      //说说
+      {
+        name:'createComment',
+        path: '/createComment',
+        component: CreateComment
+      },
+      {
+        name:'commentList',
+        path: '/commentList',
+        component: CommentList
+      },
+      {
+        name:'editorComment',
+        path: '/editorComment',
+        component: EditorComment,
+        props: true
+      },
+      //轮播图
+      {
+        name:'createCarousel',
+        path: '/createCarousel',
+        component: Carousel
+      },
+      {
+        name:'carouselList',
+        path: '/carouselList',
+        component: CarouselList
+      },
+      //blog信息
+      {
+        name:'blogInformation',
+        path: '/blogInformation',
+        component: BlogInformation
+      },
+      {
+        name:'editorBlogInfor',
+        path: '/editorBlogInfor',
+        component: EditorBlogInfor,
+        props: true
+      },
+      //博主信息
+      {
+        name:'bloguser',
+        path: '/bloguser',
+        component: BlogUser
+      },
+      {
+        name:'editorBloguser',
+        path: '/editorBloguser',
+        component: EditorBlogUser,
+        props: true
+      },
+      //站点
+      {
+        name:'websiteList',
+        path: '/websiteList',
+        component: WebsiteList
+      },
+      {
+        name:'createWebsite',
+        path: '/createWebsite',
+        component: CreateWebsite,
+      },
+      //管理账号
+      {
+        name:'accountList',
+        path: '/accountList',
+        component: AccountList,
+      },
+      {
+        name:'createAccount',
+        path: '/createAccount',
+        component: CreateAccount,
+      },
+    ]
   },
+  
+  //登录
   {
-    name:'editorArticle',
-    path: '/editorArticle',
-    component: EditorArticle,
-    props: true
-  },
-  //说说
-  {
-    name:'createComment',
-    path: '/createComment',
-    component: CreateComment
-  },
-  {
-    name:'commentList',
-    path: '/commentList',
-    component: CommentList
-  },
-  {
-    name:'editorComment',
-    path: '/editorComment',
-    component: EditorComment,
-    props: true
-  },
-  //轮播图
-  {
-    name:'createCarousel',
-    path: '/createCarousel',
-    component: Carousel
-  },
-  {
-    name:'carouselList',
-    path: '/carouselList',
-    component: CarouselList
-  },
-  //blog信息
-  {
-    name:'blogInformation',
-    path: '/blogInformation',
-    component: BlogInformation
-  },
-  {
-    name:'editorBlogInfor',
-    path: '/editorBlogInfor',
-    component: EditorBlogInfor,
-    props: true
-  },
-  //博主信息
-  {
-    name:'bloguser',
-    path: '/bloguser',
-    component: BlogUser
-  },
-  {
-    name:'editorBloguser',
-    path: '/editorBloguser',
-    component: EditorBlogUser,
-    props: true
-  },
-  //站点
-  {
-    name:'websiteList',
-    path: '/websiteList',
-    component: WebsiteList
-  },
-  {
-    name:'createWebsite',
-    path: '/createWebsite',
-    component: CreateWebsite,
-  },
+    name:'login',
+    path:'/login',
+    component: Login
+  }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: '/admin/',
   routes
+})
+const isAuthenticated = window.localStorage.token;
+console.log('00' + isAuthenticated)
+console.log(!isAuthenticated)
+
+router.beforeEach((to, from, next) => {
+  console.log(111)
+  if (to.name !== 'login' && !isAuthenticated) next({ name: 'login' })
+  else next()
 })
 
 export default router

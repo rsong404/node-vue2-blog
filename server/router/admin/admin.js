@@ -37,8 +37,10 @@ module.exports = app => {
         console.log('删除数据：'+ JSON.stringify(data))
     })
     //分类和tag查询另起路由
+    require('./login')(app)
     require('./tag')(app)
     require('./category')(app)
+    require('./account')(app)
 
     app.use('/admin/api/:type',modelware,router)
 }

@@ -1,3 +1,4 @@
+const verifyAuthorize = require('../../middleware/verifyAuthorize')
 module.exports = app => {
     const express = require('express')
     const router = new express.Router({
@@ -42,5 +43,5 @@ module.exports = app => {
     require('./category')(app)
     require('./account')(app)
 
-    app.use('/admin/api/:type',modelware,router)
+    app.use('/admin/api/:type', verifyAuthorize,modelware,router)
 }

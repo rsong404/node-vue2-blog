@@ -1,13 +1,6 @@
 <template>
   <div id="app">
-    <router-view v-if="!isAuthorize">
-        <Login/>
-    </router-view>
-    <router-view  v-else>
-        <Container/>
-
-    </router-view>
-    
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -18,13 +11,7 @@ export default {
     Container,
     Login,
   },
-  data() {
-    const isAuthenticated = window.localStorage.token
-    console.log(isAuthenticated)
-    return {
-      isAuthorize: isAuthenticated
-    }
-  },
+
 }
 </script>
 

@@ -3,6 +3,7 @@ const cors = require('cors')
 const app = express()
 app.use(express.json())
 app.use(cors())
+
 //连接数据库
 require('./plugins/connection')()
 

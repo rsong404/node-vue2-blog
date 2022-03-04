@@ -19,17 +19,22 @@ import CreateAccount from '../views/account/CreateAccount'
 import AccountList from '../views/account/AccountList'
 import Login from '../components/Login'
 import Container from '../components/Container'
+import CreateMessage from '../views/message/CreateMessage'
+import MessageList from '../views/message/MessageList'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/bloguser'
   },
   {
     path:'/container',
+    name:'container',
     component: Container,
+    redirect:'/bloguser',
     children:[
       //分类
       {
@@ -128,6 +133,18 @@ const routes = [
         path: '/createAccount',
         component: CreateAccount,
       },
+      // 留言
+      {
+        name:'createMessage',
+        path: '/createMessage',
+        component: CreateMessage,
+        props: true
+      },
+      {
+        name:'messageList',
+        path: '/messageList',
+        component: MessageList,
+      },
     ]
   },
   
@@ -144,12 +161,10 @@ const router = new VueRouter({
   base: '/admin/',
   routes
 })
-const isAuthenticated = window.localStorage.token;
-console.log('00' + isAuthenticated)
-console.log(!isAuthenticated)
+
 
 router.beforeEach((to, from, next) => {
-  console.log(111)
+  let isAuthenticated = window.localStorage.token;
   if (to.name !== 'login' && !isAuthenticated) next({ name: 'login' })
   else next()
 })

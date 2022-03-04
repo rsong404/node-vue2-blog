@@ -39,14 +39,14 @@
       </el-form-item>
       <el-form-item label="置顶数">
         <el-col :span="12">
-        <el-input
-          type="number"
-          placeholder="数字越小排列越前，最小为1，默认为0为无"
-          v-model="form.stick"
-          maxlength="1"
-          show-word-limit
-        >
-        </el-input>
+          <el-input
+            type="number"
+            placeholder="数字越小排列越前，最小为1，默认为0为无"
+            v-model="form.stick"
+            maxlength="1"
+            show-word-limit
+          >
+          </el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="文章内容">
@@ -61,7 +61,7 @@
 <script>
 import E from "wangeditor";
 import hljs from "highlight.js";
-import 'highlight.js/styles/monokai-sublime.css'
+import "highlight.js/styles/monokai-sublime.css";
 
 export default {
   inject: ["reload"],
@@ -87,7 +87,9 @@ export default {
     InitArticleData() {
       //将路由传过来的数据实现浅复制，再赋值给form
       for (const key in this.$route.params) {
-        this.form[key] = this.$route.params[key];
+        if(this.$route.params.hasOwnProperty(key)){
+          this.form[key] = this.$route.params[key];
+        }
       }
 
       this.oriTags = JSON.stringify(this.form.tags);
@@ -163,7 +165,7 @@ export default {
     if_obj_is_null(obj) {
       let i = 0;
       for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
+        if (oriObj.hasOwnProperty(key)) {
           if (obj[key] === null || obj[key] === "") {
             i++;
           }
@@ -174,8 +176,10 @@ export default {
     CompareObj(oriObj, newObj) {
       let obj = {};
       for (const key in oriObj) {
-        if (JSON.stringify(oriObj[key]) !== JSON.stringify(newObj[key])) {
-          obj[key] = newObj[key];
+        if (oriObj.hasOwnProperty(key)) {
+          if (JSON.stringify(oriObj[key]) !== JSON.stringify(newObj[key])) {
+            obj[key] = newObj[key];
+          }
         }
       }
       return obj;

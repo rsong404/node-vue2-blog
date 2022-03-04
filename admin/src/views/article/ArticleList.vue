@@ -152,7 +152,6 @@ export default {
       let result = await this.$http.get("/article");
       this.originArticleData = result.data;
       this.articleData = this.originArticleData;
-      console.log(result.data.reverse())
     },
     AllArticle() {
       this.articleData = this.originArticleData;
@@ -200,6 +199,7 @@ export default {
   position: fixed;
   top: 50%;
   right: 0;
+  transform: translateX(80%);
   transform: translateY(-50%);
   display: flex;
   align-items: center;
@@ -225,7 +225,7 @@ export default {
 .tagContainer {
   position: fixed;
   top: 50%;
-  right: 0;
+  right: 0%;
   transform: translateY(-50%);
   transform: translateX(80%);
   display: flex;

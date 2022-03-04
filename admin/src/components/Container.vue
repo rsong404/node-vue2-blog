@@ -33,7 +33,7 @@
             <el-menu-item index="/createComment">发表说说</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="/message"
+        <el-menu-item index="/messageList"
           ><i class="el-icon-s-order"></i>留言</el-menu-item
         >
         <el-submenu index="4">

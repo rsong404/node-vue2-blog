@@ -1,5 +1,6 @@
+const verifyAuthorize = require('../../middleware/verifyAuthorize')
 module.exports = (app) => {
-    app.get('/admin/api/category',(req,res)=>{
+    app.get('/admin/api/category',verifyAuthorize,(req,res)=>{
         if(JSON.stringify(req.query) !== '{}'){
             // res.send(await req.model.find(req.query))
             require('../../model/category').aggregate([

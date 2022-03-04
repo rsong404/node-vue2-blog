@@ -1,12 +1,14 @@
+const verifyAuthorize = require('../../middleware/verifyAuthorize')
+
 const bcrypt = require('bcryptjs')
 const model = require('../../model/account')
 module.exports = app => {
-    //查找
-    app.get('/admin/api/account',async(req,res) => {
+    //查找账号
+    app.get('/admin/api/account',verifyAuthorize,async(req,res) => {
         const result = await model.find({})
         res.send(result)
     })
-    //删除
+    //删除账号
     app.delete('/admin/api/account', async(req,res) => {
         
         const result1 = await model.findOne({_id:req.query._id})

@@ -56,18 +56,21 @@
         </el-col>
       </el-row>
       <!-- tag抽屉 -->
-      <div :class="drawerClass ? tagContainer : tagContainer2">
+      <div
+        v-show="tagData.length != 0 ? true : false"
+        :class="drawerClass ? tagContainer : tagContainer2"
+      >
         <div id="drawerHandel" @click="Drawer">标签</div>
         <div id="tagMain">
-          <div class="label" v-for="item in tagData" :key="item._id">
+          <div class="label" v-for="(item,index) in tagData" :key="index">
             <span
               class="label"
               style="padding: 4px"
               :style="{
                 'background-color': colorStyle[Math.floor(Math.random() * 8)],
               }"
-              @click="SelectTag(item.tagName)"
-              >{{ item.tagName }}</span
+              @click.stop="SelectTag(item)"
+              >{{ item }}</span
             >
           </div>
         </div>
@@ -152,6 +155,7 @@ export default {
       let result = await this.$http.get("/article");
       this.originArticleData = result.data;
       this.articleData = this.originArticleData;
+      this.GetTag(this.originArticleData)
     },
     AllArticle() {
       this.articleData = this.originArticleData;
@@ -163,17 +167,30 @@ export default {
     },
     //选择分类
     async SelectData(cateName) {
-      let result = await this.$http.get("/category", { params: { cateName } });
-      this.articleData = result.data[0].items.reverse();
+      this.articleData = this.originArticleData.filter(
+        (item) => item.cateName === cateName
+      );
     },
     //获取标签
-    async GetTag() {
-      let result = await this.$http.get("/tag");
-      this.tagData = result.data;
+    GetTag(arcticleArr) {
+      arcticleArr.forEach(element => {
+        if(element.tags.length >= 1){
+          this.tagData.push(...element.tags)
+        }
+      });
     },
-    async SelectTag(tagName) {
-      let result = await this.$http.get("/tag", { params: { tagName } });
-      this.articleData = result.data[0].items.reverse();
+    // 选择标签
+    SelectTag(tagName) {
+      this.articleData = this.originArticleData.filter((item) => {
+        if (item.tags.length >= 1) {
+          for (let i = 0; i < item.tags.length; i++) {
+            if(item.tags[i] === tagName){
+              return true
+            }
+          }
+        }
+        return false;
+      });
     },
     Drawer() {
       this.drawerClass = !this.drawerClass;
@@ -183,7 +200,6 @@ export default {
   created() {
     this.GetArticleData();
     this.GetCateData();
-    this.GetTag();
   },
 };
 </script>
@@ -216,11 +232,6 @@ export default {
     padding-top: 0;
     background-color: #6699cc;
   }
-  #tagMain {
-    width: 140px;
-    // height: 200px;
-    background-color: #99ccff;
-  }
 }
 .tagContainer {
   position: fixed;
@@ -243,10 +254,11 @@ export default {
     padding-top: 0;
     background-color: #6699cc;
   }
-  #tagMain {
-    width: 140px;
-    background-color: #99ccff;
-  }
+}
+#tagMain {
+  width: 140px;
+  min-height: 140px;
+  background-color: #99ccff;
 }
 .label {
   display: inline-block;
@@ -310,8 +322,6 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-
-        // background-color: tomato;
       }
       #content {
         height: 130px;
@@ -320,12 +330,10 @@ export default {
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
         overflow: hidden;
-        // background-color: skyblue;
       }
       #main_content_foot {
         height: 30px;
         line-height: 30px;
-        // background-color: red;
       }
     }
   }

@@ -103,45 +103,14 @@ export default {
     },
     async onSubmit() {
       if (this.if_obj_is_null(this.form) == 0) {
-        //添加tag
-        if (this.oriTag !== JSON.stringify(this.form.tags)) {
-          for (let index = 0; index < this.form.tags.length; index++) {
-            //查看数据库是否已存在该标签
-            let result = await this.$http.get("/tag", {
-              params: { tagName: this.form.tags[index] },
-            });
-            if (result.data.length == 0) {
-              let tag = {
-                tagName: this.form.tags[index],
-              };
-              await this.$http.post("/tag", tag);
-            }
-          }
-        }
+        if(this.form.coverPicture === '') this.form.coverPicture = 'https://gitee.com/rs404/picgo_img/raw/master/images/wanye.jpg'
         await this.$http.put(
           "/article",
           this.CompareObj(this.$route.params, this.form),
           { params: { _id: this.form._id } }
         );
-
         this.reload();
         this.$message.success("文章修改成功！");
-        if (this.removeTag.length >= 1) {
-          for (let index = 0; index < this.removeTag.length; index++) {
-            let result = await this.$http.get("/tag", {
-              params: { tagName: this.removeTag[index] },
-            });
-            //如果该标签下只有一篇文章与之关联，则可以将该标签删掉
-            if (
-              JSON.stringify(result.data) !== "[]" &&
-              result.data[0].items.length <= 1
-            ) {
-              await this.$http.delete("/tag", {
-                params: { tagName: this.removeTag[index] },
-              });
-            }
-          }
-        }
         this.$router.push("/articleList");
       } else {
         this.$message.error("表格不能为空，请检查！");
@@ -165,7 +134,7 @@ export default {
     if_obj_is_null(obj) {
       let i = 0;
       for (const key in obj) {
-        if (oriObj.hasOwnProperty(key)) {
+        if (obj.hasOwnProperty(key) && key !='coverPicture') {
           if (obj[key] === null || obj[key] === "") {
             i++;
           }

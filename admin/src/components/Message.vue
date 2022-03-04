@@ -3,7 +3,7 @@
     <el-table :data="tableData" style="width: 100%">
       <el-table-column type="expand" label="回复" width="280">
         <template slot-scope="props">
-          <div v-if="props.row.reply.length !== 0 ? true : false">
+          <div v-show="props.row.reply.length !== 0 ? true : false">
             <el-table :data="props.row.reply"
              :row-style="{'background-color':'#e0e7dd'}"
              :header-row-style="{'background-color':' #e0e7dd'}">

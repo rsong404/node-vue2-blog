@@ -107,6 +107,7 @@ export default {
           }
         }
         //添加文章
+        if(this.form.coverPicture === '') this.form.coverPicture = 'https://gitee.com/rs404/picgo_img/raw/master/images/wanye.jpg'
         await this.$http.post("/article", this.form);
         this.$message.success("文章发表成功！");
         //跳转到文章列表页面
@@ -117,14 +118,13 @@ export default {
     },
     getEditorData() {
       // 通过代码获取编辑器内容
-      let data = this.editor.txt.html();
-      alert(data);
+      this.editor.txt.html();
     },
     // 判断一个对象下是否有空属性
     if_obj_is_null(obj) {
       let i = 0;
       for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
+        if (obj.hasOwnProperty(key) && key !== 'coverPicture') {
           if (obj[key] === null || obj[key] === "") {
             i++;
           }

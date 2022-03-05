@@ -56,7 +56,6 @@ export default {
           const result = await this.$http.delete("/account", {
             params: { _id, password: value },
           });
-          console.log(result.data);
           if (result.data.result) {
             this.reload();
             this.$message({

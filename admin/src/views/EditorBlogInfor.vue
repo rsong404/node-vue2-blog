@@ -77,7 +77,6 @@ export default {
   },
   created() {
     this.blogInformation = this.$route.params;
-    console.log(this.blogInformation);
   },
 };
 </script>

@@ -64,7 +64,6 @@ export default {
       },
       async OnSubmit(){
         this.$router.push({name:'editorBlogInfor',params:this.blogInformation})
-        console.log(this.blogInformation)
       }
   },
   created() {

@@ -15,8 +15,14 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
-    box-sizing: border-box;
-
+	box-sizing: border-box;
+	font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+	
+}
+.el-button--primary {
+	color: white;
+	background-color: #b3c0d1;
+	border-color: #b3c0d1;
+	font-weight: 600;
 }

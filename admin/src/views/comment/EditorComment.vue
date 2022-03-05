@@ -26,7 +26,6 @@ export default {
   methods: {
     InitData() {
       this.form["content"] = this.$route.params["content"];
-      console.log(this.$route.params)
     },
     InitEditor() {
       const editor = new E("#editor");
@@ -43,7 +42,6 @@ export default {
       this.editor = editor;
     },
     async onSubmit() {
-        console.log(this.form)
       if (this.form.content !== "") {
         //添加说说
         await this.$http.put("/comment", this.form,{params:{_id:this.$route.params._id}});
@@ -58,7 +56,6 @@ export default {
   },
   created() {
     this.InitData();
-    console.log(this.$route.params)
   },
   mounted() {
     this.InitEditor();

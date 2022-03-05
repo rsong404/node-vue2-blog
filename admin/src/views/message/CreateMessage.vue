@@ -110,7 +110,6 @@ export default {
         return
       }
 
-
       // 新留言
       if (this.form.nick !== "" && this.form.content !== "") {
         let result = await this.$http.post("/message", this.form);
@@ -127,7 +126,7 @@ export default {
     AddEmoji() {
       this.emojiTurn = !this.emojiTurn;
     },
-    async KeyDown(e){
+    KeyDown(e){
       var event = e || window.event;
         var key = event.which || event.keyCode || event.charCode;
         if (key == 13) {

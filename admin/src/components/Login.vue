@@ -48,12 +48,7 @@ export default {
     };
   },
   mounted() {
-    document.addEventListener("keydown", async (e) => {
-      let key = window.event.keyCode;
-      if (key == 13) {
-        this.onSubmit()
-      }
-    });
+    document.addEventListener("keydown",this.KeyDown);
   },
   methods: {
     async onSubmit() {
@@ -65,9 +60,16 @@ export default {
         this.$router.push({ name: "container" });
       }
     },
+    KeyDown(e){
+      var event = e || window.event;
+        var key = event.which || event.keyCode || event.charCode;
+        if (key == 13) {
+          this.onSubmit();
+        }
+    }
   },
   beforeDestroy() {
-    document.removeEventListener('keydown')
+    document.removeEventListener('keydown',this.KeyDown)
   },
 };
 </script>

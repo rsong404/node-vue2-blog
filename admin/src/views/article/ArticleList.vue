@@ -31,18 +31,20 @@
                   <a href="javascript:;" @click="DeleteArticle(item)">删除</a>
                 </div>
                 <div id="main_content">
-                  <div id="content_title">
-                    <b>{{ item.title }}</b>
-                  </div>
+                  <h4 id="content_title">
+                    {{ item.title }}
+                  </h4>
                   <div id="content" v-html="item.contents"></div>
                   <div id="main_content_foot">
                     <span
-                      ><i class="el-icon-user"></i> {{ item.userName }}
+                      ><i class="el-icon-user-solid"></i> {{ item.userName }}
                     </span>
                     <span
-                      ><i class="el-icon-help"></i> {{ item.cateName }}
+                      ><i class="el-icon-s-help"></i> {{ item.cateName }}
                     </span>
-                    <!-- <span><i class="el-icon-price-tag"></i> {{ item.tags[0] }} </span>  -->
+                    <span
+                      ><i class="el-icon-s-flag"></i> {{ item.tags[0] }}
+                    </span>
                     <span><i class="el-icon-time"></i> {{ item.time }} </span>
                   </div>
                 </div>
@@ -56,27 +58,26 @@
         </el-col>
       </el-row>
       <!-- tag抽屉 -->
-      <div
-        v-show="tagData.length != 0 ? true : false"
-        :class="drawerClass ? tagContainer : tagContainer2"
-      >
-        <div id="drawerHandel" @click="Drawer">标签</div>
-        <div id="tagMain">
-          <div class="label" v-for="(item,index) in tagData" :key="index">
-            <span
-              class="label"
-              style="padding: 4px"
-              :style="{
-                'background-color': colorStyle[Math.floor(Math.random() * 8)],
-              }"
-              @click.stop="SelectTag(item)"
-              >{{ item }}</span
-            >
-          </div>
-        </div>
-      </div>
       <!-- </el-container> -->
     </el-container>
+    <div
+      v-show="tagData.length != 0 ? true : false"
+      :class="drawerClass ? tagContainer : tagContainer2"
+    >
+      <div id="drawerHandel" @click="Drawer">标 签</div>
+      <div id="tagMain">
+        <div class="label" v-for="(item, index) in tagData" :key="index">
+          <span
+            class="label"
+            :style="{
+              'background-color': colorStyle[Math.floor(Math.random() * 4)],
+            }"
+            @click.stop="SelectTag(item)"
+            >{{ item }}</span
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -93,14 +94,10 @@ export default {
       tagContainer: "tagContainer",
       tagContainer2: "tagContainer2",
       colorStyle: [
-        "#66CCCC",
-        "##99CC66",
-        "#FF99CC",
-        "#FF6666",
-        "#666699",
-        "#FFCC00",
-        "#0099CC",
-        "#009999",
+        "#99CCCC",
+        "#FFFFFF",
+        "#99CCFF",
+        "#CCCCFF",
       ],
     };
   },
@@ -155,7 +152,7 @@ export default {
       let result = await this.$http.get("/article");
       this.originArticleData = result.data;
       this.articleData = this.originArticleData;
-      this.GetTag(this.originArticleData)
+      this.GetTag(this.originArticleData);
     },
     AllArticle() {
       this.articleData = this.originArticleData;
@@ -173,19 +170,22 @@ export default {
     },
     //获取标签
     GetTag(arcticleArr) {
-      arcticleArr.forEach(element => {
-        if(element.tags.length >= 1){
-          this.tagData.push(...element.tags)
+      let arr = []
+      arcticleArr.forEach((element) => {
+        if (element.tags.length >= 1) {
+          arr.push(...element.tags)
         }
       });
+      this.tagData.push(...new Set(arr));
+
     },
     // 选择标签
     SelectTag(tagName) {
       this.articleData = this.originArticleData.filter((item) => {
         if (item.tags.length >= 1) {
           for (let i = 0; i < item.tags.length; i++) {
-            if(item.tags[i] === tagName){
-              return true
+            if (item.tags[i] === tagName) {
+              return true;
             }
           }
         }
@@ -211,62 +211,50 @@ export default {
   justify-content: space-between;
   overflow: hidden;
 }
-.tagContainer2 {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translateX(80%);
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  transition: 0.7s;
-  #drawerHandel {
-    cursor: pointer;
-    width: 50px;
-    height: 80px;
-    text-align: center;
-    line-height: 80px;
-    border-radius: 5px 0 0 5px;
-    color: white;
-    padding: 4px;
-    padding-top: 0;
-    background-color: #6699cc;
-  }
-}
-.tagContainer {
+@mixin tagContainer {
   position: fixed;
   top: 50%;
   right: 0%;
-  transform: translateY(-50%);
-  transform: translateX(80%);
+  // transform: translateY(-50%);
   display: flex;
   align-items: center;
   transition: 0.7s;
   #drawerHandel {
     cursor: pointer;
-    width: 50px;
+    width: 40px;
     height: 80px;
+    line-height: 40px;
     text-align: center;
-    line-height: 80px;
     border-radius: 5px 0 0 5px;
     color: white;
-    padding: 4px;
-    padding-top: 0;
-    background-color: #6699cc;
+    font-weight: 600;
+    background-color: #b3c0d1;
+    writing-mode: tb;
   }
+}
+.tagContainer2 {
+  @include tagContainer();
+  transform: translate3d(5%,-50%,0);
+}
+
+.tagContainer {
+  @include tagContainer();
+  transform: translate3d(80%,-50%,0);
+
 }
 #tagMain {
   width: 140px;
   min-height: 140px;
-  background-color: #99ccff;
+  background-color: #b3c0d1;
 }
 .label {
   display: inline-block;
   cursor: pointer;
-  color: white;
   margin: 4px;
+  padding: 4px;
   border-radius: 4px;
   text-align: center;
+  color: #868788;
 }
 #article {
   cursor: pointer;
@@ -275,25 +263,29 @@ export default {
   margin: 10px;
   margin-bottom: 30px;
   margin-left: 0;
-  border-radius: 8px 0 0 8px;
+  border-radius: 0 8px 8px 0;
+
   display: flex;
-  background-color: whitesmoke;
   #picture {
+    position: relative;
     width: 40%;
     height: 100%;
     overflow: hidden;
     border-radius: 8px 0 0 8px;
-    background-color: grey;
     img {
       height: 100%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
   #main {
     width: 60%;
-    height: 220px;
+    height: 100%;
     padding: 5px;
-
-    background-color: rgb(238, 238, 238);
+    border-radius: 0 8px 8px 0;
+    background-color: #b3c0d1;
+    color: white;
     #deleteButton {
       overflow: hidden;
       display: flex;
@@ -304,13 +296,14 @@ export default {
         width: 50px;
         height: 30px;
         line-height: 30px;
+        text-align: center;
         color: rgb(255, 4, 4);
-        float: right;
       }
     }
     #main_content {
       height: 190px;
-      background-color: tan;
+      font-weight: 450;
+
       div {
         margin: 0 8px;
       }
@@ -324,7 +317,7 @@ export default {
         text-overflow: ellipsis;
       }
       #content {
-        height: 130px;
+        height: 140px;
         font-size: 14px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -332,8 +325,13 @@ export default {
         overflow: hidden;
       }
       #main_content_foot {
-        height: 30px;
-        line-height: 30px;
+        font-size: 14px;
+        margin: 0;
+        opacity: 0.7;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
       }
     }
   }

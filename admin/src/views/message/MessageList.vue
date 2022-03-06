@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" @click="AddMessage">发留言</el-button>
+    <button id="button" @click="AddMessage">发留言</button>
     <message
       :tableData="tableData"
       @deleteData="handleDelete"

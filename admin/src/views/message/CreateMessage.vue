@@ -36,13 +36,13 @@
           </div>
         </div>
         <div>
-          <el-button
+          <button
             id="button"
             ref="center"
             type="primary"
             size="medium"
             @click="OnSubmit"
-            >发表评论</el-button
+            >发表评论</button
           >
         </div>
       </div>

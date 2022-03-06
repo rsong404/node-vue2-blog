@@ -53,7 +53,7 @@
         <div id="editor"></div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">确认修改</el-button>
+        <button id="button" @click.prevent="onSubmit">确认修改</button>
       </el-form-item>
     </el-form>
   </div>

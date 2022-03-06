@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" @click="AddAccount">新增账号</el-button>
+    <button id="button" type="primary" @click.prevent="AddAccount">新增账号</button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column label="ID" width="280">
         <template slot-scope="scope">
@@ -79,3 +79,6 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+      
+</style>

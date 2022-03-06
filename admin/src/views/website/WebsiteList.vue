@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" @click="AddWebsite">新增站点</el-button>
+    <button id="button" @click="AddWebsite">新增站点</button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column label="类型" width="280">
         <template slot-scope="scope">

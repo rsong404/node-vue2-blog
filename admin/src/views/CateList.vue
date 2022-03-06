@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" @click="AddCategory">新增分类</el-button>
+    <button id="button" @click="AddCategory">新增分类</button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column label="ID" width="280">
         <template slot-scope="scope">

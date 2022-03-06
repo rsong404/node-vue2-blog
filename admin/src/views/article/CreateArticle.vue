@@ -56,7 +56,7 @@
         <div id="editor"></div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即创建</el-button>
+        <button id="button" @click.prevent="OnSubmit">立即创建</button>
       </el-form-item>
     </el-form>
   </div>
@@ -90,7 +90,7 @@ export default {
       let result = await this.$http.get("/category");
       this.categoryData = result.data.reverse();
     },
-    async onSubmit() {
+    async OnSubmit() {
       
       if (this.if_obj_is_null(this.form) == 0) {
         //向数据库添加tag

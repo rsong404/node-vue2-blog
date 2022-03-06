@@ -18,11 +18,10 @@
           </el-form-item>
         </el-form>
         <div>
-          <el-button
+          <button id="button"
             @click="OnSubmit"
-            type="primary"
             style="position:relative;left:50%;transform:translateX(-50%)"
-            >确认添加</el-button
+            >确认添加</button
           >
         </div>
       </div>

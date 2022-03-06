@@ -5,7 +5,7 @@
         <div id="editor"></div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即添加</el-button>
+        <button id="button" type="primary" @click.prevent="onSubmit">立即添加</button>
       </el-form-item>
     </el-form>
   </div>

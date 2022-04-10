@@ -6,9 +6,11 @@ import './utils/globalStyle.css'
 import './utils/icon-css/iconfont.css'
 
 Vue.prototype.$http = http
-import {Button, DatePicker, Descriptions, DescriptionsItem, Card, Empty, Row, Option, Col, Select, Form, FormItem, MessageBox, Message, Tag, Input, Table, TableColumn, Popover, Aside,Container,MenuItem,Menu,Submenu,MenuItemGroup,Header,Main } from 'element-ui';
+import {Button, Dialog, Upload, DatePicker, Descriptions, DescriptionsItem, Card, Empty, Row, Option, Col, Select, Form, FormItem, MessageBox, Message, Tag, Input, Table, TableColumn, Popover, Aside,Container,MenuItem,Menu,Submenu,MenuItemGroup,Header,Main } from 'element-ui';
 Vue.use(Aside)
 Vue.use(Main)
+Vue.use(Dialog)
+Vue.use(Upload)
 Vue.use(Descriptions)
 Vue.use(DescriptionsItem)
 Vue.use(DatePicker)

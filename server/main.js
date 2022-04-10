@@ -7,6 +7,9 @@ app.use(cors())
 //连接数据库
 require('./plugins/connection')()
 
+//前端页面
+require('./router//fontend/index')(app)
+
 //后台管理路由
 require('./router/admin/admin')(app)
 

@@ -35,6 +35,9 @@ http.interceptors.response.use(res => {
       })
       router.push('/login')
   }
+  if(err.response.status === 302){
+    window.location = 'https://gitee.com/rs404/picgo_img/raw/master/images/xiao.jpg'
+  }
   return Promise.reject(err)
 })
 

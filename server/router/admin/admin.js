@@ -20,7 +20,7 @@ module.exports = app => {
     router.post('/', async(req,res) => {
         const data = await req.model.create(req.body)
         res.send(data)
-        console.log('添加数据' + data)
+        // console.log('添加数据' + data)
         
     })
 
@@ -28,20 +28,23 @@ module.exports = app => {
     router.put('/', async(req,res) => {
         const data = await req.model.updateOne({_id:req.query._id},req.body)
         res.status(200).send(data)
-        console.log('修改数据' + data)
+        // console.log('修改数据' + data)
     })
 
     //删除数据
     router.delete('/', async(req,res) => {
         const data = await req.model.deleteOne(req.query)
         res.send(data)
-        console.log('删除数据：'+ JSON.stringify(data))
+        // console.log('删除数据：'+ JSON.stringify(data))
     })
+
+
     //分类和tag查询另起路由
     require('./login')(app)
-    require('./tag')(app)
-    require('./category')(app)
+    // require('./tag')(app)
+    // require('./category')(app)
     require('./account')(app)
+    require('./upload')(app)
 
     app.use('/admin/api/:type', verifyAuthorize,modelware,router)
 }

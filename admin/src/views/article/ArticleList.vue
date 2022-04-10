@@ -28,7 +28,9 @@
                     @click="EditorArticle(item)"
                     >修改</a
                   >
-                  <a href="javascript:;" @click="DeleteArticle(item)">删除</a>
+                  <a href="javascript:;" @click.stop="DeleteArticle(item)"
+                    >删除</a
+                  >
                 </div>
                 <div id="main_content">
                   <h4 id="content_title">
@@ -93,12 +95,7 @@ export default {
       drawerClass: true,
       tagContainer: "tagContainer",
       tagContainer2: "tagContainer2",
-      colorStyle: [
-        "#99CCCC",
-        "#FFFFFF",
-        "#99CCFF",
-        "#CCCCFF",
-      ],
+      colorStyle: ["#99CCCC", "#FFFFFF", "#99CCFF", "#CCCCFF"],
     };
   },
   methods: {
@@ -130,11 +127,11 @@ export default {
               JSON.stringify(result.data) !== "[]" &&
               result.data[0].items.length <= 1
             ) {
-              await this.$http.delete("/tag", {
+              this.$http.delete("/tag", {
                 params: { tagName: item.tags[index] },
               });
             } else {
-              await this.$http.delete("/tag", {
+              this.$http.delete("/tag", {
                 params: { tagName: item.tags[index] },
               });
             }
@@ -170,14 +167,13 @@ export default {
     },
     //获取标签
     GetTag(arcticleArr) {
-      let arr = []
+      let arr = [];
       arcticleArr.forEach((element) => {
         if (element.tags.length >= 1) {
-          arr.push(...element.tags)
+          arr.push(...element.tags);
         }
       });
       this.tagData.push(...new Set(arr));
-
     },
     // 选择标签
     SelectTag(tagName) {
@@ -234,13 +230,12 @@ export default {
 }
 .tagContainer2 {
   @include tagContainer();
-  transform: translate3d(5%,-50%,0);
+  transform: translate3d(5%, -50%, 0);
 }
 
 .tagContainer {
   @include tagContainer();
-  transform: translate3d(80%,-50%,0);
-
+  transform: translate3d(80%, -50%, 0);
 }
 #tagMain {
   width: 140px;

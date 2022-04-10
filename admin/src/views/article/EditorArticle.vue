@@ -34,7 +34,16 @@
       </el-form-item>
       <el-form-item label="文章封面图地址">
         <el-col :span="12">
-          <el-input v-model="form.coverPicture"></el-input>
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:3000/admin/api/upload"
+            list-type="picture"
+            :headers="headers"
+            :on-success="SuccessUpload"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
         </el-col>
       </el-form-item>
       <el-form-item label="置顶数">
@@ -71,6 +80,10 @@ export default {
       removeTag: [],
       oriTag: "",
       editor: null,
+      headers: {
+        Authorization: "",
+      },
+      imageUrl: "",
       form: {
         title: "",
         userName: "",
@@ -100,6 +113,10 @@ export default {
     async GetCateData() {
       let result = await this.$http.get("/category");
       this.categoryData = result.data.reverse();
+    },
+    SuccessUpload(res) {
+      this.imageUrl = res;
+      this.form.coverPicture = res
     },
     async onSubmit() {
       if (this.if_obj_is_null(this.form) == 0) {
@@ -157,6 +174,8 @@ export default {
   created() {
     this.GetCateData();
     this.InitArticleData();
+    this.headers.Authorization = window.localStorage.token;
+
   },
   mounted() {
     this.InitEditor();
@@ -168,3 +187,32 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+
+.el-upload {
+  border: 1px dashed #6b6b6b;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+  border: 2px dashed #6b6b6b;
+
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  border: 1px dashed #6b6b6b;
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+</style>

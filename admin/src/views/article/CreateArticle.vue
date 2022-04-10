@@ -12,11 +12,7 @@
         </el-col>
       </el-form-item>
       <el-form-item label="分类">
-        <el-select
-          v-model="form.cateName"
-          placeholder="请选择分类"
-          
-        >
+        <el-select v-model="form.cateName" placeholder="请选择分类">
           <el-option
             v-for="item in this.categoryData"
             :key="item._id"
@@ -35,21 +31,30 @@
         >
         </el-select>
       </el-form-item>
-      <el-form-item label="文章封面图地址">
+      <el-form-item label="文章封面图">
         <el-col :span="12">
-          <el-input v-model="form.coverPicture"></el-input>
+          <el-upload
+            class="avatar-uploader"
+            action="http://localhost:3000/admin/api/upload"
+            list-type="picture"
+            :headers="headers"
+            :on-success="SuccessUpload"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
         </el-col>
       </el-form-item>
       <el-form-item label="置顶数">
         <el-col :span="12">
-        <el-input
-          type="number"
-          placeholder="数字越小排列越前，最小为1，默认为0为无"
-          v-model="form.stick"
-          maxlength="1"
-          show-word-limit
-        >
-        </el-input>
+          <el-input
+            type="number"
+            placeholder="数字越小排列越前，最小为1，默认为0为无"
+            v-model="form.stick"
+            maxlength="1"
+            show-word-limit
+          >
+          </el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="文章内容">
@@ -64,12 +69,16 @@
 <script>
 import E from "wangeditor";
 import hljs from "highlight.js";
-import 'highlight.js/styles/monokai-sublime.css'
+import "highlight.js/styles/monokai-sublime.css";
 
 export default {
   inject: ["reload"],
   data() {
     return {
+      headers: {
+        Authorization: "",
+      },
+      imageUrl: "",
       categoryData: [],
       tagValue: [],
       editor: null,
@@ -91,7 +100,6 @@ export default {
       this.categoryData = result.data.reverse();
     },
     async OnSubmit() {
-      
       if (this.if_obj_is_null(this.form) == 0) {
         //向数据库添加tag
         for (let index = 0; index < this.form.tags.length; index++) {
@@ -107,7 +115,9 @@ export default {
           }
         }
         //添加文章
-        if(this.form.coverPicture === '') this.form.coverPicture = 'https://gitee.com/rs404/picgo_img/raw/master/images/wanye.jpg'
+        if (this.form.coverPicture === "")
+          this.form.coverPicture =
+            "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/aca1f6ceea637aa9bd1412639b4b4a46.jpg";
         await this.$http.post("/article", this.form);
         this.$message.success("文章发表成功！");
         //跳转到文章列表页面
@@ -124,7 +134,7 @@ export default {
     if_obj_is_null(obj) {
       let i = 0;
       for (const key in obj) {
-        if (obj.hasOwnProperty(key) && key !== 'coverPicture') {
+        if (obj.hasOwnProperty(key) && key !== "coverPicture") {
           if (obj[key] === null || obj[key] === "") {
             i++;
           }
@@ -132,9 +142,14 @@ export default {
       }
       return i;
     },
+    SuccessUpload(res) {
+      this.imageUrl = res;
+      this.form.coverPicture = res
+    },
   },
   created() {
     this.GetCateData();
+    this.headers.Authorization = window.localStorage.token;
   },
   mounted() {
     const editor = new E("#editor");
@@ -155,3 +170,32 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+
+.el-upload {
+  border: 1px dashed #6b6b6b;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+  border: 2px dashed #6b6b6b;
+
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  border: 1px dashed #6b6b6b;
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+</style>

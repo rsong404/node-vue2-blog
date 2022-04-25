@@ -1,7 +1,13 @@
 <template>
   <header>
     <div id="blogName">YRsong丶博客</div>
-    <div id="model"><i @click="TurnModel" class="iconfont" :class="turnModel?'icon-Daytimemode-fill':'icon-nightmode-fill'"></i></div>
+    <div id="model">
+      <i
+        @click="TurnModel"
+        class="iconfont"
+        :class="turnModel ? 'icon-Daytimemode-fill' : 'icon-nightmode-fill'"
+      ></i>
+    </div>
     <div id="header-right">
       <div id="search">
         <div id="searchIconUp"></div>
@@ -17,23 +23,41 @@ export default {
   data() {
     return {
       turnModel: true,
+      nodeList: null,
     };
   },
+  mounted() {
+    this.nodeList = document.querySelectorAll(".backgroundColor");
+  },
   methods: {
-    TurnModel(){
-      this.turnModel = !this.turnModel
-    }
+    TurnModel() {
+      this.turnModel = !this.turnModel;
+      if (!this.turnModel) {
+        for (const item of this.nodeList) {
+          item.setAttribute(
+            "style",
+            "--backgroundColor: #0D0D0D;--whiteFontColor: #f8f8f8"
+          );
+        }
+      } else {
+        for (const item of this.nodeList) {
+          item.setAttribute(
+            "style",
+            "--backgroundColor: #f8f8f8;--whiteFontColor: #0D0D0D"
+          );
+        }
+      }
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 header {
   width: 100%;
-  height: 7vh;
+  height: 100%;
   margin: 0 auto;
   display: block;
   background-color: var(--divWhiteBackground);
-  margin-bottom: 4px;
   flex-shrink: 0;
   position: relative;
   #model > i {

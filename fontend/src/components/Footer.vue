@@ -3,9 +3,8 @@
 </template>
 <style lang="scss" scoped>
   footer {
-      height: 60px;
+      height: 100%;
       width: 100%;
-      background-color: var(--divWhiteBackground);
-      flex: 1;
+      background-color: var(--divBlackBackground);
     }
 </style>

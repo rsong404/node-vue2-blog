@@ -28,24 +28,9 @@
   }
   .relatedColors{
     background-color: var(--backgroundColor);
-    color: var(--whiteFontColor);
+    color: var(--blackFontColor);
   }
-  // @mixin center{
-  //   position: absolute;
-  //     top: 50%;
-  //     left: 50%;
-  //     transform: translate3d(-50%,-50%,0);
-  // }
-  // @mixin vertical-center{
-  //   position: absolute;
-  //     top: 50%;
-  //     transform: translateY(-50%);
-  // }
-  // @mixin horizatal-center{
-  //   position: absolute;
-  //     left: 50%;
-  //     transform: translateX(-50%);
-  // }
+  
   .aplayer.aplayer-fixed .aplayer-body {
     left: -66px;
 }

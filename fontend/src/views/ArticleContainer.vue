@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div id="content">ddd</div>
-    <div id="content">ddd</div>
-    <div id="content">ddd</div>
-    <div id="content">ddd</div>
+    <router-view></router-view>
   </div>
 </template>
 <style lang="scss" scoped>

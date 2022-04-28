@@ -27,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    this.nodeList = document.querySelectorAll(".backgroundColor");
+    this.nodeList = document.querySelectorAll(".relatedColors");
   },
   methods: {
     TurnModel() {

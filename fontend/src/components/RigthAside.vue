@@ -5,7 +5,9 @@
       <div @click="Tabs('Catalog')" :class="name=='Catalog' ? 'active' : ''">目录</div>
     </div>
     <div>
-      <component :is="name"></component>
+      <component :is="name">
+        
+      </component>
     </div>
   </div>
 </template>
@@ -44,7 +46,6 @@ export default {
       text-align: center;
       line-height: 50px;
       cursor: pointer;
-
     }
     .active{
       border-bottom: 2px rgb(112, 112, 112) solid;

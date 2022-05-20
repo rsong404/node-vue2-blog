@@ -13,12 +13,10 @@
               <router-view></router-view>
             </div>
             <div id="footerBox">
-              <!-- <my-footer></my-footer> -->
             </div>
           </div>
         </div>
         <div id="aside-right">
-          <!-- <router-view name="rightAside"></router-view> -->
           <my-rigth-aside/>
         </div>
       </main>

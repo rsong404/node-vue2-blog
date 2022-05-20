@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../components/Main.vue'
-import ArticleContainer from '../views/ArticleContainer'
+import Article from '../views/Article'
 import ArticleList from '../views/ArticleList'
-import RightAside from '../components/RigthAside.vue'
 
 Vue.use(VueRouter)
 
@@ -12,20 +11,17 @@ const routes = [
     path: '/',
     name: 'main',
     component: Main,
-    redirect: { name: 'articleContainer' },
+    redirect: { name: 'index' },
     children: [
       {
         name: 'index',
         path: 'index',
-        component: ArticleContainer,
-        redirect: { name: 'articleList' },
-        children: [
-          {
-            name: 'articleList',
-            path: 'articleList',
-            component: ArticleList,
-          },
-        ],
+        component: ArticleList,
+      },
+      {
+        name: 'article',
+        path: 'article',
+        component: Article,
       },
     ],
   },

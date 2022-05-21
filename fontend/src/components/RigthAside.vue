@@ -6,7 +6,6 @@
     </div>
     <div>
       <component :is="name">
-        
       </component>
     </div>
   </div>
@@ -48,7 +47,7 @@ export default {
       cursor: pointer;
     }
     .active{
-      border-bottom: 2px rgb(112, 112, 112) solid;
+      border-bottom: 2px rgb(245, 245, 245) solid;
     }
   }
 }

@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../components/Main.vue'
-import Article from '../views/Article'
 import ArticleList from '../views/ArticleList'
+import Article from '../views/Article'
+import Comment from '../views/Comment'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
         name: 'article',
         path: 'article',
         component: Article,
+      },
+      {
+        name: 'comment',
+        path: 'comment',
+        component: Comment,
       },
     ],
   },

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div id="blogName">YRsong丶博客</div>
+    <router-link to="/index" tag="div" id="blogName">YRsong丶博客</router-link>
     <div id="model">
       <i
         @click="TurnModel"
@@ -43,7 +43,7 @@ export default {
         for (const item of this.nodeList) {
           item.setAttribute(
             "style",
-            "--backgroundColor: #f8f8f8;--whiteFontColor: #0D0D0D"
+            "--backgroundColor: #a2d2ff;--whiteFontColor: #0D0D0D"
           );
         }
       }
@@ -77,6 +77,7 @@ header {
   }
 
   #blogName {
+    cursor: pointer;
     float: left;
     font-size: 20px;
     font-weight: 600;
@@ -93,13 +94,13 @@ header {
 
     #message {
       width: 50px;
-      height: 7vh;
+      height: 100%;
       line-height: 7vh;
       cursor: pointer;
       font-weight: 600;
-      color: rgba($color: #000000, $alpha: 0.5);
+      text-align: center;
       &:hover {
-        background-color: rgb(204, 206, 207);
+        background-color: var(--htmlWhiteBackground);
       }
     }
     #search {

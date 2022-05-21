@@ -5,7 +5,7 @@ const TalkSchema = new mongoose.Schema({
     time: {
         type: String,
         set(){
-            return dayjs().format('YYYY-MM-DD');
+            return dayjs().format('YYYY-MM-DD HH:mm');
         }
     }
 

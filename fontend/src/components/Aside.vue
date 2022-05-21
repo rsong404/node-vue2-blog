@@ -11,14 +11,14 @@
         <div>
           <div id="navigation"><span>导航</span></div>
           <router-link to="/dd" id="navigationItem"
-            ><i class="iconfont icon-namecard"></i
+            ><i class="iconfont icon-a-mingpianzhengjian-m"></i
             ><span>简历</span></router-link
           >
           <a href="https://rs404.top" target="_blank" id="navigationItem"
-            ><i class="iconfont icon-writing"></i><span>技术博客</span></a
+            ><i class="iconfont icon-zhengcewenjian-m"></i><span>技术博客</span></a
           >
-          <router-link to="/dd" id="navigationItem"
-            ><i class="iconfont icon-respond"></i
+          <router-link to="/comment" id="navigationItem"
+            ><i class="iconfont icon-xiaoxi-m"></i
             ><span>个人说说</span></router-link
           >
         </div>
@@ -51,6 +51,7 @@ export default {
     async GetCategory() {
       let result = await this.$http.get("/category");
       this.categoryData = result.data;
+      console.log('cat',this.categoryData)
     },
   },
   created() {
@@ -110,7 +111,7 @@ aside {
     }
     #adminBox {
       height: 60px;
-      background-color: var(--lightGray);
+      background-color: var(--divWhiteBackground);
       a {
         display: block;
       }
@@ -120,7 +121,7 @@ aside {
       width: 100%;
       height: 40px;
       line-height: 40px;
-      font-size: 13px;
+      font-size: 14px;
       & > span {
         margin-left: 12px;
       }
@@ -173,6 +174,7 @@ aside {
     & > i {
       float: left;
       margin-left: 20px;
+      // color: #66bfff;
     }
   }
 }

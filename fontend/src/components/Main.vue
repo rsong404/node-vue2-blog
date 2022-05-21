@@ -12,12 +12,11 @@
             <div id="contentContainer">
               <router-view></router-view>
             </div>
-            <div id="footerBox">
-            </div>
+            <div id="footerBox">footer</div>
           </div>
         </div>
         <div id="aside-right">
-          <my-rigth-aside/>
+          <my-rigth-aside />
         </div>
       </main>
       <div id="aplayer"></div>
@@ -74,6 +73,7 @@ export default {
         ...this.info, // 其他配置信息
       });
     },
+    // 音乐插件隐藏与出现
     FlexMusicBox() {
       const button = document.querySelector(".aplayer-miniswitcher>button");
       const musicBox = document.querySelector(
@@ -132,11 +132,12 @@ export default {
       #footerBox {
         width: 100%;
         height: 60px;
-        background-color: aqua;
+        background-color: var(--htmlWhiteBackground);
+        box-shadow: 0 0 5px #ffffff inset;
       }
       #articleContainer {
         flex: 1;
-        background-color: aquamarine;
+        background-color: rgb(241, 241, 241);
         display: flex;
         flex-direction: column;
         #title {
@@ -145,9 +146,8 @@ export default {
         }
         #contentContainer {
           flex: 1;
-          background-color: #e5e5e7;
+          background-color: var(--htmlWhiteBackground);
           padding: 15px;
-          
         }
       }
     }

@@ -5,6 +5,6 @@
   footer {
       height: 100%;
       width: 100%;
-      background-color: var(--divWhiteBackground);
+      background-color: var(--blue2);
     }
 </style>

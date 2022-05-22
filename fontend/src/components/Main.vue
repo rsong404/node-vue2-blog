@@ -8,9 +8,9 @@
         </div>
         <div id="article">
           <div id="articleContainer">
-            <div id="title"><my-tittle></my-tittle></div>
+            <!-- <div id="title"><my-tittle></my-tittle></div> -->
             <div id="contentContainer">
-              <router-view></router-view>
+              <router-view ref="artList" v-if="reloadRouterView"></router-view>
             </div>
             <div id="footerBox">footer</div>
           </div>
@@ -26,7 +26,7 @@
 
 <script>
 import MyHeader from "./Header.vue";
-import MyTittle from "./Tittle.vue";
+// import MyTittle from "../views/Tittle.vue";
 import MyAside from "./Aside.vue";
 import MyFooter from "./Footer.vue";
 import MyRigthAside from "./RigthAside.vue";
@@ -38,13 +38,19 @@ export default {
   name: "Main",
   components: {
     MyHeader,
-    MyTittle,
+    // MyTittle,
     MyAside,
     MyFooter,
     MyRigthAside,
   },
+  provide(){
+    return {
+      reload: this.Reload
+    }
+  },
   data() {
     return {
+      reloadRouterView: true,
       is: false,
       button: {},
       musicBox: {},
@@ -59,7 +65,14 @@ export default {
       },
     };
   },
-
+  methods: {
+    Reload(){
+      this.reloadRouterView = false
+      this.$nextTick(() => {
+        this.reloadRouterView = true
+      })
+    }
+  },
   mounted() {
     this.initAudio();
     this.FlexMusicBox();
@@ -98,7 +111,7 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: var(--shawod);
+  box-shadow: var(--shawod1);
   #header {
     width: 100%;
     height: 8vh;
@@ -110,16 +123,16 @@ export default {
     display: flex;
 
     #aside-left {
-      width: 20%;
+      width: 19%;
       height: 100%;
     }
     #aside-right {
-      width: 20%;
+      width: 19%;
       height: 100%;
-      background-color: var(--divWhiteBackground);
+      background-color: var(--blue2);
     }
     #article {
-      width: 60%;
+      width: 62%;
       height: 92vh; //要想出现滚动条就要定义好长度或宽度，不能用%单位
       display: flex;
       flex-direction: column;
@@ -132,12 +145,11 @@ export default {
       #footerBox {
         width: 100%;
         height: 60px;
-        background-color: var(--htmlWhiteBackground);
+        background-color: var(--blue1);
         box-shadow: 0 0 5px #ffffff inset;
       }
       #articleContainer {
         flex: 1;
-        background-color: rgb(241, 241, 241);
         display: flex;
         flex-direction: column;
         #title {
@@ -146,8 +158,9 @@ export default {
         }
         #contentContainer {
           flex: 1;
-          background-color: var(--htmlWhiteBackground);
-          padding: 15px;
+          background-color: var(--blue1);
+          // padding: 15px;
+          // padding-top: 0;
         }
       }
     }

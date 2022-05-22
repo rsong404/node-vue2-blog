@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11488250",
+      "name": "Daytime mode-fill",
+      "font_class": "Daytimemode-fill",
+      "unicode": "e77c",
+      "unicode_decimal": 59260
+    },
+    {
+      "icon_id": "24072202",
+      "name": "icon-nighttime-fill",
+      "font_class": "icon-nighttime-fill",
+      "unicode": "e7be",
+      "unicode_decimal": 59326
+    },
+    {
       "icon_id": "29694035",
       "name": "分享推荐-m",
       "font_class": "fenxiangtuijian-m",

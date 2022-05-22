@@ -5,7 +5,7 @@
       <i
         @click="TurnModel"
         class="iconfont"
-        :class="turnModel ? 'icon-Daytimemode-fill' : 'icon-nightmode-fill'"
+        :class="turnModel ? 'icon-Daytimemode-fill' : 'icon-icon-nighttime-fill'"
       ></i>
     </div>
     <div id="header-right">
@@ -31,21 +31,10 @@ export default {
   },
   methods: {
     TurnModel() {
+      console.log('class',this.nodeList)
       this.turnModel = !this.turnModel;
-      if (!this.turnModel) {
-        for (const item of this.nodeList) {
-          item.setAttribute(
-            "style",
-            "--backgroundColor: #0D0D0D;--whiteFontColor: #f8f8f8"
-          );
-        }
-      } else {
-        for (const item of this.nodeList) {
-          item.setAttribute(
-            "style",
-            "--backgroundColor: #a2d2ff;--whiteFontColor: #0D0D0D"
-          );
-        }
+      for (let i = 0; i < this.nodeList.length; i++) {
+        this.nodeList[i].classList.toggle('nightMode')
       }
     },
   },
@@ -57,7 +46,7 @@ header {
   height: 100%;
   margin: 0 auto;
   display: block;
-  background-color: var(--divWhiteBackground);
+  background-color: var(--blue2);
   flex-shrink: 0;
   position: relative;
   #model > i {
@@ -100,7 +89,7 @@ header {
       font-weight: 600;
       text-align: center;
       &:hover {
-        background-color: var(--htmlWhiteBackground);
+        background-color: var(--blue1);
       }
     }
     #search {

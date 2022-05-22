@@ -25,34 +25,45 @@
         <div id="catagoryContainer">
           <div id="navigation"><span>分类</span></div>
           <div id="category">
-            <div v-for="item in categoryData" :key="item._id" id="categoryItem">
-              <router-link :to="`/${item.cateName}`"
-                ><span>{{ item.cateName }}</span></router-link
-              >
-              <span>ddd</span>
+            <div @click="CheckCategory(item.items)" v-for="item in categoryList" :key="item._id" id="categoryItem">
+            <span>{{ item.cateName }}</span>
+              <!-- <router-link :to="`/${item.cateName}`"
+                ></router-link
+              > -->
+              <span>{{item.items.length}}</span>
             </div>
           </div>
         </div>
       </div>
       <div id="adminBox">
-        <a href="http://localhost:8080/admin/" target="_blank">后台管理</a>
+        <a href="http://localhost:8081/admin/" target="_blank">后台管理</a>
       </div>
     </div>
   </aside>
 </template>
 <script>
 export default {
+  inject:['reload'],
   data() {
     return {
-      categoryData: [],
+      categoryList: [],
     };
   },
   methods: {
     async GetCategory() {
       let result = await this.$http.get("/category");
-      this.categoryData = result.data;
-      console.log('cat',this.categoryData)
+      this.categoryList = result.data;
+      // console.log('cat',this.categoryList)
+      
     },
+    //选择分类
+    CheckCategory(items){
+      sessionStorage.setItem('checkCategory',JSON.stringify(items))
+      // this.$router.go(0)
+      this.$parent.$refs.articleList.articleList = items
+      console.log(this.$parent.$refs.artList.articleList)
+    }
+
   },
   created() {
     this.GetCategory();
@@ -69,6 +80,7 @@ aside {
   color: var(--blackFontColor);
   font-weight: var(--fontWeight);
   font-size: 1rem;
+  background-color: var(--blue2);
   & > div {
     cursor: pointer;
   }
@@ -110,10 +122,12 @@ aside {
       overflow: hidden;
     }
     #adminBox {
+      text-align: center;
       height: 60px;
-      background-color: var(--divWhiteBackground);
+      // line-height: 60px;
+      background-color: var(--blue2);
       a {
-        display: block;
+        display: inline-block;
       }
     }
     #navigation {
@@ -141,18 +155,27 @@ aside {
           display: block;
           width: 100%;
           height: 40px;
-          line-height: 40px;
-          text-align: left;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
 
           &:hover {
-            background-color: var(--htmlwhiteBackground);
+            background-color: var(--blue1);
           }
-          & > a {
+          & > span:nth-child(1) {
+            display: inline-block;
             margin-left: 20px;
           }
-          & > span {
-            float: right;
+          & > span:nth-child(2) {
+            text-align: center;
+            font-size: 14px;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            display: inline-block;
             margin-right: 20px;
+            background-color: var(--blue3);
+            box-shadow: var(--shadow2);
           }
         }
       }
@@ -166,7 +189,7 @@ aside {
     line-height: 40px;
     text-align: left;
     &:hover {
-      background-color: var(--htmlwhiteBackground);
+      background-color: var(--blue1);
     }
     & > span {
       margin-left: 20px;

@@ -38,7 +38,7 @@ export default {
   #tabs{
     display: flex;
     margin-bottom: 10px;
-    background-color: var(--divWhiteBackground);
+    background-color: var(--blue2);
     &>div{
       width: 50%;
       height: 50px;

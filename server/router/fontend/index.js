@@ -7,6 +7,7 @@ module.exports = app => {
         let result = await req.model.find({})
         res.send(result)
     })
+    require('./category')(app)
 
     app.use('/fontend/api/:type',modelware,router)
 }

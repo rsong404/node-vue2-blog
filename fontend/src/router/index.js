@@ -18,6 +18,7 @@ const routes = [
         name: 'index',
         path: 'index',
         component: ArticleList,
+        props: true
       },
       {
         name: 'article',

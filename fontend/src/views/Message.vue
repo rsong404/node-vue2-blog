@@ -1,7 +1,7 @@
 <template>
   <div id="MessageBox">
     <div id="Container">
-      我是文章目录页面
+
     </div>
   </div>
 </template>

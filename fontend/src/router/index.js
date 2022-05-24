@@ -4,6 +4,7 @@ import Main from '../components/Main.vue'
 import ArticleList from '../views/ArticleList'
 import Article from '../views/Article'
 import Comment from '../views/Comment'
+import Message from '../views/Message'
 
 Vue.use(VueRouter)
 
@@ -18,7 +19,7 @@ const routes = [
         name: 'index',
         path: 'index',
         component: ArticleList,
-        props: true
+        props: true,
       },
       {
         name: 'article',
@@ -29,6 +30,11 @@ const routes = [
         name: 'comment',
         path: 'comment',
         component: Comment,
+      },
+      {
+        name: 'message',
+        path: 'message',
+        component: Message,
       },
     ],
   },

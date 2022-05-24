@@ -10,12 +10,16 @@
       <div id="navigationContainer" class="relatedColors">
         <div>
           <div id="navigation"><span>导航</span></div>
+          <div @click="ReturnIndex" id="navigationItem">
+            <i class="iconfont icon-shouye-m"></i><span>首页</span>
+          </div>
           <router-link to="/dd" id="navigationItem"
             ><i class="iconfont icon-a-mingpianzhengjian-m"></i
             ><span>简历</span></router-link
           >
           <a href="https://rs404.top" target="_blank" id="navigationItem"
-            ><i class="iconfont icon-zhengcewenjian-m"></i><span>技术博客</span></a
+            ><i class="iconfont icon-zhengcewenjian-m"></i
+            ><span>技术博客</span></a
           >
           <router-link to="/comment" id="navigationItem"
             ><i class="iconfont icon-xiaoxi-m"></i
@@ -25,12 +29,17 @@
         <div id="catagoryContainer">
           <div id="navigation"><span>分类</span></div>
           <div id="category">
-            <div @click="CheckCategory(item.items)" v-for="item in categoryList" :key="item._id" id="categoryItem">
-            <span>{{ item.cateName }}</span>
+            <div
+              @click="CheckCategory(item.items)"
+              v-for="item in categoryList"
+              :key="item._id"
+              id="categoryItem"
+            >
+              <span>{{ item.cateName }}</span>
               <!-- <router-link :to="`/${item.cateName}`"
                 ></router-link
               > -->
-              <span>{{item.items.length}}</span>
+              <span>{{ item.items.length }}</span>
             </div>
           </div>
         </div>
@@ -43,7 +52,7 @@
 </template>
 <script>
 export default {
-  inject:['reload'],
+  inject: ["reload"],
   data() {
     return {
       categoryList: [],
@@ -53,17 +62,23 @@ export default {
     async GetCategory() {
       let result = await this.$http.get("/category");
       this.categoryList = result.data;
-      // console.log('cat',this.categoryList)
-      
     },
     //选择分类
-    CheckCategory(items){
-      sessionStorage.setItem('checkCategory',JSON.stringify(items))
-      // this.$router.go(0)
-      this.$parent.$refs.articleList.articleList = items
-      console.log(this.$parent.$refs.artList.articleList)
-    }
-
+    CheckCategory(items) {
+      if (this.$route.path !== "/index") {
+        this.$router.push({ name: "index" });
+      }
+      // 修改状态
+      this.$store.dispatch("bulletin", `分类`);
+      this.$store.dispatch("checkCategory", items);
+    },
+    // 返回首页
+    ReturnIndex() {
+      // 更文章title状态
+      this.$store.dispatch("bulletin", "首页");
+      this.$router.push({ name: "index" });
+      
+    },
   },
   created() {
     this.GetCategory();

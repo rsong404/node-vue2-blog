@@ -1,11 +1,13 @@
 <template>
   <header>
-    <router-link to="/index" tag="div" id="blogName">YRsong丶博客</router-link>
+    <div @click="ReturnIndex" id="blogName">YRsong丶博客</div>
     <div id="model">
       <i
         @click="TurnModel"
         class="iconfont"
-        :class="turnModel ? 'icon-Daytimemode-fill' : 'icon-icon-nighttime-fill'"
+        :class="
+          turnModel ? 'icon-Daytimemode-fill' : 'icon-icon-nighttime-fill'
+        "
       ></i>
     </div>
     <div id="header-right">
@@ -14,7 +16,9 @@
         <input type="text" placeholder="请输入搜索" />
         <div id="searchIconDown"></div>
       </div>
-      <router-link to="/message" tag="div" id="message">留言</router-link>
+      <router-link to="/message" tag="div" id="message"
+        ><i class="iconfont icon-xiaoxi2-m"></i
+      ></router-link>
     </div>
   </header>
 </template>
@@ -31,10 +35,17 @@ export default {
   },
   methods: {
     TurnModel() {
-      console.log('class',this.nodeList)
+      console.log("class", this.nodeList);
       this.turnModel = !this.turnModel;
       for (let i = 0; i < this.nodeList.length; i++) {
-        this.nodeList[i].classList.toggle('nightMode')
+        this.nodeList[i].classList.toggle("nightMode");
+      }
+    },
+    ReturnIndex() {
+      if (this.$route.path !== "/index") {
+        // 更文章title状态
+        this.$store.dispatch('bulletin','博客')
+        this.$router.push({ name: "index" });
       }
     },
   },
@@ -42,6 +53,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 header {
+  cursor: "url('../assets/cursor.ico'),pointer";
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -76,7 +88,6 @@ header {
   }
   #header-right {
     float: right;
-
     display: flex;
     height: 100%;
     align-items: center;
@@ -86,8 +97,10 @@ header {
       height: 100%;
       line-height: 7vh;
       cursor: pointer;
-      font-weight: 600;
       text-align: center;
+      & > i {
+        font-size: 18px;
+      }
       &:hover {
         background-color: var(--blue1);
       }

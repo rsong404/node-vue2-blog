@@ -1,52 +1,57 @@
 <template>
   <div id="rigthAsideContainer">
-    <div id="tabs">
-      <div @click="Tabs('Frequently')" :class="name=='Frequently' ? 'active' : ''">常用</div>
-      <div @click="Tabs('Catalog')" :class="name=='Catalog' ? 'active' : ''">目录</div>
+    <div id="tabs" >
+      <div  @click="name ='Frequently'" :class="FreToggle"><i class="iconfont icon-a-fasongdaohang-m"></i></div>
+      <div @click="name ='Catalog'" :class="CatToggle"><i class="iconfont icon-biaoji-m"></i></div>
     </div>
     <div>
-      <component :is="name">
-      </component>
+      <component :is="name"> </component>
     </div>
   </div>
 </template>
 <script>
-import Frequently from '../views/Frequently'
-import Catalog from '../views/Catalog'
+import Frequently from "../views/Frequently";
+import Catalog from "../views/Catalog";
 export default {
-  components:{
+  components: {
     Frequently,
-    Catalog
+    Catalog,
   },
   data() {
     return {
-      name: 'Frequently'
+      name: "Frequently",
+    };
+  },
+  computed:{
+    FreToggle(){
+      return this.name === 'Frequently'? 'active':''
+    },
+    CatToggle(){
+      return this.name === 'Catalog'? 'active':''
     }
   },
-  methods: {
-    Tabs(name){
-      this.name = name
-    }
-  },
-  
-}
+};
 </script>
 <style lang="scss" scoped>
 #rigthAsideContainer {
   width: 100%;
   height: 100%;
-  #tabs{
+  #tabs {
     display: flex;
     margin-bottom: 10px;
     background-color: var(--blue2);
-    &>div{
+    & > div {
       width: 50%;
       height: 50px;
       text-align: center;
       line-height: 50px;
+      
       cursor: pointer;
+      &>i{
+        font-size: 18px;
+      }
     }
-    .active{
+    .active {
       border-bottom: 2px rgb(245, 245, 245) solid;
     }
   }

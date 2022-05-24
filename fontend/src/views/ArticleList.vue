@@ -1,14 +1,13 @@
 <template>
   <div>
-    <div id="title"><my-tittle></my-tittle></div>
     <div style="padding: 15px">
       <div
         id="contentContainer"
-        v-for="item in checkCategory ? checkCategory : articleList"
+        v-for="item in articleList"
         :key="item._id"
         tag="div"
         style="overflow: hidden"
-        @click="CheckArticle(item._id)"
+        @click="CheckArticle(item)"
       >
         <div>
           <div
@@ -37,58 +36,26 @@
   </div>
 </template>
 <script>
-import myTittle from "./Tittle";
+import {mapState} from 'vuex'
 export default {
-  components: {
-    myTittle,
-  },
-  inject:['reload'],
   data() {
     return {
-      articleList: [],
-      checkCategory: [],
+      bulletinStr: 'jiodjfdoisjfods'
     };
   },
+  computed:{
+    ...mapState(['articleList'])
+  },
   methods: {
-    // 获取文章列表
-    async GetArticles() {
-      let result = await this.$http.get("/article");
-      this.articleList = result.data;
-
-      // 获取所有文章标签
-      let tagList = [];
-      this.articleList.forEach((item) => {
-        for (let i = 0; i < item.tags.length; i++) {
-          tagList.push(item.tags[i]);
-        }
-      });
-      // sessionStorage相关配置
-      sessionStorage.setItem("tagList", JSON.stringify(tagList));
-      this.checkCategory = JSON.parse(sessionStorage.getItem("checkCategory"));
-      console.log("cate", this.checkCategory);
-      console.log("art", this.articleList);
-    },
-    async CheckArticle(_id) {
-      this.articleList.forEach((item) => {
-        if (item._id === _id) {
-          // sessionStorage
-          sessionStorage.setItem("checkArticle", JSON.stringify(item));
-          // 更文章title状态
-          sessionStorage.setItem("isBulletin", JSON.stringify(false));
-        }
-      });
+    //选中文章
+    async CheckArticle(checkArticle) {
+      this.$store.dispatch('checkArticle',checkArticle)
       this.$router.push({ name: "article" });
     },
   },
-  beforeCreate() {
-    // 删除和更改旧sessionStorage
-    // sessionStorage 为了比Tittle组件先执行，所以要放在beforeCreate上
-    sessionStorage.setItem("isBulletin", JSON.stringify(true));
-    sessionStorage.setItem("checkCategory", JSON.stringify(null));
-  },
   created() {
-    // 先查看是否有选择文章分类
-    this.GetArticles();
+    
+    this.$store.dispatch('getArticleList')
   },
 };
 </script>

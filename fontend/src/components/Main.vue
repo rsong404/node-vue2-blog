@@ -8,7 +8,7 @@
         </div>
         <div id="article">
           <div id="articleContainer">
-            <!-- <div id="title"><my-tittle></my-tittle></div> -->
+            <div id="title"><my-tittle></my-tittle></div>
             <div id="contentContainer">
               <router-view ref="artList" v-if="reloadRouterView"></router-view>
             </div>
@@ -26,7 +26,7 @@
 
 <script>
 import MyHeader from "./Header.vue";
-// import MyTittle from "../views/Tittle.vue";
+import MyTittle from "./Tittle.vue";
 import MyAside from "./Aside.vue";
 import MyFooter from "./Footer.vue";
 import MyRigthAside from "./RigthAside.vue";
@@ -38,7 +38,7 @@ export default {
   name: "Main",
   components: {
     MyHeader,
-    // MyTittle,
+    MyTittle,
     MyAside,
     MyFooter,
     MyRigthAside,

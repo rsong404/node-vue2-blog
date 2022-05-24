@@ -1,53 +1,49 @@
 <template>
   <div id="ContainerBox">
-    <div id="titleContainer" style="">
-      <div id="bulletin" v-if="GetBulletinState" key="dd">bulletion</div>
-      <div id="tagContainer" v-else key="hh">
-        <h3 style="margin-top: 15px">{{ checkArticle.title }}</h3>
+    <div id="titleContainer" >
+      <div id="tagContainer" v-if="GetBulletinState">
+        <h3 style="margin-top: 15px">{{ bulletin.title }}</h3>
         <div>
           <span
             ><i class="iconfont icon-fenlei-m"></i>
-            {{ checkArticle.cateName }}</span
+            {{ bulletin.cateName }}</span
           >
           <span
             ><i class="iconfont icon-biaoqian-m"></i>
-            {{ checkArticle.tags[0] }}</span
+            {{ bulletin.tags[0] }}</span
           >
           <span
-            ><i class="iconfont icon-wode-m"></i>
-            {{ checkArticle.userName }}</span
+            ><i class="iconfont icon-wode-m"></i> {{ bulletin.userName }}</span
           >
           <span
-            ><i class="iconfont icon-shijian-m"></i>
-            {{ checkArticle.time }}</span
+            ><i class="iconfont icon-shijian-m"></i> {{ bulletin.time }}</span
           >
         </div>
       </div>
+      <div id="bulletin" else>{{ $store.state.bulletin }}</div>
+
     </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      checkArticle: {},
     };
   },
-  computed:{
-    GetBulletinState(){
-      return JSON.parse(sessionStorage.getItem("isBulletin"));
-    }
+  computed: {
+    GetBulletinState() {
+      let state = this.$store.state.bulletin
+      console.log('dfdfd',Object.prototype.toString.call(state) === '[object Object]' ? true : false)
+      return Object.prototype.toString.call(state) === '[object Object]' ? true : false
+    },
+    ...mapState(["bulletin"]),
   },
   created() {
-    // sessionStorage.setItem('isBulletin',JSON.stringify(false))
-
-    this.checkArticle = JSON.parse(sessionStorage.getItem("checkArticle"));
-    
+    // 刷新页面，重新赋值vuex数据
+    // this.$store.commit('REFRESHBULLETIN')
   },
-  beforeDestroy() {
-    // sessionStorage.setItem('isBulletin',JSON.stringify(true))
-  },
-  
 };
 </script>
 <style lang="scss" scoped>

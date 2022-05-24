@@ -1,13 +1,13 @@
 module.exports = (app) => {
-    app.get('/fontend/api/category',(req,res)=>{
+    app.get('/fontend/api/tag',(req,res)=>{
         if(JSON.stringify(req.query) !== '{}'){
             // res.send(await req.model.find(req.query))
-            require('../../model/category').aggregate([
+            require('../../model/tag').aggregate([
                 {
                   $lookup: {
                     from: "articles",
-                    localField: "cateName", //ArticleCateModel里的分类名
-                    foreignField: "cateName", //ArticleModel里的分类名
+                    localField: "tagName", //ArticleCateModel里的_id
+                    foreignField: "tags", //ArticleModel里的cid
                     as: "items"  //表示ArticleCateModel创建一个items属性，将相关联的所有ArticleModel数据对象放里面
                   },
                 },
@@ -19,12 +19,12 @@ module.exports = (app) => {
                 res.send(docs)
               })
         }else{
-            require('../../model/category').aggregate([
+            require('../../model/tag').aggregate([
                 {
                   $lookup: {
                     from: "articles",
-                    localField: "cateName", 
-                    foreignField: "cateName", 
+                    localField: "tagName", 
+                    foreignField: "tags", 
                     as: "items"  
                   },
                 },

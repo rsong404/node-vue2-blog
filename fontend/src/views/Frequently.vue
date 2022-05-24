@@ -3,7 +3,7 @@
     <div id="tagContainer">
       <div id="subtitle">标签</div>
       <div id="tags">
-        <span v-for="(item, index) in getTags" :key="index"># {{ item }}</span>
+        <span v-for="(item, index) in tagList" :key="index"># {{ item.tagName }}</span>
       </div>
     </div>
     <div id="websiteContainer">
@@ -29,19 +29,25 @@ export default {
     };
   },
   computed: {
-    getTags() {
-      return JSON.parse(sessionStorage.getItem("tagList"));
-    },
+    
   },
   methods: {
     // 获取常用网站列表
-    async getWebsite() {
+    async GetWebsite() {
       let result = await this.$http.get("/website");
       this.website = result.data;
     },
+    // 获取标签列表
+    async GetTagList(){
+      let result = await this.$http.get("/tag");
+      this.tagList = result.data
+      console.log(result.data)
+    }
+    
   },
   created() {
-    this.getWebsite();
+    this.GetWebsite();
+    this.GetTagList();
   },
 };
 </script>

@@ -1,5 +1,4 @@
 const modelware = require('../../middleware/modelware')
-const middleware = require('../../middleware/modelware')
 module.exports = app => {
     const express = require('express')
     const router = new express.Router({mergeParams:true})
@@ -8,6 +7,7 @@ module.exports = app => {
         res.send(result)
     })
     require('./category')(app)
+    require('./tag')(app)
 
     app.use('/fontend/api/:type',modelware,router)
 }

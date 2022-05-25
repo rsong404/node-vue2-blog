@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: rgb(245, 245, 245);
 
   }
   a{
@@ -12,12 +11,17 @@
         color: inherit;
     }
   }
+  li{
+    list-style: none;
+  }
   html {
     background-color: var(--blue1);
   }
   body{
     font-family: 'Microsoft Yahei',Arial, Helvetica, sans-serif;
     font-size: 16px;
+    color: #F5F5F5;
+
   }
   :root {
     --blue1: #bde0fe;
@@ -26,18 +30,22 @@
     --white1: white;
     --black1: #0D0D0D;
     --black2: #292929;
-    --shawod1: 0px 0px 5px  #f1f1f1;
+    --shawod1: 0px 0px 5px  #bebebe;
     --shadow2:  0px 0px 5px #ffffff inset;
-
+    --shawod3: 0px 0px 5px  #222222 inset;
 
     --fontWeight:500;
     --backgroundColor: #a2d2ff;
-  }
-  .relatedColors{
   }
   .nightMode{
     background-color: var(--black1);
   }
   .aplayer.aplayer-fixed .aplayer-body {
     left: -66px;
+    color: black;
+}
+.aplayer .aplayer-miniswitcher{
+  background: var(--blue3);
+  box-shadow: var(--shadow2);
+  
 }

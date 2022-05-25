@@ -35,14 +35,9 @@ export default {
   computed: {
     GetBulletinState() {
       let state = this.$store.state.bulletin
-      console.log('dfdfd',Object.prototype.toString.call(state) === '[object Object]' ? true : false)
       return Object.prototype.toString.call(state) === '[object Object]' ? true : false
     },
     ...mapState(["bulletin"]),
-  },
-  created() {
-    // 刷新页面，重新赋值vuex数据
-    // this.$store.commit('REFRESHBULLETIN')
   },
 };
 </script>

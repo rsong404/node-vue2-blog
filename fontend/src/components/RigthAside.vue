@@ -45,15 +45,21 @@ export default {
       height: 50px;
       text-align: center;
       line-height: 50px;
-      
+      font-size: 18px;
+     
       cursor: pointer;
       &>i{
-        font-size: 18px;
+        font-size:18px;
+        &:hover{
+          font-size: 22px;
+        }
+        transition: .2s;
       }
     }
     .active {
       border-bottom: 2px rgb(245, 245, 245) solid;
     }
+    
   }
 }
 </style>

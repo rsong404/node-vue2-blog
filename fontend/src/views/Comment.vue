@@ -40,6 +40,7 @@ export default {
 #commentContainer {
   width: 100%;
   min-height: 100%;
+  padding: 15px;
   & > div:nth-child(2n) {
     text-align: right;
   }

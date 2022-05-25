@@ -18,7 +18,7 @@ module.exports = (app) => {
                 }
               
               ],function(err,docs){
-                console.log(JSON.stringify(docs)) //输出查看
+                // console.log(JSON.stringify(docs)) //输出查看
                 res.send(docs)
               })
         }else{
@@ -33,10 +33,17 @@ module.exports = (app) => {
                 },
                
               ],function(err,docs){
-                console.log(JSON.stringify(docs)) //输出查看
+                // console.log(JSON.stringify(docs)) //输出查看
                 res.send(docs)
               })
         }
         
+    })
+
+    // 删除数据
+    app.delete('/admin/api/tag',verifyAuthorize,async (req,res) =>{
+      // 批量删除无用标签
+      let result = await require('../../model/tag').remove({ _id: { $in: req.query.useLess } })
+      res.send(result)
     })
 }

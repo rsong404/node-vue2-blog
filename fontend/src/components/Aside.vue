@@ -21,9 +21,9 @@
             ><i class="iconfont icon-zhengcewenjian-m"></i
             ><span>技术博客</span></a
           >
-          <router-link to="/comment" id="navigationItem"
+          <div @click="GoComment" id="navigationItem"
             ><i class="iconfont icon-xiaoxi-m"></i
-            ><span>个人说说</span></router-link
+            ><span>个人说说</span></div
           >
         </div>
         <div id="catagoryContainer">
@@ -76,9 +76,13 @@ export default {
     ReturnIndex() {
       // 更文章title状态
       this.$store.dispatch("bulletin", "首页");
-      this.$router.push({ name: "index" });
-      
+      this.$store.dispatch("getArticleList");
+      if(this.$route.path !=='/index') this.$router.push({ name: "index" });
     },
+    GoComment(){
+      this.$router.push({name:'comment'})
+      this.$store.dispatch('bulletin','说说')
+    }
   },
   created() {
     this.GetCategory();

@@ -13,8 +13,16 @@
     <div id="header-right">
       <div id="search">
         <div id="searchIconUp"></div>
-        <input type="text" placeholder="请输入搜索" />
+        <input
+          type="text"
+          v-model="searchValue"
+          @input="Search(searchValue)"
+          placeholder="请输入搜索"
+        />
         <div id="searchIconDown"></div>
+        <ul id="resultBox" :style="IsShowBox" @click="CheckArticle">
+          <li v-for="item in searchList" :key="item._id">{{ item.title }}</li>
+        </ul>
       </div>
       <router-link to="/message" tag="div" id="message"
         ><i class="iconfont icon-xiaoxi2-m"></i
@@ -28,10 +36,19 @@ export default {
     return {
       turnModel: true,
       nodeList: null,
+      searchValue: "",
+      searchList: [],
+      timer: null,
     };
   },
   mounted() {
     this.nodeList = document.querySelectorAll(".relatedColors");
+    this;
+  },
+  computed:{
+    IsShowBox(){
+      return this.searchList.length ? 'display:block;' : 'display:none;'
+    }
   },
   methods: {
     TurnModel() {
@@ -42,12 +59,43 @@ export default {
       }
     },
     ReturnIndex() {
+      // 更文章title状态
+      this.$store.dispatch("bulletin", "博客");
       if (this.$route.path !== "/index") {
-        // 更文章title状态
-        this.$store.dispatch('bulletin','博客')
         this.$router.push({ name: "index" });
       }
     },
+    // Debounce(fn, delay = 500) {
+    //   let timer = null;
+    //   return function (...rest) {
+    //     clearTimeout(timer);
+    //     timer = setTimeout(() => {
+    //       fn.apply(this, rest);
+    //     }, delay);
+    //   };
+    // },
+    SearchResult(value) {
+      let articleList = this.$store.state.articleList;
+      if (value !== "") {
+        this.searchList = articleList.filter((item) => {
+          return item.title.includes(value);
+        });
+      }else{
+        this.searchList = []
+      }
+    },
+    Search(value) {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.SearchResult(value);
+        console.log(11);
+      }, 500);
+    },
+    CheckArticle($event){
+      if($event.target.nodeName === 'LI'){
+        let tittle = ''
+      }
+    }
   },
 };
 </script>
@@ -106,7 +154,16 @@ header {
       }
     }
     #search {
+      width: 150px;
+      height: 100%;
+      position: relative;
+      z-index: 999;
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      top: 50%;
+      transform: translate3d(0, -50%, 0);
       input {
         width: 100px;
         height: 25px;
@@ -115,6 +172,29 @@ header {
         &:focus {
           outline: none;
           //   border: 0.5px solid rgb(177, 177, 177);
+        }
+      }
+      #noneBox{
+        display: none;
+      }
+      #resultBox {
+        width: 300px;
+        position: absolute;
+        top: 50px;
+        background-color: var(--blue3);
+        display: block;
+        box-shadow: var(--shadow2);
+        padding: 10px;
+        cursor: pointer;
+
+        & > li{
+          text-align: center;
+          margin: 5px 0;
+        box-shadow: var(--shadow2);
+
+        }
+        & > li:hover {
+          background-color: var(--blue1);
         }
       }
       #searchIconDown {

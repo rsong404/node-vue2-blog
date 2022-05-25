@@ -17,8 +17,8 @@ module.exports = (app) => {
                 }
               
               ],function(err,docs){
-                  console.log("查看分类")
-                console.log(JSON.stringify(docs)) //输出查看
+                  // console.log("查看分类")
+                // console.log(JSON.stringify(docs)) //输出查看
                 res.send(docs)
               })
         }else{
@@ -33,7 +33,7 @@ module.exports = (app) => {
                 },
                
               ],function(err,docs){
-                console.log(JSON.stringify(docs)) //输出查看
+                // console.log(JSON.stringify(docs)) //输出查看
                 res.send(docs)
               })
         }

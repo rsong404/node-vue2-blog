@@ -2,8 +2,10 @@
   <div id="Container">
     <div id="tagContainer">
       <div id="subtitle">标签</div>
-      <div id="tags">
-        <span v-for="(item, index) in tagList" :key="index"># {{ item.tagName }}</span>
+      <div id="tags" @click="CheckTag">
+        <span v-for="(item, index) in tagList" :key="index"
+          ># {{ item.tagName }}</span
+        >
       </div>
     </div>
     <div id="websiteContainer">
@@ -28,9 +30,7 @@ export default {
       website: [],
     };
   },
-  computed: {
-    
-  },
+  computed: {},
   methods: {
     // 获取常用网站列表
     async GetWebsite() {
@@ -38,12 +38,30 @@ export default {
       this.website = result.data;
     },
     // 获取标签列表
-    async GetTagList(){
+    async GetTagList() {
       let result = await this.$http.get("/tag");
-      this.tagList = result.data
-      console.log(result.data)
-    }
-    
+      this.tagList = result.data;
+      // console.log(result.data);
+    },
+    // 点击标签
+    async CheckTag($event) {
+      if ($event.target.nodeName === 'SPAN') {
+        let tag = $event.target.innerHTML.replace("#", "").trim();
+        let checktag = this.tagList.filter((item) => {
+          return item.tagName === tag;
+        });
+        let checkArticle = checktag.map((item) => {
+          return item.items;
+        });
+        // 筛选选中的标签文章,注意：因为item.items是数组，所以要剥开一层
+        if (this.$route.path !== "/index") {
+          await this.$router.push({ name: "index" });
+          this.$store.dispatch("checkCategory", ...checkArticle);
+        }
+        this.$store.dispatch("bulletin", tag);
+        this.$store.dispatch("checkCategory", ...checkArticle);
+      }
+    },
   },
   created() {
     this.GetWebsite();
@@ -72,7 +90,7 @@ export default {
         color: white;
         background-color: #66bfff;
         border-radius: 5px;
-        box-shadow:  0px 0px 5px #ffffff inset;
+        box-shadow: 0px 0px 5px #ffffff inset;
       }
     }
   }
@@ -84,7 +102,7 @@ export default {
         margin: 10px;
         color: white;
         background-color: #66bfff;
-        box-shadow:  0px 0px 5px #ffffff inset;
+        box-shadow: 0px 0px 5px #ffffff inset;
 
         border-radius: 5px;
       }

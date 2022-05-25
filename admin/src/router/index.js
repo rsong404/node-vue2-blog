@@ -127,6 +127,8 @@ const routes = [
         path: '/messageList',
         component: () => import('../views/message/MessageList'),
       },
+      // 标签管理
+      
     ]
   },
   

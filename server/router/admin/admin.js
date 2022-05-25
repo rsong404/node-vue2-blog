@@ -41,7 +41,7 @@ module.exports = app => {
 
     //分类和tag查询另起路由
     require('./login')(app)
-    // require('./tag')(app)
+    require('./tag')(app)
     // require('./category')(app)
     require('./account')(app)
     require('./upload')(app)

@@ -147,7 +147,7 @@ export default {
     //获取文章
     async GetArticleData() {
       let result = await this.$http.get("/article");
-      this.originArticleData = result.data;
+      this.originArticleData = result.data.reverse();
       this.articleData = this.originArticleData;
       this.GetTag(this.originArticleData);
     },
@@ -166,7 +166,7 @@ export default {
       );
     },
     //获取标签
-    GetTag(arcticleArr) {
+    async GetTag(arcticleArr) {
       let arr = [];
       arcticleArr.forEach((element) => {
         if (element.tags.length >= 1) {
@@ -174,6 +174,19 @@ export default {
         }
       });
       this.tagData.push(...new Set(arr));
+      // 获取标签列表
+      let articleList = await this.$http.get("/tag");
+      // 过滤掉数据库中无用的标签
+
+      let useLess = articleList.data.filter((item) => {
+        return !this.tagData.includes(item.tagName) ? item._id : "";
+      });
+      // 批量删除无用标签
+      if (useLess.length >= 1) {
+        await this.$http.delete("tag", {
+          params: { useLess },
+        });
+      }
     },
     // 选择标签
     SelectTag(tagName) {

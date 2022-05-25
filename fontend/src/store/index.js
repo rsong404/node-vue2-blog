@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    tagList: [],
     checkArticle: null,
     bulletin: 'tittle',
     checkCategory: [],
@@ -23,24 +22,15 @@ export default new Vuex.Store({
       context.commit('BULLETIN', value)
     },
 
-    // 选择分类
+    // 选择分类和标签
     checkCategory(context, value) {
-      context.dispatch('getArticleList', value)
+      context.commit('CHECKCATEGORY', value)
     },
 
     //获取文章列表
     async getArticleList(context, value) {
       let result = await Vue.prototype.$http.get('/article')
-      let tagList = []
-      if (result) {
-        for (const item of result.data) {
-          for (const element of item.tags) {
-            tagList.push(element)
-          }
-        }
-        context.commit('GETTAGLIST', tagList)
-      }
-      context.commit('GETARTICLELIST', value || result.data)
+      context.commit('GETARTICLELIST', value || result.data.reverse())
     },
   },
   mutations: {
@@ -59,12 +49,11 @@ export default new Vuex.Store({
     },
     REFRESHBULLETIN(state) {
       state.bulletin = JSON.parse(sessionStorage.getItem('bulletin'))
-      console.log(state.bulletin)
     },
 
-    // 选择分类
+    // 选择分类和标签
     CHECKCATEGORY(state, value) {
-      state.checkCategory = value
+      state.articleList = value
     },
 
     // 获取文章列表

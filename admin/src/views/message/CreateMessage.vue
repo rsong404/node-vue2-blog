@@ -7,10 +7,17 @@
             <img src="../../../public/avatar/avatar2.jpg" />
           </div>
           <input
-            id="nick"
+            class="nick"
             v-model.trim="form.nick"
             type="text"
             placeholder=" 昵称（必填）"
+            :disabled='itemData?true:false'
+          />
+          <input
+            class="nick"
+            v-model.trim="form.email"
+            type="text"
+            placeholder=" 邮箱（选填）"
             :disabled='itemData?true:false'
           />
         </div>
@@ -51,6 +58,7 @@
 </template>
 <script>
 import emoji from '../../utils/emoji'
+import dayjs from 'dayjs'
 export default {
   props:['itemData'],
   data() {
@@ -60,8 +68,9 @@ export default {
       form: {
         nick: "",
         avatar:
-          "https://gitee.com/rs404/picgo_img/raw/master/images/avatar2.jpg",
+          "https://myvuepressblog-image.oss-cn-shenzhen.aliyuncs.com/avatar2.jpg",
         content: "",
+        email: "",
         time: "",
       },
     };
@@ -100,6 +109,7 @@ export default {
       // 回复
       if(this.itemData){
         if(this.form.content !== ''){
+          this.form.time = dayjs().format('YYYY-MM-DD-HH:mm');
           let replyData = {parentId:this.itemData._id,...this.form}
           let result = await this.$http.get('/message',{params:{_id:this.itemData._id}})
           result.data[0].reply.push(replyData)
@@ -112,6 +122,7 @@ export default {
 
       // 新留言
       if (this.form.nick !== "" && this.form.content !== "") {
+        this.form.time = dayjs().format('YYYY-MM-DD-HH:mm');
         let result = await this.$http.post("/message", this.form);
         if (result.data) {
           this.$message.success("留言成功");
@@ -138,6 +149,7 @@ export default {
   mounted() {
     if(this.itemData){
       this.form.nick = `作者 回复 ${this.itemData.nick}` 
+      this.form.email = `作者 回复 ${this.itemData.email}` 
     }
       document.addEventListener("keydown",this.KeyDown);
     },
@@ -152,7 +164,8 @@ export default {
   width: 100%;
   position: relative;
   align-content: center;
-  // background-color: cadetblue;
+  display: flex;
+  align-items: center;
   #avatar {
     display: inline-block;
     margin: 5px 10px;
@@ -165,10 +178,8 @@ export default {
       border-radius: 50%;
     }
   }
-  #nick {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  .nick {
+    margin: 0 5px;
     height: 30px;
     border: none;
     border-radius: 5px;

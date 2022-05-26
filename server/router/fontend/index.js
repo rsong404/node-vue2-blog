@@ -8,6 +8,7 @@ module.exports = app => {
     })
     require('./category')(app)
     require('./tag')(app)
+    require('./message')(app)
 
     app.use('/fontend/api/:type',modelware,router)
 }

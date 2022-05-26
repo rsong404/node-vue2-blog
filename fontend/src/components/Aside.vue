@@ -21,10 +21,9 @@
             ><i class="iconfont icon-zhengcewenjian-m"></i
             ><span>技术博客</span></a
           >
-          <div @click="GoComment" id="navigationItem"
-            ><i class="iconfont icon-xiaoxi-m"></i
-            ><span>个人说说</span></div
-          >
+          <div @click="GoComment" id="navigationItem">
+            <i class="iconfont icon-xiaoxi-m"></i><span>个人说说</span>
+          </div>
         </div>
         <div id="catagoryContainer">
           <div id="navigation"><span>分类</span></div>
@@ -36,9 +35,7 @@
               id="categoryItem"
             >
               <span>{{ item.cateName }}</span>
-              <!-- <router-link :to="`/${item.cateName}`"
-                ></router-link
-              > -->
+              
               <span>{{ item.items.length }}</span>
             </div>
           </div>
@@ -77,12 +74,14 @@ export default {
       // 更文章title状态
       this.$store.dispatch("bulletin", "首页");
       this.$store.dispatch("getArticleList");
-      if(this.$route.path !=='/index') this.$router.push({ name: "index" });
+      if (this.$route.path !== "/index") this.$router.push({ name: "index" });
     },
-    GoComment(){
-      this.$router.push({name:'comment'})
-      this.$store.dispatch('bulletin','说说')
-    }
+    GoComment() {
+      this.$store.dispatch("bulletin", "说说");
+      if(this.$route.path !== '/comment'){
+        this.$router.push({ name: "comment" });
+      }
+    },
   },
   created() {
     this.GetCategory();
@@ -100,6 +99,7 @@ aside {
   font-weight: var(--fontWeight);
   font-size: 1rem;
   background-color: var(--blue2);
+  box-shadow: var(--shadow2);
   & > div {
     cursor: pointer;
   }
@@ -143,7 +143,8 @@ aside {
     #adminBox {
       text-align: center;
       height: 60px;
-      // line-height: 60px;
+      line-height: 60px;
+      box-shadow: var(--shadow2);
       background-color: var(--blue2);
       a {
         display: inline-block;

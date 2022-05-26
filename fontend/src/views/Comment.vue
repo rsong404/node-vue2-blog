@@ -11,7 +11,9 @@
         v-html="item.content"
         :class="computeClass(index)"
       ></div>
-      <div id="time">{{ item.time }}</div>
+      <div id="time">
+        <div>{{ item.time }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -53,9 +55,13 @@ export default {
     #comment {
       display: inline-block;
     }
-    #time{
+    #time {
       font-size: 14px;
-      color: rgb(75, 75, 75);
+      color: var(--white1);
+      div {
+        display: inline-block;
+        border-radius: 4px;
+      }
     }
     .right-commentItem {
       padding: 5px;

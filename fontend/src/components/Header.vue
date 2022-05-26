@@ -18,10 +18,15 @@
           v-model="searchValue"
           @input="Search(searchValue)"
           placeholder="请输入搜索"
+          @focus="Focus"
+          @blur="Blur"
         />
-        <div id="searchIconDown"></div>
-        <ul id="resultBox" :style="IsShowBox" @click="CheckArticle">
-          <li v-for="item in searchList" :key="item._id">{{ item.title }}</li>
+        <div id="searchIconDown"><i class="iconfont icon-sousuo"></i></div>
+        <ul ref="searchBox" id="resultBox">
+          <li v-for="item in searchList" :key="item._id"  @click="CheckArticle(item)">{{ item.title }}</li>
+          <div v-if="searchList.length ? false : true" style="textAlign:center;">
+            无结果，请重新搜索。
+          </div>
         </ul>
       </div>
       <router-link to="/message" tag="div" id="message"
@@ -43,12 +48,11 @@ export default {
   },
   mounted() {
     this.nodeList = document.querySelectorAll(".relatedColors");
-    this;
   },
-  computed:{
-    IsShowBox(){
-      return this.searchList.length ? 'display:block;' : 'display:none;'
-    }
+  computed: {
+    IsShowBox() {
+      return this.searchList.length ? "display:block;" : "display:none;";
+    },
   },
   methods: {
     TurnModel() {
@@ -65,48 +69,49 @@ export default {
         this.$router.push({ name: "index" });
       }
     },
-    // Debounce(fn, delay = 500) {
-    //   let timer = null;
-    //   return function (...rest) {
-    //     clearTimeout(timer);
-    //     timer = setTimeout(() => {
-    //       fn.apply(this, rest);
-    //     }, delay);
-    //   };
-    // },
+    Blur() {
+      let timer = setTimeout(() => {
+        this.$refs.searchBox.style.display = "none";
+        timer = null
+      }, 200);
+    },
+    Focus() {
+      this.$refs.searchBox.style.display = "block";
+    },
     SearchResult(value) {
       let articleList = this.$store.state.articleList;
       if (value !== "") {
         this.searchList = articleList.filter((item) => {
           return item.title.includes(value);
         });
-      }else{
-        this.searchList = []
+      } else {
+        this.searchList = [];
       }
     },
     Search(value) {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         this.SearchResult(value);
-        console.log(11);
       }, 500);
     },
-    CheckArticle($event){
-      if($event.target.nodeName === 'LI'){
-        let tittle = ''
+    CheckArticle(item) {
+      if(this.$route.path !== '/article'){
+        this.$router.push({name:'article'})
       }
-    }
+      this.$store.dispatch('checkArticle',item)
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 header {
-  cursor: "url('../assets/cursor.ico'),pointer";
+  cursor: pointer;
   width: 100%;
   height: 100%;
   margin: 0 auto;
   display: block;
   background-color: var(--blue2);
+  box-shadow: var(--shadow2);
   flex-shrink: 0;
   position: relative;
   #model > i {
@@ -171,30 +176,30 @@ header {
         font-size: 12px;
         &:focus {
           outline: none;
-          //   border: 0.5px solid rgb(177, 177, 177);
         }
       }
-      #noneBox{
+      #noneBox {
         display: none;
       }
       #resultBox {
         width: 300px;
         position: absolute;
         top: 50px;
-        background-color: var(--blue3);
-        display: block;
+        background-color: var(--blue2);
+        display: none;
         box-shadow: var(--shadow2);
-        padding: 10px;
+        padding: 10px 0;
         cursor: pointer;
 
-        & > li{
+        & > li {
           text-align: center;
           margin: 5px 0;
-        box-shadow: var(--shadow2);
-
+          box-shadow: var(--shadow2);
         }
         & > li:hover {
-          background-color: var(--blue1);
+          background-color: var(--blue2);
+          background-color: var(--blue3);
+
         }
       }
       #searchIconDown {
@@ -202,6 +207,11 @@ header {
         height: 25px;
         border-radius: 0 50% 50% 0;
         background-color: white;
+        text-align: center;
+        line-height: 25px;
+        &>i{
+          color: var(--black1);
+        }
       }
       #searchIconUp {
         width: 20px;

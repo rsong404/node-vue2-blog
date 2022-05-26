@@ -1,8 +1,12 @@
 <template>
   <div id="rigthAsideContainer">
-    <div id="tabs" >
-      <div  @click="name ='Frequently'" :class="FreToggle"><i class="iconfont icon-a-fasongdaohang-m"></i></div>
-      <div @click="name ='Catalog'" :class="CatToggle"><i class="iconfont icon-biaoji-m"></i></div>
+    <div id="tabs">
+      <div @click="name = 'Frequently'" :class="FreToggle">
+        <i class="iconfont icon-a-fasongdaohang-m"></i>
+      </div>
+      <div @click="name = 'Catalog'" :class="CatToggle">
+        <i class="iconfont icon-biaoji-m"></i>
+      </div>
     </div>
     <div>
       <component :is="name"> </component>
@@ -22,13 +26,13 @@ export default {
       name: "Frequently",
     };
   },
-  computed:{
-    FreToggle(){
-      return this.name === 'Frequently'? 'active':''
+  computed: {
+    FreToggle() {
+      return this.name === "Frequently" ? "active" : "";
     },
-    CatToggle(){
-      return this.name === 'Catalog'? 'active':''
-    }
+    CatToggle() {
+      return this.name === "Catalog" ? "active" : "";
+    },
   },
 };
 </script>
@@ -36,30 +40,33 @@ export default {
 #rigthAsideContainer {
   width: 100%;
   height: 100%;
+  box-shadow: var(--shadow2);
+
   #tabs {
     display: flex;
     margin-bottom: 10px;
     background-color: var(--blue2);
+    box-shadow: var(--shadow2);
+
     & > div {
       width: 50%;
       height: 50px;
       text-align: center;
       line-height: 50px;
       font-size: 18px;
-     
+
       cursor: pointer;
-      &>i{
-        font-size:18px;
-        &:hover{
+      & > i {
+        font-size: 18px;
+        &:hover {
           font-size: 22px;
         }
-        transition: .2s;
+        transition: 0.2s;
       }
     }
     .active {
       border-bottom: 2px rgb(245, 245, 245) solid;
     }
-    
   }
 }
 </style>

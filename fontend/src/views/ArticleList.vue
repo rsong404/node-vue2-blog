@@ -20,7 +20,7 @@
           </div>
           <div id="content">
             <span
-              ><i class="iconfont icon-fenlei-m"></i> {{ item.cateName }}</span
+              ><i class="iconfont icon-fenlei"></i> {{ item.cateName }}</span
             >
             <span
               ><i class="iconfont icon-biaoqian-m"></i> {{ item.tags[0] }}</span

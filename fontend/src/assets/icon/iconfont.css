@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3418712 */
-  src: url('iconfont.woff2?t=1653183386924') format('woff2'),
-       url('iconfont.woff?t=1653183386924') format('woff'),
-       url('iconfont.ttf?t=1653183386924') format('truetype');
+  src: url('iconfont.woff2?t=1653554208548') format('woff2'),
+       url('iconfont.woff?t=1653554208548') format('woff'),
+       url('iconfont.ttf?t=1653554208548') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,34 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shipin:before {
+  content: "\e601";
+}
+
+.icon-dongman:before {
+  content: "\e609";
+}
+
+.icon-mulu:before {
+  content: "\e619";
+}
+
+.icon-dongman1:before {
+  content: "\e604";
+}
+
+.icon-sousuo:before {
+  content: "\e603";
+}
+
+.icon-fenlei:before {
+  content: "\e602";
+}
+
+.icon-zhayan:before {
+  content: "\e600";
 }
 
 .icon-Daytimemode-fill:before {
@@ -27,10 +55,6 @@
 
 .icon-biaoji-m:before {
   content: "\e7dd";
-}
-
-.icon-fenlei-m:before {
-  content: "\e7de";
 }
 
 .icon-a-guanyuwomenxitong-m:before {

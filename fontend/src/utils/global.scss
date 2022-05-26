@@ -27,25 +27,52 @@
     --blue1: #bde0fe;
     --blue2:  #a2d2ff;
     --blue3: #66bfff;
-    --white1: white;
-    --black1: #0D0D0D;
-    --black2: #292929;
+    --blue4: #33aaff;
+    --blue5: #0095ff;
+    --white1: rgb(255, 255, 255);
+    --black1: #666666;
+    --black2: #4d4d4d;
+    --black3: #333333;
+    --black4: #333333;
     --shawod1: 0px 0px 5px  #bebebe;
     --shadow2:  0px 0px 5px #ffffff inset;
-    --shawod3: 0px 0px 5px  #222222 inset;
+    --shawod3: 0px 0px 15px  #929292, 0px 0px 5px  #dfdede inset;
 
     --fontWeight:500;
     --backgroundColor: #a2d2ff;
   }
   .nightMode{
-    background-color: var(--black1);
+    background-color: var(--black2);
+  }
+  button{
+    width: 70px;
+    height: 30px;
+    background-color: var(--blue2);
+    box-shadow: var(--shadow2);
+    color: var(--white1);
+    border: var(--blue2) solid 1px;
+    &:active {
+      background-color: var(--blue3);
+      border: none;
+    }
+  }
+  // 一下为音乐播放器相关样式的修改
+  .aplayer-list{
+    color: black;
+    background-color: var(--blue2);
+    box-shadow: var(--shadow2);
+  }
+  .aplayer .aplayer-list ol li.aplayer-list-light{
+    background-color: var(--blue3);
+    box-shadow: var(--shadow2);
   }
   .aplayer.aplayer-fixed .aplayer-body {
     left: -66px;
     color: black;
+    background-color: var(--blue2);
+    box-shadow: var(--shadow2);
 }
-.aplayer .aplayer-miniswitcher{
-  background: var(--blue3);
-  box-shadow: var(--shadow2);
-  
+  .aplayer .aplayer-miniswitcher{
+    background: var(--blue3);
+    box-shadow: var(--shadow2);
 }

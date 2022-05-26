@@ -38,6 +38,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="nick" label="昵称" width="180"> </el-table-column>
+      <el-table-column prop="email" label="邮箱" width="180"> </el-table-column>
       <el-table-column prop="content" label="留言" width="180">
       </el-table-column>
       <el-table-column prop="time" label="时间" width="180"> </el-table-column>

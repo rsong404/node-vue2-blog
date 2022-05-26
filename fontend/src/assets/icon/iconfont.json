@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1283",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "1705947",
+      "name": "动漫",
+      "font_class": "dongman",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "11006265",
+      "name": "目录",
+      "font_class": "mulu",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "11200578",
+      "name": "动漫",
+      "font_class": "dongman1",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "20000260",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "2578223",
+      "name": "分类",
+      "font_class": "fenlei",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "1220",
+      "name": "眨眼",
+      "font_class": "zhayan",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
       "icon_id": "11488250",
       "name": "Daytime mode-fill",
       "font_class": "Daytimemode-fill",
@@ -32,13 +81,6 @@
       "font_class": "biaoji-m",
       "unicode": "e7dd",
       "unicode_decimal": 59357
-    },
-    {
-      "icon_id": "29694037",
-      "name": "分类-m",
-      "font_class": "fenlei-m",
-      "unicode": "e7de",
-      "unicode_decimal": 59358
     },
     {
       "icon_id": "29694038",

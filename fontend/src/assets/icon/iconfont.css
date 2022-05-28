@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3418712 */
-  src: url('iconfont.woff2?t=1653554208548') format('woff2'),
-       url('iconfont.woff?t=1653554208548') format('woff'),
-       url('iconfont.ttf?t=1653554208548') format('truetype');
+  src: url('iconfont.woff2?t=1653632129006') format('woff2'),
+       url('iconfont.woff?t=1653632129006') format('woff'),
+       url('iconfont.ttf?t=1653632129006') format('truetype');
 }
 
 .iconfont {
@@ -13,16 +13,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-heart-rate-full:before {
+  content: "\e911";
+}
+
+.icon-boke:before {
+  content: "\e636";
+}
+
+.icon-beian:before {
+  content: "\e6b0";
+}
+
 .icon-shipin:before {
   content: "\e601";
 }
 
 .icon-dongman:before {
   content: "\e609";
-}
-
-.icon-mulu:before {
-  content: "\e619";
 }
 
 .icon-dongman1:before {

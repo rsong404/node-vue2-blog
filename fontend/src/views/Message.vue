@@ -4,7 +4,6 @@
       <div id="message">
         <div id="header">
           <div id="avatar">
-            <img src="../assets/avatar2.jpg" />
           </div>
           <input
             class="nick"
@@ -29,7 +28,7 @@
         <div
           id="emoji"
           class="iconfont icon-zhayan"
-          @click.capture.stop ="AddEmoji"
+          @click.capture.stop="AddEmoji"
         ></div>
         <div id="submitButton">
           <button ref="center" type="primary" size="medium" @click="OnSubmit">
@@ -44,13 +43,14 @@
             >{{ item }}</span
           >
         </div>
+        <div ref="prompt" id="messagePrompt">{{ messagePrompt }}</div>
       </div>
     </div>
-    <div id="messageListContainer">
+    <div id="messageListContainer" v-if="isRefresh">
       <div>全部评论 {{ messageList.length }} 条</div>
       <div id="messageItem" v-for="item in messageList" :key="item._id">
         <div id="messageAvatar">
-          <img :src="item.avatar"  />
+          <img :src="item.avatar" />
         </div>
         <div id="messageItemContent">
           <div id="messageItemHeader">
@@ -62,22 +62,25 @@
           </div>
           <!-- 回复的内容 -->
           <div v-if="item.reply">
-            <div id="replyItem"  v-for="replyItem in item.reply" :key="replyItem._id">
-            <div id="messageAvatar">
-              <img src="https://myvuepressblog-image.oss-cn-shenzhen.aliyuncs.com/logo.jpg"  />
-            </div>
-            <div id="messageItemContent">
-              <div id="messageItemHeader">
-                <div>{{ replyItem.nick }}</div>
-                <div>{{ replyItem.time }}</div>
+            <div
+              id="replyItem"
+              v-for="replyItem in item.reply"
+              :key="replyItem._id"
+            >
+              <div id="messageAvatar">
+                <img src="../assets/logo.jpg" />
               </div>
-              <div id="messageContent">
-                {{ replyItem.content }}
+              <div id="messageItemContent">
+                <div id="messageItemHeader">
+                  <div>{{ replyItem.nick }}</div>
+                  <div>{{ replyItem.time }}</div>
+                </div>
+                <div id="messageContent">
+                  {{ replyItem.content }}
+                </div>
               </div>
             </div>
           </div>
-          </div>
-          
         </div>
       </div>
     </div>
@@ -85,7 +88,7 @@
 </template>
 <script>
 import emoji from "../utils/emoji";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 export default {
   data() {
     return {
@@ -100,6 +103,9 @@ export default {
         time: "",
       },
       messageList: [],
+      messagePrompt: "评论成功",
+      messagePromptTimer: null,
+      isRefresh: true,
     };
   },
   computed: {
@@ -129,20 +135,40 @@ export default {
       this.textarea.selectionEnd = this.textarea.selectionStart;
       this.textarea.focus();
     },
-
+    RefreshMessage(){
+      this.isRefresh = false
+      this.$nextTick(() => {this.isRefresh = true})
+    },
     async OnSubmit() {
       this.form.content = this.$refs.textarea.value.trim();
       // 新留言
       if (this.form.nick !== "" && this.form.content !== "") {
-        this.form.time = dayjs().format('YYYY-MM-DD-HH:mm');
-        console.log(this.time)
+        this.form.time = dayjs().format("YYYY-MM-DD-HH:mm");
         let result = await this.$http.post("/message", this.form);
         if (result.data) {
+          // 刷新评论
+          this.GetMessageList();
+
+          //提示相关
+          this.messagePrompt = "评论成功";
+          this.$refs.prompt.style.setProperty("--color", "var(--blue3)");
+          clearTimeout(this.messagePromptTimer);
+          this.$refs.prompt.classList.add("addPromptAnimation");
+          this.messagePromptTimer = setTimeout(() => {
+            this.$refs.prompt.classList.remove("addPromptAnimation");
+          }, 2000);
+          // 重置为空
           this.$refs.textarea.value = "";
           this.form.nick = "";
         }
       } else {
-        this.$message.error("表格不能为空，请检查。");
+        this.messagePrompt = "表格不能为空，请检查";
+        this.$refs.prompt.style.setProperty("--color", "red");
+        clearTimeout(this.messagePromptTimer);
+        this.$refs.prompt.classList.add("addPromptAnimation");
+        this.messagePromptTimer = setTimeout(() => {
+          this.$refs.prompt.classList.remove("addPromptAnimation");
+        }, 2000);
       }
     },
     AddEmoji() {
@@ -190,6 +216,9 @@ export default {
         height: 40px;
         border-radius: 50%;
         background-color: burlywood;
+        background-image: url("../assets/avatar2.jpg");
+        background-size: cover;
+        background-position: center;
         img {
           width: 100%;
           border-radius: 50%;
@@ -229,6 +258,32 @@ export default {
     #foot {
       width: 100%;
       position: relative;
+      #messagePrompt {
+        --color: var(--blue3);
+        display: inline-block;
+        padding: 10px;
+        background-color: var(--color);
+        position: absolute;
+        z-index: 9999;
+        top: 80px;
+        left: 50%;
+        border-radius: 8px;
+        transform: translateX(-50%);
+        opacity: 0;
+      }
+      .addPromptAnimation {
+        animation: Prompt 6s cubic-bezier(0.075, 0.52, 0.165, 1);
+      }
+      @keyframes Prompt {
+        from {
+          top: 80px;
+          opacity: 1;
+        }
+        to {
+          top: -80px;
+          opacity: 0;
+        }
+      }
       #emojiArr {
         position: absolute;
         z-index: 999;
@@ -253,7 +308,7 @@ export default {
         font-size: 24px;
         &:hover {
           cursor: pointer;
-          color: var(--blue3);
+          color: #66bfff;
         }
       }
     }
@@ -302,7 +357,7 @@ export default {
           background-color: var(--blue2);
           margin: 5px;
           font-size: 14px;
-          img{
+          img {
             width: 35px;
           }
         }

@@ -23,8 +23,17 @@
         />
         <div id="searchIconDown"><i class="iconfont icon-sousuo"></i></div>
         <ul ref="searchBox" id="resultBox">
-          <li v-for="item in searchList" :key="item._id"  @click="CheckArticle(item)">{{ item.title }}</li>
-          <div v-if="searchList.length ? false : true" style="textAlign:center;">
+          <li
+            v-for="item in searchList"
+            :key="item._id"
+            @click="CheckArticle(item)"
+          >
+            {{ item.title }}
+          </li>
+          <div
+            v-if="searchList.length ? false : true"
+            style="textalign: center"
+          >
             无结果，请重新搜索。
           </div>
         </ul>
@@ -44,6 +53,7 @@ export default {
       searchValue: "",
       searchList: [],
       timer: null,
+      root: null,
     };
   },
   mounted() {
@@ -56,11 +66,18 @@ export default {
   },
   methods: {
     TurnModel() {
-      console.log("class", this.nodeList);
-      this.turnModel = !this.turnModel;
-      for (let i = 0; i < this.nodeList.length; i++) {
-        this.nodeList[i].classList.toggle("nightMode");
+      // 切换夜间模式
+      this.root = document.querySelector(":root");
+      if(this.turnModel){//夜间
+        this.root.style.setProperty("--blue1", "var(--black1)");
+        this.root.style.setProperty("--blue2", "var(--black3)");
+        this.root.style.setProperty("--blue3", "var(--black1)");
+      }else{//白天
+        this.root.style.setProperty("--blue1", "#bde0fe");
+        this.root.style.setProperty("--blue2", "#a2d2ff");
+        this.root.style.setProperty("--blue3", "#66bfff");
       }
+      this.turnModel = !this.turnModel;
     },
     ReturnIndex() {
       // 更文章title状态
@@ -72,7 +89,7 @@ export default {
     Blur() {
       let timer = setTimeout(() => {
         this.$refs.searchBox.style.display = "none";
-        timer = null
+        timer = null;
       }, 200);
     },
     Focus() {
@@ -95,10 +112,10 @@ export default {
       }, 500);
     },
     CheckArticle(item) {
-      if(this.$route.path !== '/article'){
-        this.$router.push({name:'article'})
+      if (this.$route.path !== "/article") {
+        this.$router.push({ name: "article" });
       }
-      this.$store.dispatch('checkArticle',item)
+      this.$store.dispatch("checkArticle", item);
     },
   },
 };
@@ -199,7 +216,6 @@ header {
         & > li:hover {
           background-color: var(--blue2);
           background-color: var(--blue3);
-
         }
       }
       #searchIconDown {
@@ -209,7 +225,7 @@ header {
         background-color: white;
         text-align: center;
         line-height: 25px;
-        &>i{
+        & > i {
           color: var(--black1);
         }
       }

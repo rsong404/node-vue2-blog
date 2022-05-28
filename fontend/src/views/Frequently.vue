@@ -1,7 +1,7 @@
 <template>
   <div id="Container">
     <div id="tagContainer">
-      <div id="subtitle">标签</div>
+      <div id="subtitle"><i class="iconfont icon-biaoqian-m"> </i> 标签</div>
       <div id="tags" @click="CheckTag">
         <span v-for="(item, index) in tagList" :key="index"
           ># {{ item.tagName }}</span
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div id="websiteContainer">
-      <div id="subtitle">导航</div>
+      <div id="subtitle"><i class="iconfont icon-faxian2-m"> </i> 导航</div>
       <div id="website">
         <a
           v-for="(item, index) in website"
@@ -28,6 +28,7 @@ export default {
     return {
       tagList: [],
       website: [],
+      timer: null,
     };
   },
   computed: {},
@@ -45,7 +46,7 @@ export default {
     },
     // 点击标签
     async CheckTag($event) {
-      if ($event.target.nodeName === 'SPAN') {
+      if ($event.target.nodeName === "SPAN") {
         let tag = $event.target.innerHTML.replace("#", "").trim();
         let checktag = this.tagList.filter((item) => {
           return item.tagName === tag;
@@ -56,7 +57,10 @@ export default {
         // 筛选选中的标签文章,注意：因为item.items是数组，所以要剥开一层
         if (this.$route.path !== "/index") {
           await this.$router.push({ name: "index" });
-          this.$store.dispatch("checkCategory", ...checkArticle);
+          clearTimeout(this.timer);
+          this.timer = setTimeout(() => {
+            this.$store.dispatch("checkCategory", ...checkArticle);
+          }, 200);
         }
         this.$store.dispatch("bulletin", tag);
         this.$store.dispatch("checkCategory", ...checkArticle);
@@ -74,10 +78,13 @@ export default {
   #subtitle {
     width: 100%;
     height: 40px;
-    text-align: right;
+    text-align: left;
     line-height: 40px;
-    padding-right: 12px;
+    padding-left: 12px;
     font-size: 14px;
+    i {
+      font-size: 13px;
+    }
   }
   #tagContainer {
     #tags {
@@ -88,7 +95,7 @@ export default {
         padding: 5px;
         margin: 5px;
         color: white;
-        background-color: #66bfff;
+        background-color: var(--blue3);
         border-radius: 5px;
         box-shadow: 0px 0px 5px #ffffff inset;
       }
@@ -101,9 +108,8 @@ export default {
         padding: 5px;
         margin: 10px;
         color: white;
-        background-color: #66bfff;
+        background-color: var(--blue3);
         box-shadow: 0px 0px 5px #ffffff inset;
-
         border-radius: 5px;
       }
     }

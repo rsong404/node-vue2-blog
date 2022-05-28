@@ -66,14 +66,14 @@ export default {
     .right-commentItem {
       padding: 5px;
       margin-bottom: 5px;
-      background-color: #a2d2ff;
+      background-color: var(--blue2);
       border-radius: 5px;
       box-shadow: 2px 2px 5px #cecece, 0px 0px 10px #ffffff inset;
     }
     .left-commentItem {
       padding: 5px;
       margin-bottom: 5px;
-      background-color: #a2d2ff;
+      background-color: var(--blue2);
       border-radius: 5px;
       box-shadow: 2px 2px 15px #cecece, 0px 0px 10px #ffffff inset;
     }

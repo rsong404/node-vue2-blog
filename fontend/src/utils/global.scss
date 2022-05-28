@@ -51,6 +51,9 @@
     box-shadow: var(--shadow2);
     color: var(--white1);
     border: var(--blue2) solid 1px;
+    &:hover{
+      border-color: var(--blue3);
+    }
     &:active {
       background-color: var(--blue3);
       border: none;

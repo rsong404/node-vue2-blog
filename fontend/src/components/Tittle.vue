@@ -20,7 +20,7 @@
           >
         </div>
       </div>
-      <div id="bulletin" else>{{ $store.state.bulletin }}</div>
+      <div id="bulletin" v-if="!GetBulletinState">{{ $store.state.bulletin }}</div>
 
     </div>
   </div>
@@ -72,9 +72,9 @@ export default {
         font-size: 10px;
         margin: 5px 15px;
         padding: 5px;
-        background-color: #66bfff;
+        background-color: var(--blue3);
         border-radius: 5px;
-        box-shadow: 0px 0px 5px #ffffff inset;
+        box-shadow: var(--shadow2);
       }
     }
   }

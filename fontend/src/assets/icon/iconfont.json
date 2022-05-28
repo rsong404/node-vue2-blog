@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "18169469",
+      "name": "心,心脏,心跳,心率",
+      "font_class": "heart-rate-full",
+      "unicode": "e911",
+      "unicode_decimal": 59665
+    },
+    {
+      "icon_id": "3906209",
+      "name": "博客",
+      "font_class": "boke",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "19573949",
+      "name": "备案",
+      "font_class": "beian",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
       "icon_id": "1283",
       "name": "视频",
       "font_class": "shipin",
@@ -18,13 +39,6 @@
       "font_class": "dongman",
       "unicode": "e609",
       "unicode_decimal": 58889
-    },
-    {
-      "icon_id": "11006265",
-      "name": "目录",
-      "font_class": "mulu",
-      "unicode": "e619",
-      "unicode_decimal": 58905
     },
     {
       "icon_id": "11200578",

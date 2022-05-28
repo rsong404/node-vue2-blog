@@ -1,6 +1,6 @@
 <template>
   <aside>
-    <div id="avatarBox" class="relatedColors">
+    <div id="avatarBox" @click="ReturnIndex" class="relatedColors">
       <div id="avatar">
         <img src="../assets/logo.jpg" alt="" />
       </div>
@@ -35,24 +35,26 @@
               id="categoryItem"
             >
               <span>{{ item.cateName }}</span>
-              
+
               <span>{{ item.items.length }}</span>
             </div>
           </div>
         </div>
       </div>
       <div id="adminBox">
-        <a href="http://localhost:8081/admin/" target="_blank">后台管理</a>
+        <a href="http://localhost:8081/admin/" target="_blank"
+          ><i class="iconfont icon-shezhi-m"></i
+        ></a>
       </div>
     </div>
   </aside>
 </template>
 <script>
 export default {
-  inject: ["reload"],
   data() {
     return {
       categoryList: [],
+      timer: null,
     };
   },
   methods: {
@@ -64,9 +66,14 @@ export default {
     CheckCategory(items) {
       if (this.$route.path !== "/index") {
         this.$router.push({ name: "index" });
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+          this.$store.dispatch("checkCategory", items);
+        }, 200);
       }
       // 修改状态
       this.$store.dispatch("bulletin", `分类`);
+
       this.$store.dispatch("checkCategory", items);
     },
     // 返回首页
@@ -78,7 +85,7 @@ export default {
     },
     GoComment() {
       this.$store.dispatch("bulletin", "说说");
-      if(this.$route.path !== '/comment'){
+      if (this.$route.path !== "/comment") {
         this.$router.push({ name: "comment" });
       }
     },
@@ -146,8 +153,22 @@ aside {
       line-height: 60px;
       box-shadow: var(--shadow2);
       background-color: var(--blue2);
+      backdrop-filter: blur(5px);
+      i {
+        display: inline-block;
+        font-size: 30px;
+        animation: fengche 1s linear infinite;
+      }
       a {
         display: inline-block;
+      }
+    }
+    @keyframes fengche {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
       }
     }
     #navigation {

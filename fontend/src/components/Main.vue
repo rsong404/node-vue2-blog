@@ -10,16 +10,18 @@
           <div id="articleContainer">
             <div id="title"><my-tittle></my-tittle></div>
             <div id="contentContainer">
-              <router-view ref="artList" v-if="reloadRouterView"></router-view>
+              <router-view ref="artList"></router-view>
             </div>
-            <div id="footerBox">footer</div>
+            <div id="footerBox">
+              <my-footer></my-footer>
+            </div>
           </div>
         </div>
         <div id="aside-right">
           <my-rigth-aside />
         </div>
       </main>
-      <div id="aplayer"></div>
+      <!-- <div id="aplayer"></div> -->
     </div>
   </div>
 </template>
@@ -43,14 +45,9 @@ export default {
     MyFooter,
     MyRigthAside,
   },
-  provide(){
-    return {
-      reload: this.Reload
-    }
-  },
+  
   data() {
     return {
-      reloadRouterView: true,
       is: false,
       button: {},
       musicBox: {},
@@ -65,17 +62,11 @@ export default {
       },
     };
   },
-  methods: {
-    Reload(){
-      this.reloadRouterView = false
-      this.$nextTick(() => {
-        this.reloadRouterView = true
-      })
-    }
-  },
+
   mounted() {
-    this.initAudio();
-    this.FlexMusicBox();
+    // 暂时注释掉
+    // this.initAudio();
+    // this.FlexMusicBox();
   },
   methods: {
     initAudio() {
@@ -144,9 +135,8 @@ export default {
       }
       #footerBox {
         width: 100%;
-        height: 60px;
-        background-color: var(--blue1);
-        box-shadow: 0 0 5px #ffffff inset;
+        min-height: 60px;
+        // height: 60px;
       }
       #articleContainer {
         flex: 1;

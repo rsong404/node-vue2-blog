@@ -12,8 +12,9 @@
         <div>
           <div
             id="coverPicture"
-            :style="`backgroundImage:url(${item.coverPicture});`"
           >
+            <!-- :style="`backgroundImage:url(${item.coverPicture});`" -->
+          <!-- ${item.coverPicture} -->
             <div id="articleTitle">
               <h2>{{ item.title }}</h2>
             </div>
@@ -54,7 +55,6 @@ export default {
     },
   },
   created() {
-    
     this.$store.dispatch('getArticleList')
   },
 };
@@ -71,6 +71,7 @@ export default {
   box-shadow: 0px 0px 8px #f3f3f3 inset;
   cursor: pointer;
   #coverPicture {
+    background-image: url("../assets/wanye.jpg");
     position: relative;
     height: 270px;
     width: 100%;

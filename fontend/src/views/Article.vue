@@ -24,6 +24,9 @@ export default {
 #articleContainer {
   width: 100%;
   min-height: 100%;
-  background-color: var(--blue1);
+  background-color: var(--blue2);
+  padding: 15px;
+  box-shadow: var(--shadow2);
+  // color: var(--black2);
 }
 </style>

@@ -27,7 +27,7 @@ export default {
     async GetBlogInf() {
       let result = await this.$http.get("/blog");
       this.blogInf = result.data[0];
-      console.log(this.blogInf);
+      //console.log(this.blogInf);
     },
   },
   mounted() {

@@ -10,11 +10,9 @@
         @click="CheckArticle(item)"
       >
         <div>
-          <div
-            id="coverPicture"
-          >
+          <div id="coverPicture">
             <!-- :style="`backgroundImage:url(${item.coverPicture});`" -->
-          <!-- ${item.coverPicture} -->
+            <!-- ${item.coverPicture} -->
             <div id="articleTitle">
               <h2>{{ item.title }}</h2>
             </div>
@@ -37,25 +35,25 @@
   </div>
 </template>
 <script>
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      bulletinStr: 'jiodjfdoisjfods'
+      bulletinStr: "jiodjfdoisjfods",
     };
   },
-  computed:{
-    ...mapState(['articleList'])
+  computed: {
+    ...mapState(["articleList"]),
   },
   methods: {
     //选中文章
     async CheckArticle(checkArticle) {
-      this.$store.dispatch('checkArticle',checkArticle)
+      this.$store.dispatch("checkArticle", checkArticle);
       this.$router.push({ name: "article" });
     },
   },
   created() {
-    this.$store.dispatch('getArticleList')
+    this.$store.dispatch("getArticleList");
   },
 };
 </script>
@@ -84,6 +82,7 @@ export default {
     #articleTitle {
       width: 100%;
       position: absolute;
+
       bottom: 0;
       color: white;
       font-size: 1.2rem;
@@ -96,6 +95,9 @@ export default {
       h2 {
         text-align: center;
         padding: 0 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

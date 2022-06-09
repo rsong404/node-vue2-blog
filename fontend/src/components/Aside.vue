@@ -43,8 +43,11 @@
       </div>
       <div id="adminBox">
         <a href="http://localhost:8081/admin/" target="_blank"
-          ><i class="iconfont icon-shezhi-m"></i
-        ></a>
+          ><div id="adminContainer" >
+            <i class="iconfont icon-shezhi-m"></i>
+            <div>后台管理</div>
+          </div></a
+        >
       </div>
     </div>
   </aside>
@@ -66,7 +69,7 @@ export default {
     CheckCategory(items) {
       if (this.$route.path !== "/index") {
         this.$router.push({ name: "index" });
-        clearTimeout(this.timer)
+        clearTimeout(this.timer);
         this.timer = setTimeout(() => {
           this.$store.dispatch("checkCategory", items);
         }, 200);
@@ -150,17 +153,27 @@ aside {
     #adminBox {
       text-align: center;
       height: 60px;
-      line-height: 60px;
+      // line-height: 60px;
       box-shadow: var(--shadow2);
       background-color: var(--blue2);
-      backdrop-filter: blur(5px);
-      i {
-        display: inline-block;
-        font-size: 30px;
-        animation: fengche 1s linear infinite;
-      }
+
       a {
+        width: 100%;
+        height: 100%;
         display: inline-block;
+        position: relative;
+        #adminContainer{
+          width: 100%;
+          position: absolute;
+          top:50%;
+          transform: translateY(-50%);
+        i {
+          display: inline-block;
+          margin: 5px 0;
+          font-size: 25px;
+          // animation: fengche 1s linear infinite;
+        }
+        }
       }
     }
     @keyframes fengche {

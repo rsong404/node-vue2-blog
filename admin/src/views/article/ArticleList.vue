@@ -36,7 +36,7 @@
                   <h4 id="content_title">
                     {{ item.title }}
                   </h4>
-                  <div id="content" v-html="item.contents"></div>
+                  <div id="content" v-html="item.contents.slice(0,150)"></div>
                   <div id="main_content_foot">
                     <span
                       ><i class="el-icon-user-solid"></i> {{ item.userName }}
@@ -329,7 +329,7 @@ export default {
         font-size: 14px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 6;
         overflow: hidden;
       }
       #main_content_foot {

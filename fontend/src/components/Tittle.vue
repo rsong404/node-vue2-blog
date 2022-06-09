@@ -66,8 +66,13 @@ export default {
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-
+      & > h3{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
       & span {
+        cursor: pointer;
         display: inline-block;
         font-size: 10px;
         margin: 5px 15px;

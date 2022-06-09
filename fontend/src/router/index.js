@@ -5,6 +5,7 @@ import ArticleList from '../views/ArticleList'
 import Article from '../views/Article'
 import Comment from '../views/Comment'
 import Message from '../views/Message'
+import MainIndex from '../views/MainIndex'
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [
       },
     ],
   },
+  {
+    path:'/main',
+    name: "mainIndex",
+    component: MainIndex
+  }
 ]
 
 const router = new VueRouter({

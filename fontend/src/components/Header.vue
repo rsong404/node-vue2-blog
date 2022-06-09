@@ -58,6 +58,20 @@ export default {
   },
   mounted() {
     this.nodeList = document.querySelectorAll(".relatedColors");
+    this.turnModel = this.$store.state.showModel;
+    this.root = document.querySelector(":root");
+
+    if (this.turnModel) {
+      //白天
+      this.root.style.setProperty("--blue1", "#bde0fe");
+      this.root.style.setProperty("--blue2", "#a2d2ff");
+      this.root.style.setProperty("--blue3", "#66bfff");
+    } else {
+      //夜间
+      this.root.style.setProperty("--blue1", "var(--black1)");
+      this.root.style.setProperty("--blue2", "var(--black3)");
+      this.root.style.setProperty("--blue3", "var(--black1)");
+    }
   },
   computed: {
     IsShowBox() {
@@ -67,17 +81,19 @@ export default {
   methods: {
     TurnModel() {
       // 切换夜间模式
-      this.root = document.querySelector(":root");
-      if(this.turnModel){//夜间
+      if (this.turnModel) {
+        //夜间
         this.root.style.setProperty("--blue1", "var(--black1)");
         this.root.style.setProperty("--blue2", "var(--black3)");
         this.root.style.setProperty("--blue3", "var(--black1)");
-      }else{//白天
+      } else {
+        //白天
         this.root.style.setProperty("--blue1", "#bde0fe");
         this.root.style.setProperty("--blue2", "#a2d2ff");
         this.root.style.setProperty("--blue3", "#66bfff");
       }
       this.turnModel = !this.turnModel;
+      this.$store.state.showModel = this.turnModel;
     },
     ReturnIndex() {
       // 更文章title状态
@@ -134,6 +150,10 @@ header {
   #model > i {
     font-size: 30px;
     cursor: pointer;
+    transition: 0.2s;
+    &:hover{
+      font-size: 34px;
+    }
   }
   & > div {
     margin: 0 20px;

@@ -9,6 +9,8 @@ export default new Vuex.Store({
     bulletin: 'tittle',
     checkCategory: [],
     articleList: [],
+    catalog: [],
+    showModel: true,
   },
   actions: {
     // 选中的文章
@@ -75,6 +77,11 @@ export default new Vuex.Store({
         }
       }
     },
+
+    // 文章目录
+    CATALOG(state,value){
+      state.catalog = value
+    }
   },
 
   modules: {},

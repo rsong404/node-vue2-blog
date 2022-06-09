@@ -241,11 +241,14 @@ export default {
       width: 99%;
       height: 120px;
       resize: none;
-      background-color: #ffffff;
+      // background-color: #ffffff;
       border: 0 steelblue solid;
       border-radius: 10px;
       outline: none;
       font-size: 16px;
+      background-image: url(../assets/pinglun.png);
+      background-position: center;
+      background-size: cover;
       &:focus {
         background-color: rgb(255, 255, 255);
         border: rgb(56, 153, 192) 1px solid;

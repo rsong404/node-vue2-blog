@@ -59,8 +59,9 @@ export default {
           await this.$router.push({ name: "index" });
           clearTimeout(this.timer);
           this.timer = setTimeout(() => {
-            this.$store.dispatch("checkCategory", ...checkArticle);
+            this.$store.dispatch("checkCategory", ...checkArticle)
           }, 200);
+          //this.$nextTick(() =>{this.$store.dispatch("checkCategory", ...checkArticle)})
         }
         this.$store.dispatch("bulletin", tag);
         this.$store.dispatch("checkCategory", ...checkArticle);

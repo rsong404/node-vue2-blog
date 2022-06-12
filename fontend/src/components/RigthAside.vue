@@ -2,10 +2,10 @@
   <div id="rigthAsideContainer">
     <div id="tabs">
       <div @click="name = 'Frequently'" :class="FreToggle">
-        <i class="iconfont icon-a-fasongdaohang-m"></i>
+        <i class="iconfont icon-fenlei"></i>
       </div>
       <div @click="name = 'Catalog'" :class="CatToggle">
-        <i class="iconfont icon-biaoji-m"></i>
+        <i class="iconfont icon-a-fasongdaohang-m"></i>
       </div>
     </div>
     <div>

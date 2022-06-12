@@ -77,6 +77,8 @@ export default {
   min-height: 100%;
   box-shadow: var(--shadow2);
   line-height: 30px;
+  letter-spacing: 2px;
+
   #articleContent {
     width: 100%;
     min-height: 100%;

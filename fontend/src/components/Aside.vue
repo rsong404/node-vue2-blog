@@ -10,6 +10,10 @@
       <div id="navigationContainer" class="relatedColors">
         <div>
           <div id="navigation"><span>导航</span></div>
+          <router-link to="/main" id="navigationItem"
+            ><i class="iconfont icon-biaoji-m"></i
+            ><span>主页</span></router-link
+          >
           <div @click="ReturnIndex" id="navigationItem">
             <i class="iconfont icon-shouye-m"></i><span>首页</span>
           </div>

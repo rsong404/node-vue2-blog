@@ -79,9 +79,9 @@ export default new Vuex.Store({
     },
 
     // 文章目录
-    CATALOG(state,value){
+    CATALOG(state, value) {
       state.catalog = value
-    }
+    },
   },
 
   modules: {},

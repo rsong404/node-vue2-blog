@@ -1,48 +1,68 @@
 <template>
-  <header>
-    <div @click="ReturnIndex" id="blogName">YRsong丶博客</div>
-    <div id="model">
-      <i
-        @click="TurnModel"
-        class="iconfont"
-        :class="
-          turnModel ? 'icon-Daytimemode-fill' : 'icon-icon-nighttime-fill'
-        "
-      ></i>
-    </div>
-    <div id="header-right">
-      <div id="search">
-        <div id="searchIconUp"></div>
-        <input
-          type="text"
-          v-model="searchValue"
-          @input="Search(searchValue)"
-          placeholder="请输入搜索"
-          @focus="Focus"
-          @blur="Blur"
-        />
-        <div id="searchIconDown"><i class="iconfont icon-sousuo"></i></div>
-        <ul ref="searchBox" id="resultBox">
-          <li
-            v-for="item in searchList"
-            :key="item._id"
-            @click="CheckArticle(item)"
-          >
-            {{ item.title }}
-          </li>
-          <div
-            v-if="searchList.length ? false : true"
-            style="textalign: center"
-          >
-            无结果，请重新搜索。
-          </div>
-        </ul>
+  <div style="width: 100%; height: 100%; position: relative">
+    <header>
+      <div @click="ReturnIndex" id="blogName">YRsong丶博客</div>
+      <div id="model">
+        <i
+          @click="TurnModel"
+          class="iconfont"
+          :class="
+            turnModel ? 'icon-Daytimemode-fill' : 'icon-icon-nighttime-fill'
+          "
+        ></i>
       </div>
-      <router-link to="/message" tag="div" id="message"
-        ><i class="iconfont icon-xiaoxi2-m"></i
-      ></router-link>
+      <div id="header-right">
+        <div id="search">
+          <div id="searchIconUp"></div>
+          <input
+            type="text"
+            v-model="searchValue"
+            @input="Search(searchValue)"
+            placeholder="请输入搜索"
+            @focus="Focus"
+            @blur="Blur"
+          />
+          <div id="searchIconDown"><i class="iconfont icon-sousuo"></i></div>
+          <ul ref="searchBox" id="resultBox">
+            <li
+              v-for="item in searchList"
+              :key="item._id"
+              @click="CheckArticle(item)"
+            >
+              {{ item.title }}
+            </li>
+            <div
+              v-if="searchList.length ? false : true"
+              style="textalign: center"
+            >
+              无结果，请重新搜索。
+            </div>
+          </ul>
+        </div>
+        <router-link to="/message" tag="div" id="message"
+          ><i class="iconfont icon-xiaoxi2-m"></i
+        ></router-link>
+      </div>
+    </header>
+    <div class="mobileHeader" id="mobileHeader">
+      <div @click="Open" :class="IsOpen ? 'active':''"><i class="iconfont icon-fenlei1"></i></div>
+      <div @click="ReturnIndex">YRsong丶博客</div>
+      <div>
+        <div class="model">
+          <i
+            @click="TurnModel"
+            class="iconfont"
+            :class="
+              turnModel ? 'icon-Daytimemode-fill' : 'icon-icon-nighttime-fill'
+            "
+          ></i>
+        </div>
+        <router-link to="/message" tag="div"
+          ><i class="iconfont icon-xiaoxi2-m"></i
+        ></router-link>
+      </div>
     </div>
-  </header>
+  </div>
 </template>
 <script>
 export default {
@@ -54,6 +74,7 @@ export default {
       searchList: [],
       timer: null,
       root: null,
+      isOpenFold: false,
     };
   },
   mounted() {
@@ -77,8 +98,14 @@ export default {
     IsShowBox() {
       return this.searchList.length ? "display:block;" : "display:none;";
     },
+    IsOpen(){
+      return this.$store.state.isOpenFold
+    }
   },
   methods: {
+    Open() {
+      this.$store.commit("ISOPENFOLD");
+    },
     TurnModel() {
       // 切换夜间模式
       if (this.turnModel) {
@@ -137,6 +164,64 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@media screen and (max-width: 780px) {
+  header {
+    display: none !important;
+  }
+  #mobileHeader {
+    display: flex;
+  }
+}
+.active{
+  background-color: var(--blue1);
+}
+.mobileHeader {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: none;
+  background-color: var(--blue2);
+  box-shadow: var(--shadow2);
+  flex-shrink: 0;
+  position: absolute;
+  justify-content: space-between;
+  align-items: center;
+
+  & > div {
+    text-align: center;
+  }
+  & > div:nth-child(1) {
+    font-size: 600;
+    width: 50px;
+    height: 100%;
+    font-weight: 600;
+    & > i {
+      display: inline-block;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  & > div:nth-child(2) {
+    width: 180px;
+    font-weight: 600;
+  }
+  .model > i {
+    font-size: 20px;
+    transition: 0.2s;
+    &:hover {
+      font-size: 30px;
+    }
+  }
+  & > div:nth-child(3) {
+    height: 100%;
+    width: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
 header {
   cursor: pointer;
   width: 100%;
@@ -146,12 +231,12 @@ header {
   background-color: var(--blue2);
   box-shadow: var(--shadow2);
   flex-shrink: 0;
-  position: relative;
+  position: absolute;
   #model > i {
     font-size: 30px;
     cursor: pointer;
     transition: 0.2s;
-    &:hover{
+    &:hover {
       font-size: 34px;
     }
   }

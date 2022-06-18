@@ -11,6 +11,7 @@ export default new Vuex.Store({
     articleList: [],
     catalog: [],
     showModel: true,
+    isOpenFold: false,
   },
   actions: {
     // 选中的文章
@@ -36,6 +37,11 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    //是否打开手机模式折叠分类
+    ISOPENFOLD(state, value) {
+      state.isOpenFold = !state.isOpenFold
+    },
+
     //选中的文章相关
     CHECKARTICLE(state, value) {
       state.checkArticle = value

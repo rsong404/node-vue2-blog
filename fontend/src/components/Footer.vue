@@ -2,14 +2,12 @@
   <footer>
     <div id="footContainer">
       <div>
-        <i class="iconfont icon-boke fengche"></i> {{ blogInf.blogName }}
+        <i class="iconfont icon-boke fengche"></i>
+        <span>{{ blogInf.blogName }}</span>
       </div>
       <div id="heartBeatBox">
-        <i
-          class="iconfont icon-heart-rate-full "
-          style="color: red"
-        ></i>
-        
+        <i class="iconfont icon-heart-rate-full" style="color: red"></i>
+
         <span>{{ blogInf.startTime }}</span>
       </div>
       <div><i class="iconfont icon-beian"></i> {{ blogInf.recordNumber }}</div>
@@ -36,6 +34,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@media screen and (max-width: 780px) {
+  #footContainer > div:nth-child(1) {
+    display: none;
+  }
+}
 footer {
   height: 100%;
   width: 100%;
@@ -46,18 +49,19 @@ footer {
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     & > div {
       padding: 5px;
-      margin: 5px 30px;
+      margin: 5px 5px;
+      white-space: nowrap;
       i {
         display: inline-block;
         font-size: 18px;
       }
     }
+
     #heartBeatBox {
-      flex: 1;
       height: 100%;
       width: 100px;
       display: flex;

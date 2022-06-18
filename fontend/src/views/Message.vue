@@ -3,8 +3,7 @@
     <div id="messageContainer">
       <div id="message">
         <div id="header">
-          <div id="avatar">
-          </div>
+          <div id="avatar"></div>
           <input
             class="nick"
             v-model.trim="form.nick"
@@ -135,9 +134,11 @@ export default {
       this.textarea.selectionEnd = this.textarea.selectionStart;
       this.textarea.focus();
     },
-    RefreshMessage(){
-      this.isRefresh = false
-      this.$nextTick(() => {this.isRefresh = true})
+    RefreshMessage() {
+      this.isRefresh = false;
+      this.$nextTick(() => {
+        this.isRefresh = true;
+      });
     },
     async OnSubmit() {
       this.form.content = this.$refs.textarea.value.trim();
@@ -196,6 +197,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@media screen and (max-width: 520px) {
+  #avatar {
+    display: none !important;
+  }
+  .nick {
+    width: calc(100% - 100px);
+    // width: 100px !important;
+  }
+}
 #messageBox {
   width: 100%;
   padding: 15px;
@@ -339,14 +349,11 @@ export default {
       #messageItemContent {
         flex: 1;
         #messageItemHeader {
+          display: flex;
+          justify-content: space-between;
           margin: 10px;
-          position: relative;
           & > div {
             display: inline-block;
-          }
-          & > div:nth-child(2) {
-            position: absolute;
-            right: 0;
           }
         }
         #messageContent {

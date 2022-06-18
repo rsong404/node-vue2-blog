@@ -20,6 +20,7 @@
         <div id="aside-right">
           <my-rigth-aside />
         </div>
+        <div id="shady" @click="IsClickShady" :class="IsShady?'isShady':''"></div>
       </main>
       <!-- <div id="aplayer"></div> -->
     </div>
@@ -45,7 +46,7 @@ export default {
     MyFooter,
     MyRigthAside,
   },
-  
+
   data() {
     return {
       is: false,
@@ -68,7 +69,15 @@ export default {
     // this.initAudio();
     // this.FlexMusicBox();
   },
+  computed:{
+    IsShady(){
+      return this.$store.state.isOpenFold
+    }
+  },
   methods: {
+    IsClickShady(){
+      this.$store.commit('ISOPENFOLD')
+    },
     initAudio() {
       // 创建一个音乐播放器实例，并挂载到DOM上，同时进行相关配置
       new APlayer({
@@ -95,6 +104,30 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@media screen and (max-width: 1050px) {
+  #container {
+    width: 100vw !important;
+  }
+}
+@media screen and (max-width: 950px) {
+  #aside-right {
+    display: none;
+  }
+  #aside-left {
+    width: 24% !important;
+  }
+  #article {
+    width: 76% !important;
+  }
+}
+@media screen and (max-width: 780px) {
+  #aside-right {
+    display: none;
+  }
+  #aside-left {
+    width: 0 !important;
+  }
+}
 #container {
   width: 78vw;
   height: 100vh;
@@ -112,7 +145,20 @@ export default {
     width: 100%;
     height: 92vh;
     display: flex;
-
+    position: relative;
+    .isShady{
+      display: block !important;
+    }
+    #shady {
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.5);
+      display: none;
+      position: absolute;
+      z-index: 888;
+      top: 0;
+      // left: 100%;
+    }
     #aside-left {
       width: 19%;
       height: 100%;
@@ -123,6 +169,7 @@ export default {
       background-color: var(--blue2);
     }
     #article {
+      flex: 1;
       width: 62%;
       height: 92vh; //要想出现滚动条就要定义好长度或宽度，不能用%单位
       display: flex;
@@ -135,7 +182,7 @@ export default {
       }
       #footerBox {
         width: 100%;
-        min-height: 60px;
+        height: 60px;
       }
       #articleContainer {
         flex: 1;

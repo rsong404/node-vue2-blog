@@ -1,60 +1,119 @@
 <template>
-  <aside>
-    <div id="avatarBox" @click="ReturnIndex" class="relatedColors">
-      <div id="avatar">
-        <img src="../assets/logo.jpg" alt="" />
-      </div>
-      <div id="">夏日の蝉</div>
-    </div>
-    <div id="navigationBox">
-      <div id="navigationContainer" class="relatedColors">
-        <div>
-          <div id="navigation"><span>导航</span></div>
-          <router-link to="/main" id="navigationItem"
-            ><i class="iconfont icon-biaoji-m"></i
-            ><span>主页</span></router-link
-          >
-          <div @click="ReturnIndex" id="navigationItem">
-            <i class="iconfont icon-shouye-m"></i><span>首页</span>
-          </div>
-          <router-link to="/dd" id="navigationItem"
-            ><i class="iconfont icon-a-mingpianzhengjian-m"></i
-            ><span>简历</span></router-link
-          >
-          <a href="https://rs404.top" target="_blank" id="navigationItem"
-            ><i class="iconfont icon-zhengcewenjian-m"></i
-            ><span>技术博客</span></a
-          >
-          <div @click="GoComment" id="navigationItem">
-            <i class="iconfont icon-xiaoxi-m"></i><span>个人说说</span>
-          </div>
+  <div id="AsideBox" style="width: 100%; height: 100%">
+    <aside>
+      <div id="avatarBox" @click="ReturnIndex" class="relatedColors">
+        <div id="avatar">
+          <img src="../assets/logo.jpg" alt="" />
         </div>
-        <div id="catagoryContainer">
-          <div id="navigation"><span>分类</span></div>
-          <div id="category">
-            <div
-              @click="CheckCategory(item.items)"
-              v-for="item in categoryList"
-              :key="item._id"
-              id="categoryItem"
+        <div id="">夏日の蝉</div>
+      </div>
+      <div id="navigationBox">
+        <div id="navigationContainer" class="relatedColors">
+          <div>
+            <div id="navigation"><span>导航</span></div>
+            <router-link to="/main" id="navigationItem"
+              ><i class="iconfont icon-biaoji-m"></i
+              ><span>主页</span></router-link
             >
-              <span>{{ item.cateName }}</span>
+            <div @click="ReturnIndex" id="navigationItem">
+              <i class="iconfont icon-shouye-m"></i><span>首页</span>
+            </div>
+            <router-link to="/dd" id="navigationItem"
+              ><i class="iconfont icon-a-mingpianzhengjian-m"></i
+              ><span>简历</span></router-link
+            >
+            <a href="https://rs404.top" target="_blank" id="navigationItem"
+              ><i class="iconfont icon-zhengcewenjian-m"></i
+              ><span>技术博客</span></a
+            >
+            <div @click="GoComment" id="navigationItem">
+              <i class="iconfont icon-xiaoxi-m"></i><span>个人说说</span>
+            </div>
+          </div>
+          <div id="catagoryContainer">
+            <div id="navigation"><span>分类</span></div>
+            <div id="category">
+              <div
+                @click="CheckCategory(item.items)"
+                v-for="item in categoryList"
+                :key="item._id"
+                id="categoryItem"
+              >
+                <span>{{ item.cateName }}</span>
 
-              <span>{{ item.items.length }}</span>
+                <span>{{ item.items.length }}</span>
+              </div>
             </div>
           </div>
         </div>
+        <div id="adminBox">
+          <a href="http://localhost:8081/admin/" target="_blank"
+            ><div id="adminContainer">
+              <i class="iconfont icon-shezhi-m"></i>
+              <div>后台管理</div>
+            </div></a
+          >
+        </div>
       </div>
-      <div id="adminBox">
-        <a href="http://localhost:8081/admin/" target="_blank"
-          ><div id="adminContainer" >
-            <i class="iconfont icon-shezhi-m"></i>
-            <div>后台管理</div>
-          </div></a
-        >
+    </aside>
+    <aside id="mobileAside" :class="isOpen ? 'open' : ''">
+      <div id="avatarBox" @click="ReturnIndex" class="relatedColors">
+        <div id="avatar">
+          <img src="../assets/logo.jpg" alt="" />
+        </div>
+        <div id="">夏日の蝉</div>
       </div>
-    </div>
-  </aside>
+      <div id="navigationBox">
+        <div id="navigationContainer" class="relatedColors">
+          <div>
+            <div id="navigation"><span>导航</span></div>
+            <router-link to="/main" id="navigationItem"
+              ><i class="iconfont icon-biaoji-m"></i
+              ><span>主页</span></router-link
+            >
+            <div @click="ReturnIndex" id="navigationItem">
+              <i class="iconfont icon-shouye-m"></i><span>首页</span>
+            </div>
+            <router-link to="/dd" id="navigationItem"
+              ><i class="iconfont icon-a-mingpianzhengjian-m"></i
+              ><span>简历</span></router-link
+            >
+            <a href="https://rs404.top" target="_blank" id="navigationItem"
+              ><i class="iconfont icon-zhengcewenjian-m"></i
+              ><span>技术博客</span></a
+            >
+            <div @click="GoComment" id="navigationItem">
+              <i class="iconfont icon-xiaoxi-m"></i><span>个人说说</span>
+            </div>
+          </div>
+          <div id="catagoryContainer">
+            <div id="navigation"><span>分类</span></div>
+            <div id="category">
+              <div
+                @click="CheckCategory(item.items)"
+                v-for="item in categoryList"
+                :key="item._id"
+                id="categoryItem"
+              >
+                <span>{{ item.cateName }}</span>
+
+                <span>{{ item.items.length }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="adminBox">
+          <a href="http://localhost:8081/admin/" target="_blank"
+            ><div id="adminContainer">
+              <i class="iconfont icon-shezhi-m"></i>
+              <div>后台管理</div>
+            </div></a
+          >
+        </div>
+      </div>
+      <!-- <div id="shady"></div> -->
+    </aside>
+  </div>
 </template>
 <script>
 export default {
@@ -63,6 +122,11 @@ export default {
       categoryList: [],
       timer: null,
     };
+  },
+  computed: {
+    isOpen() {
+      return this.$store.state.isOpenFold;
+    },
   },
   methods: {
     async GetCategory() {
@@ -103,6 +167,30 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.open {
+  display: block !important;
+  transform: translateX(0) !important;
+}
+#mobileAside {
+  width: 50%;
+  height: 92vh;
+  position: fixed;
+  z-index: 999;
+  top: 8vh;
+  display: none;
+  transform: translateX(-100%);
+  transition: all 0.2s;
+  overflow: hidden;
+  // #shady{
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: black;
+  //   position: absolute;
+  //   z-index: 999;
+  //   top: -100%;
+  //   left: 100%;
+  // }
+}
 aside {
   display: flex;
   flex-direction: column;
@@ -150,9 +238,61 @@ aside {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    box-sizing: border-box;
     #navigationContainer {
       flex: 1;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      #navigation {
+        text-align: left;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        & > span {
+          margin-left: 12px;
+        }
+      }
+      #catagoryContainer {
+        width: 100%;
+        flex: 1;
+        #category {
+          height: calc(92vh - 440px);
+          overflow-y: auto;
+          overflow-x: hidden;
+          &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+          }
+          #categoryItem {
+            display: block;
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &:hover {
+              background-color: var(--blue1);
+            }
+            & > span:nth-child(1) {
+              display: inline-block;
+              margin-left: 20px;
+            }
+            & > span:nth-child(2) {
+              text-align: center;
+              font-size: 14px;
+              width: 20px;
+              height: 20px;
+              border-radius: 10px;
+              display: inline-block;
+              margin-right: 20px;
+              background-color: var(--blue3);
+              box-shadow: var(--shadow2);
+            }
+          }
+        }
+      }
     }
     #adminBox {
       text-align: center;
@@ -166,74 +306,16 @@ aside {
         height: 100%;
         display: inline-block;
         position: relative;
-        #adminContainer{
+        #adminContainer {
           width: 100%;
           position: absolute;
-          top:50%;
+          top: 50%;
           transform: translateY(-50%);
-        i {
-          display: inline-block;
-          margin: 5px 0;
-          font-size: 25px;
-          // animation: fengche 1s linear infinite;
-        }
-        }
-      }
-    }
-    @keyframes fengche {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    #navigation {
-      text-align: left;
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-      font-size: 14px;
-      & > span {
-        margin-left: 12px;
-      }
-    }
-    #catagoryContainer {
-      width: 100%;
-      height: 60%;
-      #category {
-        height: 90%;
-        overflow-y: auto;
-        overflow-x: hidden;
-        &::-webkit-scrollbar {
-          width: 0;
-          height: 0;
-        }
-        #categoryItem {
-          display: block;
-          width: 100%;
-          height: 40px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-
-          &:hover {
-            background-color: var(--blue1);
-          }
-          & > span:nth-child(1) {
+          i {
             display: inline-block;
-            margin-left: 20px;
-          }
-          & > span:nth-child(2) {
-            text-align: center;
-            font-size: 14px;
-            width: 20px;
-            height: 20px;
-            border-radius: 10px;
-            display: inline-block;
-            margin-right: 20px;
-            background-color: var(--blue3);
-            box-shadow: var(--shadow2);
+            margin: 5px 0;
+            font-size: 25px;
+            // animation: fengche 1s linear infinite;
           }
         }
       }

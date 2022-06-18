@@ -19,7 +19,8 @@
           </div>
           <div id="content">
             <span
-              ><i class="iconfont icon-wenjianjia-m"></i> {{ item.cateName }}</span
+              ><i class="iconfont icon-wenjianjia-m"></i>
+              {{ item.cateName }}</span
             >
             <span
               ><i class="iconfont icon-biaoqian-m"></i> {{ item.tags[0] }}</span
@@ -58,6 +59,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@media screen and (max-width: 780px) {
+  #content > span {
+    font-size: 12px;
+    & > i {
+      font-size: 12px;
+    }
+  }
+  #content > span:nth-child(3) {
+    display: none;
+  }
+}
 #title {
   width: 100%;
   height: 100px;

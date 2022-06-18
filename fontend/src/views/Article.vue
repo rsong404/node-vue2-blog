@@ -72,12 +72,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 #articleContainer {
   width: 100%;
   min-height: 100%;
   box-shadow: var(--shadow2);
   line-height: 30px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 
   #articleContent {
     width: 100%;

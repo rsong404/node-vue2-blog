@@ -49,30 +49,43 @@ export default {
       this.$store.commit("CATALOG", this.catalog);
     },
     NextOrLast(is) {
-      let articleList = this.$store.state.articleList;
+      let articleList = this.$store.state.totalArticle;
       let checkArticle = this.$store.state.checkArticle;
-      let result = articleList.indexOf(checkArticle);
-      if (is) {
-        if (result === articleList.length) {
-          result = 0;
+      let result = 0;
+      articleList.forEach((item, index) => {
+        if (item._id === checkArticle._id) {
+          result = index;
         }
-        this.$store.dispatch("checkArticle", articleList[++result]);
+      });
+
+      if (is) {
+        if (result === articleList.length - 1) {
+          result = 0;
+        } else {
+          result += 1;
+        }
+        this.$store.dispatch("checkArticle", articleList[result]);
       } else {
         if (result === 0) {
-          result = articleList.length;
+          result = articleList.length - 1;
+        } else {
+          result -= 1;
         }
-        this.$store.dispatch("checkArticle", articleList[--result]);
+        this.$store.dispatch("checkArticle", articleList[result]);
+        
       }
     },
   },
-
+  updated() {
+    this.catalog = []
+   this.CreateCatalog()
+  },
   mounted() {
     this.CreateCatalog();
   },
 };
 </script>
 <style lang="scss" scoped>
-
 #articleContainer {
   width: 100%;
   min-height: 100%;
@@ -100,7 +113,7 @@ export default {
       width: 65px;
       text-align: center;
       margin: 10px 5px;
-      border-radius: 5px;
+      border-radius: 4px;
       box-shadow: var(--shadow2);
       background-color: var(--blue2);
     }

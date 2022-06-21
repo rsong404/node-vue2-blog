@@ -1,11 +1,11 @@
 <template>
   <div id="ContainerBox">
-    <div id="titleContainer" >
+    <div id="titleContainer">
       <div id="tagContainer" v-if="GetBulletinState">
         <h3 style="margin-top: 15px">{{ bulletin.title }}</h3>
         <div>
           <span
-            ><i class="iconfont icon-fenlei-m"></i>
+            ><i class="iconfont icon-wenjianjia-m"></i>
             {{ bulletin.cateName }}</span
           >
           <span
@@ -20,22 +20,27 @@
           >
         </div>
       </div>
-      <div id="bulletin" v-if="!GetBulletinState">{{ $store.state.bulletin }}</div>
-
+      <div id="bulletin" v-if="!GetBulletinState">
+        {{ $store.state.bulletin }}
+      </div>
+    </div>
+    <div id="wave">
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
     </div>
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-    };
-  },
   computed: {
     GetBulletinState() {
-      let state = this.$store.state.bulletin
-      return Object.prototype.toString.call(state) === '[object Object]' ? true : false
+      let state = this.$store.state.bulletin;
+      return Object.prototype.toString.call(state) === "[object Object]"
+        ? true
+        : false;
     },
     ...mapState(["bulletin"]),
   },
@@ -45,11 +50,69 @@ export default {
 #ContainerBox {
   width: 100%;
   height: 100%;
+  position: relative;
+  #wave {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    // background-color: var(--blue2);
+  }
+  .wave {
+    background: url(../assets/wave.svg)
+      repeat-x;
+    position: absolute;
+    bottom: 0;
+    width: 6400px;
+    height: 85%;
+    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.7;
+  }
+
+  .wave:nth-of-type(2) {
+    animation: wave 7.5s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+      swell 7s ease -1.25s infinite;
+    opacity: 1;
+  }
+  .wave:nth-of-type(3) {
+    animation: wave 5s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+      swell 8s ease -1.25s infinite;
+    opacity: 0.4;
+  }
+  .wave:nth-of-type(4) {
+    height: 75%;
+    border: 0;
+    animation: wave 6s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+      swell 6s ease -1.25s infinite;
+    opacity: 0.4;
+  }
+
+  @keyframes wave {
+    0% {
+      margin-left: 0;
+    }
+    100% {
+      margin-left: -1600px;
+    }
+  }
+
+  @keyframes swell {
+    0%,
+    100% {
+      transform: translate3d(0, -25deg, 0);
+    }
+    50% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
   #titleContainer {
     width: 100%;
     height: 100%;
-    background-color: var(--blue1);
-    background-image: url("../assets/title.jpg");
+    // background-color: var(--blue2);
+    position: absolute;
+    z-index: 888;
+    // background-image: url("../assets/title.jpg");
     background-position: center;
     background-size: 100%;
     box-shadow: 0px 0px 5px #ffffff inset;
@@ -66,16 +129,23 @@ export default {
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      & > h3{
+      & > h3 {
+        width: 100%;
+        padding: 0 10px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      & > div{
+        width: 100%;
+        white-space: nowrap;
+        text-align: center;
       }
       & span {
         cursor: pointer;
         display: inline-block;
         font-size: 10px;
-        margin: 5px 15px;
+        margin: 5px 10px;
         padding: 5px;
         background-color: var(--blue3);
         border-radius: 5px;

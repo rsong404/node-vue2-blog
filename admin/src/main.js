@@ -4,10 +4,14 @@ import router from './router'
 import http from './utils/http'
 import './utils/globalStyle.css'
 import './utils/icon-css/iconfont.css'
+// import "highlight.js/styles/monokai-sublime.css";
+import "highlight.js/styles/darcula.css";
+
 
 Vue.prototype.$http = http
-import {Button, Dialog, Upload, DatePicker, Descriptions, DescriptionsItem, Card, Empty, Row, Option, Col, Select, Form, FormItem, MessageBox, Message, Tag, Input, Table, TableColumn, Popover, Aside,Container,MenuItem,Menu,Submenu,MenuItemGroup,Header,Main } from 'element-ui';
+import {Button, InputNumber, Dialog, Upload, DatePicker, Descriptions, DescriptionsItem, Card, Empty, Row, Option, Col, Select, Form, FormItem, MessageBox, Message, Tag, Input, Table, TableColumn, Popover, Aside,Container,MenuItem,Menu,Submenu,MenuItemGroup,Header,Main } from 'element-ui';
 Vue.use(Aside)
+Vue.use(InputNumber)
 Vue.use(Main)
 Vue.use(Dialog)
 Vue.use(Upload)

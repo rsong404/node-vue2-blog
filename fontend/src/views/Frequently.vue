@@ -28,7 +28,6 @@ export default {
     return {
       tagList: [],
       website: [],
-      timer: null,
     };
   },
   computed: {},
@@ -42,7 +41,6 @@ export default {
     async GetTagList() {
       let result = await this.$http.get("/tag");
       this.tagList = result.data;
-      // console.log(result.data);
     },
     // 点击标签
     async CheckTag($event) {
@@ -56,12 +54,10 @@ export default {
         });
         // 筛选选中的标签文章,注意：因为item.items是数组，所以要剥开一层
         if (this.$route.path !== "/index") {
-          await this.$router.push({ name: "index" });
-          clearTimeout(this.timer);
-          this.timer = setTimeout(() => {
-            this.$store.dispatch("checkCategory", ...checkArticle)
-          }, 200);
-          //this.$nextTick(() =>{this.$store.dispatch("checkCategory", ...checkArticle)})
+          this.$router.push({
+            name: "index",
+            params: { items: checkArticle[0] },
+          });
         }
         this.$store.dispatch("bulletin", tag);
         this.$store.dispatch("checkCategory", ...checkArticle);
@@ -76,6 +72,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 #Container {
+  width: 100%;
+  height: 100%;
   #subtitle {
     width: 100%;
     height: 40px;
@@ -88,8 +86,18 @@ export default {
     }
   }
   #tagContainer {
+    width: 100%;
+    height: 50%;
     #tags {
+      width: 100%;
+      max-height: calc(100% - 50px);
       padding: 5px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
       span {
         cursor: pointer;
         display: inline-block;
@@ -103,7 +111,17 @@ export default {
     }
   }
   #websiteContainer {
+    width: 100%;
+    height: 50%;
     #website {
+      width: 100%;
+      max-height: calc(100% - 50px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
       a {
         display: inline-block;
         padding: 5px;

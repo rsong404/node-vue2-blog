@@ -2,16 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../components/Main.vue'
 import ArticleList from '../views/ArticleList'
-import Article from '../views/Article'
-import Comment from '../views/Comment'
-import Message from '../views/Message'
 import MainIndex from '../views/MainIndex'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/main',
     name: 'main',
     component: Main,
     redirect: { name: 'index' },
@@ -25,22 +22,22 @@ const routes = [
       {
         name: 'article',
         path: 'article',
-        component: Article,
+        component: () => import('../views/Article'),
       },
       {
         name: 'comment',
         path: 'comment',
-        component: Comment,
+        component: () => import('../views/Comment'),
       },
       {
         name: 'message',
         path: 'message',
-        component: Message,
+        component: () => import('../views/Message'),
       },
     ],
   },
   {
-    path:'/main',
+    path:'/',
     name: "mainIndex",
     component: MainIndex
   }

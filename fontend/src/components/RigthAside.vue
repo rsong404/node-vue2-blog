@@ -8,8 +8,10 @@
         <i class="iconfont icon-a-fasongdaohang-m"></i>
       </div>
     </div>
-    <div>
-      <component :is="name"> </component>
+    <div id="content">
+      <keep-alive>
+        <component :is="name"> </component>
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -41,7 +43,8 @@ export default {
   width: 100%;
   height: 100%;
   box-shadow: var(--shadow2);
-
+  display: flex;
+  flex-direction: column;
   #tabs {
     display: flex;
     margin-bottom: 10px;
@@ -67,6 +70,9 @@ export default {
     .active {
       border-bottom: 2px rgb(245, 245, 245) solid;
     }
+  }
+  #content{
+    flex: 1;
   }
 }
 </style>

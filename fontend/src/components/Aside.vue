@@ -11,7 +11,7 @@
         <div id="navigationContainer" class="relatedColors">
           <div>
             <div id="navigation"><span>导航</span></div>
-            <router-link to="/main" id="navigationItem"
+            <router-link to="/" id="navigationItem"
               ><i class="iconfont icon-biaoji-m"></i
               ><span>主页</span></router-link
             >
@@ -111,7 +111,6 @@
           >
         </div>
       </div>
-      <!-- <div id="shady"></div> -->
     </aside>
   </div>
 </template>
@@ -120,7 +119,6 @@ export default {
   data() {
     return {
       categoryList: [],
-      timer: null,
     };
   },
   computed: {
@@ -136,21 +134,16 @@ export default {
     //选择分类
     CheckCategory(items) {
       if (this.$route.path !== "/index") {
-        this.$router.push({ name: "index" });
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
-          this.$store.dispatch("checkCategory", items);
-        }, 200);
+        this.$router.push({ name: "index", params: { items } });
       }
       // 修改状态
       this.$store.dispatch("bulletin", `分类`);
-
       this.$store.dispatch("checkCategory", items);
     },
     // 返回首页
     ReturnIndex() {
       // 更文章title状态
-      this.$store.dispatch("bulletin", "首页");
+      this.$store.dispatch("bulletin");
       this.$store.dispatch("getArticleList");
       if (this.$route.path !== "/index") this.$router.push({ name: "index" });
     },
@@ -181,15 +174,6 @@ export default {
   transform: translateX(-100%);
   transition: all 0.2s;
   overflow: hidden;
-  // #shady{
-  //   width: 100%;
-  //   height: 100%;
-  //   background-color: black;
-  //   position: absolute;
-  //   z-index: 999;
-  //   top: -100%;
-  //   left: 100%;
-  // }
 }
 aside {
   display: flex;

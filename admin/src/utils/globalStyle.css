@@ -97,6 +97,9 @@ video {
   color: white;
   font-weight: 600;
 }
+#button:hover {
+  background-color: #c6ccd4;
+}
 #button:active {
   border: #617991 solid 2px;
 }

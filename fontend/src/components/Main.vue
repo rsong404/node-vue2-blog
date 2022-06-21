@@ -68,6 +68,7 @@ export default {
     // 暂时注释掉
     // this.initAudio();
     // this.FlexMusicBox();
+
   },
   computed:{
     IsShady(){
@@ -157,7 +158,6 @@ export default {
       position: absolute;
       z-index: 888;
       top: 0;
-      // left: 100%;
     }
     #aside-left {
       width: 19%;

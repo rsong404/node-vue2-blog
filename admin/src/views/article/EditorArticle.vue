@@ -48,14 +48,12 @@
       </el-form-item>
       <el-form-item label="置顶数">
         <el-col :span="12">
-          <el-input
-            type="number"
-            placeholder="数字越小排列越前，最小为1，默认为0为无"
+          <el-input-number
             v-model="form.stick"
-            maxlength="1"
-            show-word-limit
-          >
-          </el-input>
+            :min="0"
+            :max="10"
+            label="数字越大级别越高"
+          ></el-input-number>
         </el-col>
       </el-form-item>
       <el-form-item label="文章内容">
@@ -70,7 +68,6 @@
 <script>
 import E from "wangeditor";
 import hljs from "highlight.js";
-import "highlight.js/styles/monokai-sublime.css";
 
 export default {
   inject: ["reload"],
@@ -100,7 +97,7 @@ export default {
     InitArticleData() {
       //将路由传过来的数据实现浅复制，再赋值给form
       for (const key in this.$route.params) {
-        if(this.$route.params.hasOwnProperty(key)){
+        if (this.$route.params.hasOwnProperty(key)) {
           this.form[key] = this.$route.params[key];
         }
       }
@@ -116,16 +113,26 @@ export default {
     },
     SuccessUpload(res) {
       this.imageUrl = res;
-      this.form.coverPicture = res
+      this.form.coverPicture = res;
     },
     async onSubmit() {
       if (this.if_obj_is_null(this.form) == 0) {
-        if(this.form.coverPicture === '') this.form.coverPicture = 'https://gitee.com/rs404/picgo_img/raw/master/images/wanye.jpg'
+        if (this.form.coverPicture === "")
+          this.form.coverPicture =
+            "https://gitee.com/rs404/picgo_img/raw/master/images/wanye.jpg";
         await this.$http.put(
           "/article",
           this.CompareObj(this.$route.params, this.form),
           { params: { _id: this.form._id } }
         );
+        //看有没有新添加的tag，有就向数据库添加tag
+        let tagList = [];
+        let newTagList = []
+        newTagList = this.form.tags.filter(item => !this.$route.params.tags.includes(item))
+        for (let index = 0; index < newTagList.length; index++) {
+          tagList.push({ tagName: this.form.tags[index] });
+        }
+        await this.$http.post("/tag", tagList);
         this.reload();
         this.$message.success("文章修改成功！");
         this.$router.push("/articleList");
@@ -151,7 +158,7 @@ export default {
     if_obj_is_null(obj) {
       let i = 0;
       for (const key in obj) {
-        if (obj.hasOwnProperty(key) && key !='coverPicture') {
+        if (obj.hasOwnProperty(key) && key != "coverPicture") {
           if (obj[key] === null || obj[key] === "") {
             i++;
           }
@@ -175,7 +182,6 @@ export default {
     this.GetCateData();
     this.InitArticleData();
     this.headers.Authorization = window.localStorage.token;
-
   },
   mounted() {
     this.InitEditor();
@@ -188,7 +194,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 .el-upload {
   border: 1px dashed #6b6b6b;
   border-radius: 6px;
@@ -199,7 +204,6 @@ export default {
 .avatar-uploader .el-upload:hover {
   border-color: #409eff;
   border: 2px dashed #6b6b6b;
-
 }
 .avatar-uploader-icon {
   font-size: 28px;

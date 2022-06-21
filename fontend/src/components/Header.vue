@@ -124,7 +124,7 @@ export default {
     },
     ReturnIndex() {
       // 更文章title状态
-      this.$store.dispatch("bulletin", "博客");
+      this.$store.dispatch("bulletin");
       if (this.$route.path !== "/index") {
         this.$router.push({ name: "index" });
       }

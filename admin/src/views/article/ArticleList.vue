@@ -117,25 +117,6 @@ export default {
             message: "删除成功!",
           });
           this.reload();
-          //删除文章的时候同时删除标签
-          for (let index = 0; index < item.tags.length; index++) {
-            let result = await this.$http.get("/tag", {
-              params: { tagName: item.tags[index] },
-            });
-            //如果该标签下只有一篇文章与之关联，则可以将该标签删掉
-            if (
-              JSON.stringify(result.data) !== "[]" &&
-              result.data[0].items.length <= 1
-            ) {
-              this.$http.delete("/tag", {
-                params: { tagName: item.tags[index] },
-              });
-            } else {
-              this.$http.delete("/tag", {
-                params: { tagName: item.tags[index] },
-              });
-            }
-          }
         })
         .catch(() => {
           this.$message({
@@ -177,10 +158,12 @@ export default {
       // 获取标签列表
       let articleList = await this.$http.get("/tag");
       // 过滤掉数据库中无用的标签
-
       let useLess = articleList.data.filter((item) => {
-        return !this.tagData.includes(item.tagName) ? item._id : "";
+        return !this.tagData.includes(item.tagName);
       });
+      useLess = useLess.map((item) => {
+        return item._id
+      })
       // 批量删除无用标签
       if (useLess.length >= 1) {
         await this.$http.delete("tag", {
@@ -221,10 +204,11 @@ export default {
   overflow: hidden;
 }
 @mixin tagContainer {
+  width: 240px;
+  height: 70%;
   position: fixed;
   top: 50%;
-  right: 0%;
-  // transform: translateY(-50%);
+  right: -0%;
   display: flex;
   align-items: center;
   transition: 0.7s;
@@ -251,9 +235,16 @@ export default {
   transform: translate3d(80%, -50%, 0);
 }
 #tagMain {
-  width: 140px;
+  width: 100%;
   min-height: 140px;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: #b3c0d1;
+  &::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
 }
 .label {
   display: inline-block;

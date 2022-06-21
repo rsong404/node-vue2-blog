@@ -17,11 +17,28 @@
   html {
     background-color: var(--blue1);
   }
+  h1,h2,h3,h4,h5,h6{
+    padding: 5px 0;
+  }
   body{
     font-family: 'Microsoft Yahei',Arial, Helvetica, sans-serif;
     font-size: 16px;
     color: #F5F5F5;
+  }
+  pre{
+    max-width: 100%;
+    overflow-x: auto;
+    border-radius: 5px;
+    background-color: var(--black4);
+    padding: 5px;
+    &::-webkit-scrollbar{
+      height: 5px;
+      background-color: white;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--black1);
 
+    }
   }
   :root {
     --blue1: #bde0fe;

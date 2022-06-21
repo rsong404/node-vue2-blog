@@ -12,6 +12,8 @@ export default new Vuex.Store({
     catalog: [],
     showModel: true,
     isOpenFold: false,
+    totalArticle: [],
+    motto: ''
   },
   actions: {
     // 选中的文章
@@ -53,7 +55,7 @@ export default new Vuex.Store({
 
     //tittle组件数据状态相关
     BULLETIN(state, value) {
-      state.bulletin = value
+      state.bulletin = value || state.motto
     },
     REFRESHBULLETIN(state) {
       state.bulletin = JSON.parse(sessionStorage.getItem('bulletin'))

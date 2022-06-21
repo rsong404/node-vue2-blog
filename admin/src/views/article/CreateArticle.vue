@@ -47,14 +47,12 @@
       </el-form-item>
       <el-form-item label="置顶数">
         <el-col :span="12">
-          <el-input
-            type="number"
-            placeholder="数字越小排列越前，最小为1，默认为0为无"
+          <el-input-number
             v-model="form.stick"
-            maxlength="1"
-            show-word-limit
-          >
-          </el-input>
+            :min="0"
+            :max="10"
+            label="数字越大级别越高"
+          ></el-input-number>
         </el-col>
       </el-form-item>
       <el-form-item label="文章内容">
@@ -69,7 +67,6 @@
 <script>
 import E from "wangeditor";
 import hljs from "highlight.js";
-import "highlight.js/styles/monokai-sublime.css";
 
 export default {
   inject: ["reload"],
@@ -102,18 +99,11 @@ export default {
     async OnSubmit() {
       if (this.if_obj_is_null(this.form) == 0) {
         //向数据库添加tag
+        let tagList = [];
         for (let index = 0; index < this.form.tags.length; index++) {
-          //查看数据库是否已存在该标签
-          let result = await this.$http.get("/tag", {
-            params: { tagName: this.form.tags[index] },
-          });
-          if (result.data.length == 0) {
-            let tag = {
-              tagName: this.form.tags[index],
-            };
-            await this.$http.post("/tag", tag);
-          }
+          tagList.push({ tagName: this.form.tags[index] });
         }
+        await this.$http.post("/tag", tagList);
         //添加文章
         if (this.form.coverPicture === "")
           this.form.coverPicture =
@@ -144,7 +134,7 @@ export default {
     },
     SuccessUpload(res) {
       this.imageUrl = res;
-      this.form.coverPicture = res
+      this.form.coverPicture = res;
     },
   },
   created() {
@@ -171,7 +161,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 .el-upload {
   border: 1px dashed #6b6b6b;
   border-radius: 6px;
@@ -182,7 +171,6 @@ export default {
 .avatar-uploader .el-upload:hover {
   border-color: #409eff;
   border: 2px dashed #6b6b6b;
-
 }
 .avatar-uploader-icon {
   font-size: 28px;

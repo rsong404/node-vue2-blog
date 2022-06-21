@@ -9,7 +9,7 @@
       <div id="nick"><h2>YRsong</h2></div>
       <h4 id="motto"><span ref="motto"></span><span id="cursor"></span></h4>
       <div id="navContainer">
-        <router-link to="/index"
+        <router-link to="/main"
           ><i class="iconfont icon-shouye-m"></i> Main</router-link
         >
         <a href="https://rs404.top" target="_blank"
@@ -38,6 +38,7 @@
 </template>
 <script>
 export default {
+  name:'MainIndex',
   data() {
     return {
       pictureList: [],
@@ -64,9 +65,10 @@ export default {
     async GetBloguser() {
       let result = await this.$http.get("/bloguser");
       this.userInformation = result.data[0];
+
+      this.$store.state.motto = this.userInformation.motto
     },
     TypeEffect() {
-      // window.requestAnimationFrame(this.TypeEffect)
       let CharIndex = 0;
       let flag = true;
       let speed = 250;

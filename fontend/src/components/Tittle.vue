@@ -21,7 +21,7 @@
         </div>
       </div>
       <div id="bulletin" v-if="!GetBulletinState">
-        {{ $store.state.bulletin }}
+        <span>{{ $store.state.bulletin }}</span>
       </div>
     </div>
     <div id="wave">
@@ -55,11 +55,9 @@ export default {
     width: 100%;
     height: 100%;
     position: absolute;
-    // background-color: var(--blue2);
   }
   .wave {
-    background: url(../assets/wave.svg)
-      repeat-x;
+    background: url(../assets/wave.svg) repeat-x;
     position: absolute;
     bottom: 0;
     width: 6400px;
@@ -109,18 +107,24 @@ export default {
   #titleContainer {
     width: 100%;
     height: 100%;
-    // background-color: var(--blue2);
     position: absolute;
     z-index: 888;
-    // background-image: url("../assets/title.jpg");
     background-position: center;
     background-size: 100%;
     box-shadow: 0px 0px 5px #ffffff inset;
     #bulletin {
       width: 100%;
       height: 100px;
-      text-align: center;
-      line-height: 100px;
+      position: relative;
+      span {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: pre-wrap;
+      }
     }
     #tagContainer {
       width: 100%;
@@ -132,11 +136,12 @@ export default {
       & > h3 {
         width: 100%;
         padding: 0 10px;
+        text-align: center;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      & > div{
+      & > div {
         width: 100%;
         white-space: nowrap;
         text-align: center;

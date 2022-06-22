@@ -130,7 +130,7 @@ export default {
   height: 100px;
 }
 .stick {
-  box-shadow: 0px 0px 8px #2bee66 inset !important;
+  box-shadow: 0px 0px 8px #57c19e inset !important;
 }
 #contentContainer {
   width: 100%;

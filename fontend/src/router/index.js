@@ -34,13 +34,23 @@ const routes = [
         path: 'message',
         component: () => import('../views/Message'),
       },
+      {
+        name: 'website',
+        path: 'website',
+        component: () => import('../views/Website'),
+      },
     ],
   },
   {
     path:'/',
     name: "mainIndex",
     component: MainIndex
+  },
+  {
+    path:'*',
+    component: () => import('../views/NotFound')
   }
+
 ]
 
 const router = new VueRouter({

@@ -57,7 +57,7 @@
             "
           ></i>
         </div>
-        <router-link to="/message" tag="div"
+        <router-link to="/main/message" tag="div"
           ><i class="iconfont icon-xiaoxi2-m"></i
         ></router-link>
       </div>

@@ -72,7 +72,8 @@ export default {
     }
   }
   #content{
-    flex: 1;
+    width: 100%;
+    height: calc(100% - 50px);
   }
 }
 </style>

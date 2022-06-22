@@ -1,43 +1,47 @@
 <template>
-  <div id="AsideBox" style="width: 100%; height: 100%">
+  <div class="AsideBox" style="width: 100%; height: 100%">
     <aside>
-      <div id="avatarBox" @click="ReturnIndex" class="relatedColors">
-        <div id="avatar">
+      <div class="avatarBox relatedColors" @click="ReturnIndex">
+        <div class="avatar">
           <img src="../assets/logo.jpg" alt="" />
         </div>
-        <div id="">夏日の蝉</div>
+        <div class="">夏日の蝉</div>
       </div>
-      <div id="navigationBox">
-        <div id="navigationContainer" class="relatedColors">
+      <div class="navigationBox">
+        <div class="navigationContainer relatedColors">
           <div>
-            <div id="navigation"><span>导航</span></div>
-            <router-link to="/" id="navigationItem"
+            <div class="navigation"><span>导航</span></div>
+            <router-link to="/" class="navigationItem"
               ><i class="iconfont icon-biaoji-m"></i
               ><span>主页</span></router-link
             >
-            <div @click="ReturnIndex" id="navigationItem">
+            <div @click="ReturnIndex" class="navigationItem">
               <i class="iconfont icon-shouye-m"></i><span>首页</span>
             </div>
-            <router-link to="/dd" id="navigationItem"
+            <router-link to="/main/dd" class="navigationItem"
               ><i class="iconfont icon-a-mingpianzhengjian-m"></i
               ><span>简历</span></router-link
             >
-            <a href="https://rs404.top" target="_blank" id="navigationItem"
+            <a href="https://rs404.top" target="_blank" class="navigationItem"
               ><i class="iconfont icon-zhengcewenjian-m"></i
               ><span>技术博客</span></a
             >
-            <div @click="GoComment" id="navigationItem">
+            <div @click="GoComment" class="navigationItem">
               <i class="iconfont icon-xiaoxi-m"></i><span>个人说说</span>
             </div>
+            <router-link id="website" to="/main/website" class="navigationItem"
+              ><i class="iconfont icon-faxian2-m"></i
+              ><span>常用网站</span></router-link
+            >
           </div>
-          <div id="catagoryContainer">
-            <div id="navigation"><span>分类</span></div>
-            <div id="category">
+          <div class="catagoryContainer">
+            <div class="navigation"><span>分类</span></div>
+            <div class="category">
               <div
                 @click="CheckCategory(item.items)"
                 v-for="item in categoryList"
                 :key="item._id"
-                id="categoryItem"
+                class="categoryItem"
               >
                 <span>{{ item.cateName }}</span>
 
@@ -46,9 +50,9 @@
             </div>
           </div>
         </div>
-        <div id="adminBox">
+        <div class="adminBox">
           <a href="http://localhost:8081/admin/" target="_blank"
-            ><div id="adminContainer">
+            ><div class="adminContainer">
               <i class="iconfont icon-shezhi-m"></i>
               <div>后台管理</div>
             </div></a
@@ -56,44 +60,48 @@
         </div>
       </div>
     </aside>
-    <aside id="mobileAside" :class="isOpen ? 'open' : ''">
-      <div id="avatarBox" @click="ReturnIndex" class="relatedColors">
-        <div id="avatar">
+    <aside class="mobileAside" :id="isOpen ? 'open' : ''">
+      <div class="avatarBox relatedColors" @click="ReturnIndex">
+        <div class="avatar">
           <img src="../assets/logo.jpg" alt="" />
         </div>
-        <div id="">夏日の蝉</div>
+        <div class="">夏日の蝉</div>
       </div>
-      <div id="navigationBox">
-        <div id="navigationContainer" class="relatedColors">
+      <div class="navigationBox">
+        <div class="navigationContainer relatedColors">
           <div>
-            <div id="navigation"><span>导航</span></div>
-            <router-link to="/main" id="navigationItem"
+            <div class="navigation"><span>导航</span></div>
+            <router-link to="/main" class="navigationItem"
               ><i class="iconfont icon-biaoji-m"></i
               ><span>主页</span></router-link
             >
-            <div @click="ReturnIndex" id="navigationItem">
+            <div @click="ReturnIndex" class="navigationItem">
               <i class="iconfont icon-shouye-m"></i><span>首页</span>
             </div>
-            <router-link to="/dd" id="navigationItem"
+            <router-link to="/dd" class="navigationItem"
               ><i class="iconfont icon-a-mingpianzhengjian-m"></i
               ><span>简历</span></router-link
             >
-            <a href="https://rs404.top" target="_blank" id="navigationItem"
+            <a href="https://rs404.top" target="_blank" class="navigationItem"
               ><i class="iconfont icon-zhengcewenjian-m"></i
               ><span>技术博客</span></a
             >
-            <div @click="GoComment" id="navigationItem">
+            <div @click="GoComment" class="navigationItem">
               <i class="iconfont icon-xiaoxi-m"></i><span>个人说说</span>
             </div>
+            <router-link to="/main/website" class="navigationItem"
+              ><i class="iconfont icon-faxian2-m"></i
+              ><span>常用网站</span></router-link
+            >
           </div>
-          <div id="catagoryContainer">
-            <div id="navigation"><span>分类</span></div>
-            <div id="category">
+          <div class="catagoryContainer">
+            <div class="navigation"><span>分类</span></div>
+            <div class="category">
               <div
                 @click="CheckCategory(item.items)"
                 v-for="item in categoryList"
                 :key="item._id"
-                id="categoryItem"
+                class="categoryItem"
               >
                 <span>{{ item.cateName }}</span>
 
@@ -102,9 +110,9 @@
             </div>
           </div>
         </div>
-        <div id="adminBox">
+        <div class="adminBox">
           <a href="http://localhost:8081/admin/" target="_blank"
-            ><div id="adminContainer">
+            ><div class="adminContainer">
               <i class="iconfont icon-shezhi-m"></i>
               <div>后台管理</div>
             </div></a
@@ -160,11 +168,33 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.open {
-  display: block !important;
-  transform: translateX(0) !important;
+@media screen and (max-width: 780px) {
+  .category {
+    height: calc(92vh - 480px) !important;
+  }
 }
-#mobileAside {
+@media screen and (min-width: 780px) {
+  #open {
+    display: none !important;
+    transform: translateX(-100%) !important;
+  }
+}
+@media screen and (max-width: 950px) {
+  #website {
+    display: block !important;
+  }
+  .category {
+    height: calc(92vh - 480px) !important;
+  }
+}
+#open {
+  display: block;
+  transform: translateX(0);
+}
+#website {
+  display: none;
+}
+.mobileAside {
   width: 50%;
   height: 92vh;
   position: fixed;
@@ -192,14 +222,14 @@ aside {
   & i {
     font-size: 1.2rem;
   }
-  #avatarBox {
+  .avatarBox {
     width: 100%;
     height: 100px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-bottom: 1px white solid;
-    #avatar {
+    .avatar {
       width: 60px;
       height: 60px;
       border-radius: 50%;
@@ -208,7 +238,7 @@ aside {
         border-radius: 50%;
       }
     }
-    #author {
+    .author {
       width: 80px;
       height: 30px;
       margin-right: 0;
@@ -216,18 +246,19 @@ aside {
     }
   }
 
-  #navigationBox {
+  .navigationBox {
     width: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     box-sizing: border-box;
-    #navigationContainer {
+    .navigationContainer {
       flex: 1;
       display: flex;
       flex-direction: column;
-      #navigation {
+
+      .navigation {
         text-align: left;
         width: 100%;
         height: 40px;
@@ -237,10 +268,10 @@ aside {
           margin-left: 12px;
         }
       }
-      #catagoryContainer {
+      .catagoryContainer {
         width: 100%;
         flex: 1;
-        #category {
+        .category {
           height: calc(92vh - 440px);
           overflow-y: auto;
           overflow-x: hidden;
@@ -248,7 +279,7 @@ aside {
             width: 0;
             height: 0;
           }
-          #categoryItem {
+          .categoryItem {
             display: block;
             width: 100%;
             height: 40px;
@@ -278,7 +309,7 @@ aside {
         }
       }
     }
-    #adminBox {
+    .adminBox {
       text-align: center;
       height: 60px;
       // line-height: 60px;
@@ -290,7 +321,7 @@ aside {
         height: 100%;
         display: inline-block;
         position: relative;
-        #adminContainer {
+        .adminContainer {
           width: 100%;
           position: absolute;
           top: 50%;
@@ -306,7 +337,7 @@ aside {
     }
   }
 
-  #navigationItem {
+  .navigationItem {
     display: block;
     width: 100%;
     height: 40px;
@@ -321,7 +352,7 @@ aside {
     & > i {
       float: left;
       margin-left: 20px;
-      // color: #66bfff;
+      // color: .66bfff;
     }
   }
 }

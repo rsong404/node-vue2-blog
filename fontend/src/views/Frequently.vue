@@ -9,7 +9,7 @@
       </div>
     </div>
     <div id="websiteContainer">
-      <div id="subtitle"><i class="iconfont icon-faxian2-m"> </i> 导航</div>
+      <div id="subtitle"><i class="iconfont icon-faxian2-m"> </i> 导航 <router-link to="/main/website" tag="div" class="more">更多</router-link></div>
       <div id="website">
         <a
           v-for="(item, index) in website"
@@ -83,6 +83,11 @@ export default {
     font-size: 14px;
     i {
       font-size: 13px;
+    }
+    .more{
+      cursor: pointer;
+      float: right;
+      padding: 0 5px;
     }
   }
   #tagContainer {

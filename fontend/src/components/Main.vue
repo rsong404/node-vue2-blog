@@ -20,7 +20,11 @@
         <div id="aside-right">
           <my-rigth-aside />
         </div>
-        <div id="shady" @click="IsClickShady" :class="IsShady?'isShady':''"></div>
+        <div
+          id="shady"
+          @click="IsClickShady"
+          :class="IsShady ? 'isShady' : ''"
+        ></div>
       </main>
       <!-- <div id="aplayer"></div> -->
     </div>
@@ -68,16 +72,15 @@ export default {
     // 暂时注释掉
     // this.initAudio();
     // this.FlexMusicBox();
-
   },
-  computed:{
-    IsShady(){
-      return this.$store.state.isOpenFold
-    }
+  computed: {
+    IsShady() {
+      return this.$store.state.isOpenFold;
+    },
   },
   methods: {
-    IsClickShady(){
-      this.$store.commit('ISOPENFOLD')
+    IsClickShady() {
+      this.$store.commit("ISOPENFOLD");
     },
     initAudio() {
       // 创建一个音乐播放器实例，并挂载到DOM上，同时进行相关配置
@@ -129,6 +132,12 @@ export default {
     width: 0 !important;
   }
 }
+@media screen and (min-width: 780px) {
+  #shady {
+    display: none !important;
+    transform: translateX(-100%) !important;
+  }
+}
 #container {
   width: 78vw;
   height: 100vh;
@@ -147,7 +156,7 @@ export default {
     height: 92vh;
     display: flex;
     position: relative;
-    .isShady{
+    .isShady {
       display: block !important;
     }
     #shady {

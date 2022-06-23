@@ -1,11 +1,15 @@
 <template>
   <div id="Container">
     <div ref="background" id="backgroundImg"></div>
-    <div ref="mainBox" class="glass box1">
-      <div
-        id="avatar"
-        :style="`backgroundImage:url('${userInformation.avatar}')`"
-      ></div>
+    <div ref="mainBox" class="box1">
+      <div style="position: relative; width: 120px; height: 120px">
+        <div id="avatar">努力奋斗！</div>
+        <div
+          class="avatar"
+          ref="avatar"
+          :style="`backgroundImage:url('${userInformation.avatar}')`"
+        ></div>
+      </div>
       <div id="nick"><h2>YRsong</h2></div>
       <h4 id="motto"><span ref="motto"></span><span id="cursor"></span></h4>
       <div id="navContainer">
@@ -38,20 +42,17 @@
 </template>
 <script>
 export default {
-  name:'MainIndex',
+  name: "MainIndex",
   data() {
     return {
       pictureList: [],
       userInformation: {},
       timer: null,
       mainBox: NodeList,
+      tag: true,
     };
   },
-  computed: {
-    BackgroundImg() {
-      return `backgroundImage: url('${item.imgsrc}')`;
-    },
-  },
+
   mounted() {
     this.mainBox = this.$refs.mainBox;
   },
@@ -62,11 +63,20 @@ export default {
           $event.target.style.backgroundImage;
       }
     },
+    EnterAvatar() {
+      if (this.tag) {
+        this.$refs.avatar.style.transform = "rotateY(180deg)";
+        this.tag = false;
+      } else {
+        this.$refs.avatar.style.transform = "rotateY(0deg)";
+        this.tag = true;
+      }
+    },
     async GetBloguser() {
       let result = await this.$http.get("/bloguser");
       this.userInformation = result.data[0];
 
-      this.$store.state.motto = this.userInformation.motto
+      this.$store.state.motto = this.userInformation.motto;
     },
     TypeEffect() {
       let CharIndex = 0;
@@ -96,13 +106,16 @@ export default {
   },
   async created() {
     let result = await this.$http.get("/carousel");
-    this.pictureList = result.data.filter((item,index)=>{
-      return index < 6
-    })
+    this.pictureList = result.data.filter((item, index) => {
+      return index < 6;
+    });
     this.GetBloguser();
     this.TypeEffect();
   },
-
+  mounted() {
+    let avatar = document.querySelector(".avatar");
+    avatar.addEventListener("mouseenter", this.EnterAvatar);
+  },
   beforeDestroy() {
     clearInterval(this.timer);
   },
@@ -118,10 +131,7 @@ export default {
     z-index: 999;
     top: 50% !important;
     left: 50% !important;
-    transform: translate(-50%,-50%)
-  }
-  .glass{
-    backdrop-filter: blur(0) !important;
+    transform: translate(-50%, -50%);
   }
 }
 #Container {
@@ -132,7 +142,7 @@ export default {
   #backgroundImg {
     width: 100%;
     height: 100%;
-    background-image: url("../assets/1.jpg");
+    background-image: url("../assets/earth.jpg");
     background-position: center;
     background-size: cover;
     transition: all 0.5s;
@@ -167,32 +177,45 @@ export default {
     width: 100%;
   }
 }
-.glass {
-  background-color: rgba($color: #353535, $alpha: 0.5);
-  backdrop-filter: blur(5px);
+#avatar {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: rgb(40, 51, 83);
+  text-align: center;
+  line-height: 120px;
+  font-weight: 600;
 }
 .box1 {
   position: absolute;
   z-index: 999;
-  top: 10%;
-  left: 8%;
-  // transform: translate3d(-50%,-50%,0);
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
   width: 330px;
   height: 400px;
   border-radius: 15px;
-  box-shadow: 0 0 10px 4px rgba(90, 90, 90, 0.3);
+  // box-shadow: 0 0 10px 4px rgba(90, 90, 90, 0.3);
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  #avatar {
+  .avatar {
+    position: absolute;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     background-color: skyblue;
     background-position: center;
     background-size: cover;
+    transform-origin: left;
+    transition: all 2s cubic-bezier(0.87, 0.08, 0.01, 0.98);
+    // transition-delay: 1s;
+    &:hover {
+      // transform: rotateY(180deg);
+    }
   }
   #nick {
     margin: 20px 0 30px 0;

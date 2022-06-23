@@ -1,45 +1,54 @@
 <template>
   <div id="MessageBox">
     <div id="Container">
-        <div v-if="route === '/main/article'">
-          <a :href="`#${item.id}`" :style="`paddingLeft:${item.level * 5}px`" v-for="item in GetCatalog" :key="item.id">{{item.title}}</a>
-        </div>
-        <div v-if="route !== '/main/article'">
-          dididd
-        </div>
+      <div v-show="isCatalog">
+        <a
+          :href="`#${item.id}`"
+          :style="`paddingLeft:${item.level * 5}px`"
+          v-for="item in GetCatalog"
+          :key="item.id"
+          >{{ item.title }}</a
+        >
+      </div>
+      <div id="gifcontainer" v-show="!isCatalog"></div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      route: ''
-    }
+      route: "",
+    };
   },
   created() {
-    this.route = this.$route.path
+    this.route = this.$route.path;
   },
-  computed:{
-    GetCatalog(){
-      return this.$store.state.catalog
-    }
-  }
-}
+  computed: {
+    GetCatalog() {
+      return this.$store.state.catalog;
+    },
+    ...mapState(["isCatalog"]),
+  },
+};
 </script>
 <style lang="scss" scoped>
-#MessageBox{
+#MessageBox {
   width: 100%;
   height: 100%;
-  // background-color: var(--blue3);
-  #Container{
+  #Container {
     width: 100%;
     height: 100%;
-    a{
+    a {
       display: block;
-      width:100%;
+      width: 100%;
       padding: 5px;
-      
+    }
+    #gifcontainer {
+      width: 100%;
+      height: 35%;
+      background-image: url("../assets/123.gif");
     }
   }
 }

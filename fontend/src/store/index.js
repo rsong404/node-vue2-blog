@@ -9,6 +9,7 @@ export default new Vuex.Store({
     bulletin: 'tittle',
     checkCategory: [],
     articleList: [],
+    isCatalog: false,
     catalog: [],
     showModel: true,
     isOpenFold: false,
@@ -86,7 +87,10 @@ export default new Vuex.Store({
       }
     },
 
-    // 文章目录
+    // 文章目录相关
+    ISCATALOG(state,value){
+      state.isCatalog = value
+    },
     CATALOG(state, value) {
       state.catalog = value
     },

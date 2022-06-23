@@ -39,7 +39,7 @@
             </div>
           </ul>
         </div>
-        <router-link to="/message" tag="div" id="message"
+        <router-link to="/main/message" tag="div" id="message"
           ><i class="iconfont icon-xiaoxi2-m"></i
         ></router-link>
       </div>

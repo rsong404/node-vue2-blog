@@ -82,6 +82,11 @@ export default {
   },
   mounted() {
     this.CreateCatalog();
+    this.$store.commit('ISCATALOG',true)
+  },
+  beforeDestroy() {
+        this.$store.commit('ISCATALOG',false)
+
   },
 };
 </script>

@@ -12,9 +12,9 @@
       1
     </button>
     <button v-if="startNumAndEndNum.start > 2">···</button>
+
     <!-- 中间部分 -->
-    <!-- eslint-disable-next-line vue/no-use-v-if-with-v-for -->
-    <button v-for="(page, index) in startNumAndEndNum.end" :key="index" v-if="page >= startNumAndEndNum.start" @click="$emit('getPageNo', page)" :class="{ active: pageNo == page }">
+    <button v-for="(page, index) in NecessaryPage" :key="index" @click="$emit('getPageNo', page)" :class="{ active: pageNo == page }">
       {{ page }}
     </button>
 
@@ -40,13 +40,22 @@
 
 <script>
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
   name: 'Pagination',
   props: ['pageNo', 'pageSize', 'total', 'continues'],
   computed: {
     // 计算一共有多少页,用总的页数/每页展示的数据量，因为结果可能为小数，所有这里向上取整
     totalPage() {
       return Math.ceil(this.total / this.pageSize);
+    },
+    // 技术所需几个显示分页
+    NecessaryPage(){
+      let pageList = []
+      console.log(this.startNumAndEndNum.end)
+      for (let i = 1; i <= this.startNumAndEndNum.end; i++) {
+        if(i >= this.startNumAndEndNum.start)
+          pageList.push(i)
+      }
+      return pageList
     },
     //计算出连续的页码的起始数字与结束数字[连续页码的数字:至少是3]
     startNumAndEndNum() {

@@ -113,7 +113,7 @@ export default {
           let replyData = {parentId:this.itemData._id,...this.form}
           let result = await this.$http.get('/message',{params:{_id:this.itemData._id}})
           result.data[0].reply.push(replyData)
-          await this.$http.put('/message',result.data[0],{params:{_id:result.data[0]._id}})
+          await this.$http.put('/message',result.data[0],{params:{_id:result.data[0]._id,reply:replyData}})
           this.$message.success('回复成功！')
           this.$router.push({name:'messageList'})
         }

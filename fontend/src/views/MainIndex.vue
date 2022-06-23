@@ -35,7 +35,6 @@
           v-for="item in pictureList"
           :key="item._id"
         ></li>
-        <!-- <div class="imgItem"></div> -->
       </ul>
     </div>
   </div>
@@ -170,13 +169,6 @@ export default {
     background-size: cover;
   }
 }
-#swiper {
-  width: 100%;
-  height: 100%;
-  img {
-    width: 100%;
-  }
-}
 #avatar {
   position: absolute;
   width: 120px;
@@ -196,7 +188,6 @@ export default {
   width: 330px;
   height: 400px;
   border-radius: 15px;
-  // box-shadow: 0 0 10px 4px rgba(90, 90, 90, 0.3);
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -212,10 +203,6 @@ export default {
     background-size: cover;
     transform-origin: left;
     transition: all 2s cubic-bezier(0.87, 0.08, 0.01, 0.98);
-    // transition-delay: 1s;
-    &:hover {
-      // transform: rotateY(180deg);
-    }
   }
   #nick {
     margin: 20px 0 30px 0;

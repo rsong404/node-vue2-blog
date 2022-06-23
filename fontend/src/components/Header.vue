@@ -45,7 +45,9 @@
       </div>
     </header>
     <div class="mobileHeader" id="mobileHeader">
-      <div @click="Open" :class="IsOpen ? 'active':''"><i class="iconfont icon-fenlei1"></i></div>
+      <div @click="Open" :class="IsOpen ? 'active' : ''">
+        <i class="iconfont icon-fenlei1"></i>
+      </div>
       <div @click="ReturnIndex">YRsong丶博客</div>
       <div>
         <div class="model">
@@ -81,7 +83,6 @@ export default {
     this.nodeList = document.querySelectorAll(".relatedColors");
     this.turnModel = this.$store.state.showModel;
     this.root = document.querySelector(":root");
-
     if (this.turnModel) {
       //白天
       this.root.style.setProperty("--blue1", "#bde0fe");
@@ -98,9 +99,9 @@ export default {
     IsShowBox() {
       return this.searchList.length ? "display:block;" : "display:none;";
     },
-    IsOpen(){
-      return this.$store.state.isOpenFold
-    }
+    IsOpen() {
+      return this.$store.state.isOpenFold;
+    },
   },
   methods: {
     Open() {
@@ -123,12 +124,13 @@ export default {
       this.$store.state.showModel = this.turnModel;
     },
     ReturnIndex() {
-      // 更文章title状态
+      //更新文章title状态
       this.$store.dispatch("bulletin");
       if (this.$route.path !== "/index") {
         this.$router.push({ name: "index" });
       }
     },
+    // 搜索栏失去焦点
     Blur() {
       let timer = setTimeout(() => {
         this.$refs.searchBox.style.display = "none";
@@ -148,6 +150,7 @@ export default {
         this.searchList = [];
       }
     },
+    // 搜索输入，防抖
     Search(value) {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
@@ -172,7 +175,7 @@ export default {
     display: flex;
   }
 }
-.active{
+.active {
   background-color: var(--blue1);
 }
 .mobileHeader {
@@ -187,7 +190,6 @@ export default {
   position: absolute;
   justify-content: space-between;
   align-items: center;
-
   & > div {
     text-align: center;
   }

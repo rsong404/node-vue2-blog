@@ -50,7 +50,6 @@ export default {
     // 技术所需几个显示分页
     NecessaryPage(){
       let pageList = []
-      console.log(this.startNumAndEndNum.end)
       for (let i = 1; i <= this.startNumAndEndNum.end; i++) {
         if(i >= this.startNumAndEndNum.start)
           pageList.push(i)
@@ -63,23 +62,19 @@ export default {
       //先定义两个变量存储起始数字与结束数字
       let start = 0,
         end = 0
-      //连续页码数字3【就是至少3页】，如果出现不正常的现象【就是不够3页】
-      //不正常现象【总页数没有连续页码多】
+      //连续页码数字3
       if (continues > totalPage) {
         start = 1
         end = totalPage
       } else {
-        //正常现象【连续页码3，但是你的总页数一定是大于3的】
         //起始数字
         start = pageNo - parseInt(continues / 2)
         //结束数字
         end = pageNo + parseInt(continues / 2)
-        //把出现不正常的现象【start数字出现0|负数】纠正
         if (start < 1) {
           start = 1
           end = continues
         }
-        //把出现不正常的现象[end数字大于总页码]纠正
         if (end > totalPage) {
           end = totalPage
           start = totalPage - continues + 1

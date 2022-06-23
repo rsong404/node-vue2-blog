@@ -115,7 +115,7 @@ export default {
       z-index: -1;
       border-radius: 5px;
       background-color: #04bdfb;
-      background-image: linear-gradient(315deg, #04bdfb 0%, #57BBC1 74%);
+      background-image: linear-gradient(315deg, #04bdfb 0%, #57bbc1 74%);
       box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
         7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;

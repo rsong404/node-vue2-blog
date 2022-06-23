@@ -7,7 +7,6 @@
       </div>
       <div id="heartBeatBox">
         <i class="iconfont icon-heart-rate-full" style="color: red"></i>
-
         <span>{{ blogInf.startTime }}</span>
       </div>
       <div><i class="iconfont icon-beian"></i> {{ blogInf.recordNumber }}</div>
@@ -25,7 +24,6 @@ export default {
     async GetBlogInf() {
       let result = await this.$http.get("/blog");
       this.blogInf = result.data[0];
-      //console.log(this.blogInf);
     },
   },
   mounted() {
@@ -60,7 +58,6 @@ footer {
         font-size: 18px;
       }
     }
-
     #heartBeatBox {
       height: 100%;
       width: 100px;
@@ -68,7 +65,6 @@ footer {
       justify-content: center;
       align-items: center;
       span {
-        // display: inline-block;
         margin: 0 10px;
       }
     }

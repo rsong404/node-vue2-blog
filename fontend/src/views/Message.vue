@@ -203,7 +203,6 @@ export default {
   }
   .nick {
     width: calc(100% - 100px);
-    // width: 100px !important;
   }
 }
 #messageBox {
@@ -218,7 +217,6 @@ export default {
       align-content: center;
       display: flex;
       align-items: center;
-      // background-color: cadetblue;
       #avatar {
         display: inline-block;
         margin: 5px 10px;
@@ -251,7 +249,6 @@ export default {
       width: 99%;
       height: 120px;
       resize: none;
-      // background-color: #ffffff;
       border: 0 steelblue solid;
       border-radius: 10px;
       outline: none;
@@ -362,7 +359,6 @@ export default {
         #replyItem {
           display: flex;
           flex-wrap: nowrap;
-          // box-shadow: var(--shadow2);
           margin: 10px 0;
           background-color: var(--blue2);
           margin: 5px;

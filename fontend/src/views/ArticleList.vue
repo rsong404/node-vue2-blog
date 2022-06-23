@@ -31,7 +31,9 @@
             <span
               ><i class="iconfont icon-wode-m"></i> {{ item.userName }}</span
             >
-            <span v-if="!item.stick >= 1"><i class="iconfont icon-shijian-m"></i> {{ item.time }}</span>
+            <span v-if="!item.stick >= 1"
+              ><i class="iconfont icon-shijian-m"></i> {{ item.time }}</span
+            >
           </div>
         </div>
       </div>
@@ -70,19 +72,19 @@ export default {
     async GetArticleList() {
       let result = await this.$http.get("/article");
       let stickArticle = [];
-      this.totalArticle = result.data.reverse().filter((item,index)=>{
-        if(item.stick >= 1) stickArticle.push(item)
-        return item.stick < 1
-      })
+      this.totalArticle = result.data.reverse().filter((item, index) => {
+        if (item.stick >= 1) stickArticle.push(item);
+        return item.stick < 1;
+      });
       // 置顶由大到小排序
-      stickArticle.sort((a,b) => b.stick - a.stick)
+      stickArticle.sort((a, b) => b.stick - a.stick);
 
-      this.totalArticle.unshift(...stickArticle)
-      let articleList =  this.totalArticle.filter(
+      this.totalArticle.unshift(...stickArticle);
+      let articleList = this.totalArticle.filter(
         (item, index) => index < this.pageSize
       );
 
-      //如果点击了分类或标签有数据传过来时 
+      //如果点击了分类或标签有数据传过来时
       if (JSON.stringify(this.$route.params) !== "{}") {
         this.$store.dispatch("getArticleList", this.$route.params.items);
       } else {
@@ -90,7 +92,6 @@ export default {
       }
       this.$store.state.totalArticle = this.totalArticle;
     },
-
     //选中文章
     async CheckArticle(checkArticle) {
       this.$store.dispatch("checkArticle", checkArticle);

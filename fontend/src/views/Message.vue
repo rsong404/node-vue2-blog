@@ -140,36 +140,37 @@ export default {
         this.isRefresh = true;
       });
     },
+    MessagePrompt(message, cssVariable, cssVariableValue) {
+      //提示相关
+      this.messagePrompt = message;
+      this.$refs.prompt.style.setProperty(cssVariable, cssVariableValue);
+      clearTimeout(this.messagePromptTimer);
+      this.$refs.prompt.classList.add("addPromptAnimation");
+      this.messagePromptTimer = setTimeout(() => {
+        this.$refs.prompt.classList.remove("addPromptAnimation");
+      }, 1000);
+    },
     async OnSubmit() {
       this.form.content = this.$refs.textarea.value.trim();
       // 新留言
       if (this.form.nick !== "" && this.form.content !== "") {
-        this.form.time = dayjs().format("YYYY-MM-DD-HH:mm");
+        let ePattern =/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if (this.form.email !== "" && !ePattern.test(this.form.email)) {
+          this.MessagePrompt("邮箱格式错误，请检查", "--color", "red");
+          return;
+        }
         let result = await this.$http.post("/message", this.form);
         if (result.data) {
           // 刷新评论
           this.GetMessageList();
-
-          //提示相关
-          this.messagePrompt = "评论成功";
-          this.$refs.prompt.style.setProperty("--color", "var(--blue3)");
-          clearTimeout(this.messagePromptTimer);
-          this.$refs.prompt.classList.add("addPromptAnimation");
-          this.messagePromptTimer = setTimeout(() => {
-            this.$refs.prompt.classList.remove("addPromptAnimation");
-          }, 2000);
+          //提示
+          this.MessagePrompt("评论成功", "--color", "skyblue");
           // 重置为空
           this.$refs.textarea.value = "";
           this.form.nick = "";
         }
       } else {
-        this.messagePrompt = "表格不能为空，请检查";
-        this.$refs.prompt.style.setProperty("--color", "red");
-        clearTimeout(this.messagePromptTimer);
-        this.$refs.prompt.classList.add("addPromptAnimation");
-        this.messagePromptTimer = setTimeout(() => {
-          this.$refs.prompt.classList.remove("addPromptAnimation");
-        }, 2000);
+        this.MessagePrompt("表格不能为空，请检查", "--color", "red");
       }
     },
     AddEmoji() {

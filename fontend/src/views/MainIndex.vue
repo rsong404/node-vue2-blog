@@ -117,6 +117,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timer);
+    avatar.removeEventListener("mouseenter", this.EnterAvatar);
   },
 };
 </script>

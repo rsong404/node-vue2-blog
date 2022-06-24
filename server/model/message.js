@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const dayjs = require('dayjs')
 const MessageSchema = new mongoose.Schema({
     nick: String,
     avatar: String,

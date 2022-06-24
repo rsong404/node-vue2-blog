@@ -5,7 +5,7 @@
         <a
           :href="`#${item.id}`"
           :style="`paddingLeft:${item.level * 5}px`"
-          v-for="item in GetCatalog"
+          v-for="item in catalog"
           :key="item.id"
           >{{ item.title }}</a
         >
@@ -17,19 +17,8 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      route: "",
-    };
-  },
-  created() {
-    this.route = this.$route.path;
-  },
   computed: {
-    GetCatalog() {
-      return this.$store.state.catalog;
-    },
-    ...mapState(["isCatalog"]),
+    ...mapState(["isCatalog", "catalog"]),
   },
 };
 </script>

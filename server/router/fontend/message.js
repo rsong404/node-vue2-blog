@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer')
+const dayjs = require('dayjs')
 module.exports = (app) => {
     let transporter = nodemailer.createTransport({
       host: 'smtp.qq.com',
@@ -9,6 +10,7 @@ module.exports = (app) => {
       }
     })
     app.post('/fontend/api/message',async (req,res)=>{
+      req.body.time = dayjs().format('YYYY-MM-DD-HH:mm');
       let result = await require('../../model/message').create(req.body)
         let nick = req.body.nick
         let email = req.body.email

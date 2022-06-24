@@ -58,7 +58,7 @@ export default {
           return item.items;
         });
         // 筛选选中的标签文章,注意：因为item.items是数组，所以要剥开一层
-        if (this.$route.path !== "/index") {
+        if (this.$route.name !== "index") {
           this.$router.push({
             name: "index",
             params: { items: checkArticle[0] },

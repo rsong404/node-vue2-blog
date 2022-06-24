@@ -42,15 +42,14 @@ const routes = [
     ],
   },
   {
-    path:'/',
-    name: "mainIndex",
-    component: MainIndex
+    path: '/',
+    name: 'mainIndex',
+    component: MainIndex,
   },
   {
-    path:'*',
-    component: () => import('../views/NotFound')
-  }
-
+    path: '*',
+    component: () => import('../views/NotFound'),
+  },
 ]
 
 const router = new VueRouter({

@@ -158,7 +158,7 @@ export default {
       }, 500);
     },
     CheckArticle(item) {
-      if (this.$route.path !== "/article") {
+      if (this.$route.name !== "article") {
         this.$router.push({ name: "article" });
       }
       this.$store.dispatch("checkArticle", item);

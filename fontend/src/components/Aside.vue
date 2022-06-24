@@ -18,10 +18,10 @@
             <div @click="ReturnIndex" class="navigationItem">
               <i class="iconfont icon-shouye-m"></i><span>首页</span>
             </div>
-            <router-link to="/main/dd" class="navigationItem"
-              ><i class="iconfont icon-a-mingpianzhengjian-m"></i
-              ><span>简历</span></router-link
-            >
+            <div @click="Resume" class="navigationItem">
+              <i class="iconfont icon-a-mingpianzhengjian-m"></i
+              ><span>简历</span>
+            </div>
             <a href="https://rs404.top" target="_blank" class="navigationItem"
               ><i class="iconfont icon-zhengcewenjian-m"></i
               ><span>技术博客</span></a
@@ -42,6 +42,7 @@
                 v-for="item in categoryList"
                 :key="item._id"
                 class="categoryItem"
+                item
               >
                 <span>{{ item.cateName }}</span>
 
@@ -78,9 +79,9 @@
             <div @click="ReturnIndex" class="navigationItem">
               <i class="iconfont icon-shouye-m"></i><span>首页</span>
             </div>
-            <router-link to="/dd" class="navigationItem"
+            <div @click="Resume" class="navigationItem"
               ><i class="iconfont icon-a-mingpianzhengjian-m"></i
-              ><span>简历</span></router-link
+              ><span>简历</span></div
             >
             <a href="https://rs404.top" target="_blank" class="navigationItem"
               ><i class="iconfont icon-zhengcewenjian-m"></i
@@ -139,9 +140,17 @@ export default {
       let result = await this.$http.get("/category");
       this.categoryList = result.data;
     },
+    Resume() {
+      for (const item of this.categoryList) {
+        if (item.cateName === "简历") {
+          this.$store.dispatch("checkArticle", item.items[0]);
+          if(this.$route.name !== 'article') this.$router.push({ name: "article" });
+        }
+      }
+    },
     //选择分类
     CheckCategory(items) {
-      if (this.$route.path !== "/index") {
+      if (this.$route.name !== "index") {
         this.$router.push({ name: "index", params: { items } });
       }
       // 修改状态
@@ -153,11 +162,11 @@ export default {
       // 更文章title状态
       this.$store.dispatch("bulletin");
       this.$store.dispatch("getArticleList");
-      if (this.$route.path !== "/index") this.$router.push({ name: "index" });
+      if (this.$route.name !== "index") this.$router.push({ name: "index" });
     },
     GoComment() {
       this.$store.dispatch("bulletin", "说说");
-      if (this.$route.path !== "/comment") {
+      if (this.$route.name !== "comment") {
         this.$router.push({ name: "comment" });
       }
     },

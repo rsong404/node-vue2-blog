@@ -39,7 +39,7 @@ module.exports = (app) => {
     if (req.query.reply) {
       let info = JSON.parse(req.query.reply)
       let contents = info.content
-      let replyEmail = info.email.replace('作者 回复 ', '')
+      let replyEmail = info.email
       let sendHtml = `<div>
         <div>留言者：YRsong丶博客</div>
         <div>内容：${contents}</div>

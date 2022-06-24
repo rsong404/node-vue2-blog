@@ -149,7 +149,7 @@ export default {
   mounted() {
     if(this.itemData){
       this.form.nick = `作者 回复 ${this.itemData.nick}` 
-      this.form.email = `作者 回复 ${this.itemData.email}` 
+      this.form.email = `${this.itemData.email}` 
     }
       document.addEventListener("keydown",this.KeyDown);
     },

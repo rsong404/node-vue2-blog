@@ -1,64 +1,15 @@
 export default  [
     // 歌曲列表
     {
-      name: "塞尔达传说：荒野之息主题曲", // 歌曲名字
-      artist: "任天堂", // 歌曲演唱者
+      name: "グランドエスケープ (Movie edit)-三浦透子", // 歌曲名字
+      artist: "天气之子", // 歌曲演唱者
       // 歌曲地址（这里用外链地址）
-      url: "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/saierdachuanshuo.mp3",
+      url: "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%89%E3%82%A8%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%20%28Movie%20edit%29-%E4%B8%89%E6%B5%A6%E9%80%8F%E5%AD%90.mp3",
       cover:
-        "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/saierdachuanshuo.jpg", // 歌曲头像
-      lrc: "", // 歌词
+        "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/%E5%A4%A9%E6%B0%94%E4%B9%8B%E5%AD%90.jpg", // 歌曲头像
+      lrc: "https://music.y444.cn/api/v1/search/lyric/lrc?id=1378491296&src=wyy&name=%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%89%E3%82%A8%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%20(Movie%20edit)-%E4%B8%89%E6%B5%A6%E9%80%8F%E5%AD%90", // 歌词
       theme: "rgb(127, 218, 180)", // 播放这首歌曲时的主题色
     },
-    {
-        name: "原神-雪山：皎洁的笑颜", 
-        artist: "陈致逸/HOYO-MiX", 
-        // 歌曲地址（这里用外链地址）
-        url: "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/jiaojiedexiaoyan.mp3",
-        cover:
-          "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/xueshan.jpg", // 歌曲头像
-        lrc: "", 
-        theme: "rgb(127, 218, 180)", // 播放这首歌曲时的主题色
-      },
-      {
-        name: "原神-蒙德：繁忙的午后", 
-        artist: "陈致逸/HOYO-MiX", 
-        // 歌曲地址（这里用外链地址）
-        url: "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/mengde1.mp3",
-        cover:
-          "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/mengde.jpg", // 歌曲头像
-        lrc: "", 
-        theme: "rgb(127, 218, 180)", // 播放这首歌曲时的主题色
-      },
-      {
-        name: "原神-蒙德：风所爱之城", 
-        artist: "陈致逸/HOYO-MiX", 
-        // 歌曲地址（这里用外链地址）
-        url: "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/mengde2.mp3",
-        cover:
-          "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/mengde.jpg", // 歌曲头像
-        lrc: "", 
-        theme: "rgb(127, 218, 180)", // 播放这首歌曲时的主题色
-      },
-      {
-        name: "原神-璃月：杯中明月", 
-        artist: "陈致逸/HOYO-MiX", 
-        // 歌曲地址（这里用外链地址）
-        url: "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/liyue2.mp3",
-        cover:
-          "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/liyue.jpg", // 歌曲头像
-        lrc: "", 
-        theme: "rgb(127, 218, 180)", // 播放这首歌曲时的主题色
-      },
-      {
-        name: "原神-璃月：璃月的晴空", 
-        artist: "陈致逸/HOYO-MiX", 
-        // 歌曲地址（这里用外链地址）
-        url: "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/liyue1.mp3",
-        cover:
-          "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/liyue.jpg", // 歌曲头像
-        lrc: "", 
-        theme: "rgb(222, 28, 49)", // 播放这首歌曲时的主题色
-      },
+    
       
   ]

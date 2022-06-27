@@ -1,7 +1,7 @@
 <template>
   <div id="MessageBox">
     <div id="Container">
-      <div v-show="isCatalog">
+      <div id="content" v-show="isCatalog">
         <a
           :href="`#${item.id}`"
           :style="`paddingLeft:${item.level * 5}px`"
@@ -33,6 +33,16 @@ export default {
       display: block;
       width: 100%;
       padding: 5px;
+    }
+    #content{
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      &::-webkit-scrollbar{
+        width: 0;
+        height: 0;
+      }
     }
     #gifcontainer {
       width: 100%;

@@ -7,7 +7,6 @@
         <div
           class="avatar"
           ref="avatar"
-          :style="`backgroundImage:url('${userInformation.avatar}')`"
         ></div>
       </div>
       <div id="nick"><h2>YRsong</h2></div>
@@ -74,7 +73,7 @@ export default {
     async GetBloguser() {
       let result = await this.$http.get("/bloguser");
       this.userInformation = result.data[0];
-
+      // console.log(this.userInformation.avatar)
       this.$store.state.motto = this.userInformation.motto;
     },
     TypeEffect() {
@@ -102,16 +101,19 @@ export default {
         }
       }, speed);
     },
+    async GetCarousel() {
+      let result = await this.$http.get("/carousel");
+      this.pictureList = result.data.filter((item, index) => {
+        return index < 6;
+      });
+    },
   },
-  async created() {
-    let result = await this.$http.get("/carousel");
-    this.pictureList = result.data.filter((item, index) => {
-      return index < 6;
-    });
+  created() {
     this.GetBloguser();
     this.TypeEffect();
   },
   mounted() {
+    this.GetCarousel()
     let avatar = document.querySelector(".avatar");
     avatar.addEventListener("mouseenter", this.EnterAvatar);
   },
@@ -204,7 +206,9 @@ export default {
     background-size: cover;
     transform-origin: left;
     transition: all 2s cubic-bezier(0.87, 0.08, 0.01, 0.98);
+    background-image: url("../assets/logo.jpg");
   }
+  
   #nick {
     margin: 20px 0 30px 0;
   }

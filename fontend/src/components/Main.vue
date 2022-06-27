@@ -26,7 +26,7 @@
           :class="IsShady ? 'isShady' : ''"
         ></div>
       </main>
-      <!-- <div id="aplayer"></div> -->
+      <div id="aplayer"></div>
     </div>
   </div>
 </template>
@@ -69,9 +69,8 @@ export default {
   },
 
   mounted() {
-    // 暂时注释掉
-    // this.initAudio();
-    // this.FlexMusicBox();
+    this.initAudio();
+    this.FlexMusicBox();
   },
   computed: {
     IsShady() {

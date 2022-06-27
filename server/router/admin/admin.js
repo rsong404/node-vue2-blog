@@ -62,13 +62,11 @@ module.exports = (app) => {
   router.delete('/', async (req, res) => {
     const data = await req.model.deleteOne(req.query)
     res.send(data)
-    // console.log('删除数据：'+ JSON.stringify(data))
   })
 
   //分类和tag查询另起路由
   require('./login')(app)
   require('./tag')(app)
-  // require('./category')(app)
   require('./account')(app)
   require('./upload')(app)
 

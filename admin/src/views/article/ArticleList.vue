@@ -36,7 +36,7 @@
                   <h4 id="content_title">
                     {{ item.title }}
                   </h4>
-                  <div id="content" v-html="item.contents.slice(0,150)"></div>
+                  <div id="content" v-html="item.contents.slice(0, 150)"></div>
                   <div id="main_content_foot">
                     <span
                       ><i class="el-icon-user-solid"></i> {{ item.userName }}
@@ -60,7 +60,6 @@
         </el-col>
       </el-row>
       <!-- tag抽屉 -->
-      <!-- </el-container> -->
     </el-container>
     <div
       v-show="tagData.length != 0 ? true : false"
@@ -162,8 +161,8 @@ export default {
         return !this.tagData.includes(item.tagName);
       });
       useLess = useLess.map((item) => {
-        return item._id
-      })
+        return item._id;
+      });
       // 批量删除无用标签
       if (useLess.length >= 1) {
         await this.$http.delete("tag", {
@@ -241,7 +240,7 @@ export default {
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #b3c0d1;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     width: 0;
     height: 0;
   }

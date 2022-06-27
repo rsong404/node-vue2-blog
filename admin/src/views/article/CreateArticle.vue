@@ -107,7 +107,7 @@ export default {
         //添加文章
         if (this.form.coverPicture === "")
           this.form.coverPicture =
-            "https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/aca1f6ceea637aa9bd1412639b4b4a46.jpg";
+            "https://cdn.jsdelivr.net/gh/rsong404/vuepress_img@master/images/articleCover.jpg";
         await this.$http.post("/article", this.form);
         this.$message.success("文章发表成功！");
         //跳转到文章列表页面

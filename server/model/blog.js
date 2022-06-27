@@ -7,9 +7,7 @@ const BlogSchema = new mongoose.Schema({
     bulletin: String,
     startTime: {
         type: String,
-        // set(){
-        //     return dayjs().format('YYYY-MM-DD');
-        // }
+
     },
     recordNumber: String
 

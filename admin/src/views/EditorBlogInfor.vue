@@ -60,7 +60,7 @@ export default {
         blogName: "",
         userName: "",
         defcoverPicture: "",
-        bulletin:'',
+        bulletin: "",
         startTime: "",
         recordNumber: "",
       },
@@ -106,5 +106,4 @@ export default {
   transform: translate(-30%, -50%);
   background-size: cover;
 }
-
 </style>

@@ -15,21 +15,21 @@
           <div id="avatar"><img :src="bloguser.avatar" /></div>
         </div>
         <el-descriptions direction="vertical" :column="2" border>
-          <el-descriptions-item label="姓名"
-            >{{bloguser.realName}}</el-descriptions-item
-          >
-          <el-descriptions-item label="手机号"
-            >{{bloguser.telephone}}</el-descriptions-item
-          >
-          <el-descriptions-item label="邮箱" 
-            >{{bloguser.mail}}</el-descriptions-item
-          >
+          <el-descriptions-item label="姓名">{{
+            bloguser.realName
+          }}</el-descriptions-item>
+          <el-descriptions-item label="手机号">{{
+            bloguser.telephone
+          }}</el-descriptions-item>
+          <el-descriptions-item label="邮箱">{{
+            bloguser.mail
+          }}</el-descriptions-item>
           <el-descriptions-item label="微信">
-            <el-tag>{{bloguser.wechat}}</el-tag>
+            <el-tag>{{ bloguser.wechat }}</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="勉励语"
-            >{{bloguser.motto}}</el-descriptions-item
-          >
+          <el-descriptions-item label="勉励语">{{
+            bloguser.motto
+          }}</el-descriptions-item>
         </el-descriptions>
       </div>
     </el-card>
@@ -100,7 +100,7 @@ export default {
     margin: 0 auto;
     border-radius: 50%;
   }
-  
+
   & img {
     width: 100px;
     height: 100px;

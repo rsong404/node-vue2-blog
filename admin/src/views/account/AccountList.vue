@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button id="button" type="primary" @click.prevent="AddAccount">新增账号</button>
+    <button id="button" type="primary" @click.prevent="AddAccount">
+      新增账号
+    </button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column label="ID" width="280">
         <template slot-scope="scope">
@@ -62,8 +64,12 @@ export default {
               type: "success",
               message: "删除成功",
             });
-          }else{
-              this.$message.error('密码错误,删除失败！')
+          } else {
+            if (result.data.wrongMessage) {
+              this.$message.error(result.data.wrongMessage);
+              return
+            }
+            this.$message.error("密码错误,删除失败！");
           }
         })
         .catch(() => {
@@ -80,5 +86,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-      
 </style>

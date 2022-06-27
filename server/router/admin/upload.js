@@ -21,8 +21,7 @@ module.exports = (app) => {
 
     app.post('/admin/api/upload', verifyAuthorize, upload.single('file'), async(req,res) => {
         const file = `https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/${req.file.filename}`
-        // const reuslt =await model.create({imgsrc:file})
-        // console.log(reuslt)
+        
         res.send(file)
     })
 }

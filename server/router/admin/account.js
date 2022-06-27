@@ -11,6 +11,12 @@ module.exports = app => {
     //删除账号
     app.delete('/admin/api/account', async(req,res) => {
         
+        const all = await model.find({})
+        if(all.length <= 1) {
+            res.send({result:false,wrongMessage:'只有1个管理账户，无法删除！'})
+            return
+        }
+        
         const result1 = await model.findOne({_id:req.query._id})
         
         const result2 = bcrypt.compareSync(req.query.password, result1.password);

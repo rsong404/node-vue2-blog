@@ -2,7 +2,6 @@ const verifyAuthorize = require('../../middleware/verifyAuthorize')
 module.exports = (app) => {
     app.get('/admin/api/category',verifyAuthorize,(req,res)=>{
         if(JSON.stringify(req.query) !== '{}'){
-            // res.send(await req.model.find(req.query))
             require('../../model/category').aggregate([
                 {
                   $lookup: {
@@ -17,8 +16,6 @@ module.exports = (app) => {
                 }
               
               ],function(err,docs){
-                  // console.log("查看分类")
-                // console.log(JSON.stringify(docs)) //输出查看
                 res.send(docs)
               })
         }else{
@@ -33,7 +30,6 @@ module.exports = (app) => {
                 },
                
               ],function(err,docs){
-                // console.log(JSON.stringify(docs)) //输出查看
                 res.send(docs)
               })
         }

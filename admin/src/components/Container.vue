@@ -2,12 +2,13 @@
   <el-container style="height: 705px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <el-menu
-      background-color='#b3c0d1'
-      text-color='white'
-      active-text-color='#6699CC'
-      router 
-      :default-active="this.$route.path" 
-      unique-opened>
+        background-color="#b3c0d1"
+        text-color="white"
+        active-text-color="#6699CC"
+        router
+        :default-active="this.$route.path"
+        unique-opened
+      >
         <el-menu-item index="/bloguser"
           ><i class="el-icon-s-custom"></i>博主信息</el-menu-item
         >
@@ -107,12 +108,11 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.el-menu{
+.el-menu {
   font-weight: 600;
 }
-i{
+i {
   color: white;
 }
 .el-header {

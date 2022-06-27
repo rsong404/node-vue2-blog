@@ -1,9 +1,15 @@
 <template>
-  <div id="blogInformationContainer" >
-    <el-card class="box-card" :style="{'background-image': `url(${blogInformation.defcoverPicture})`}">
+  <div id="blogInformationContainer">
+    <el-card
+      class="box-card"
+      :style="{ 'background-image': `url(${blogInformation.defcoverPicture})` }"
+    >
       <div slot="header" class="clearfix">
         <span>博客信息</span>
-        <el-button @click="OnSubmit" style="float: right; padding: 3px 0" type="text"
+        <el-button
+          @click="OnSubmit"
+          style="float: right; padding: 3px 0"
+          type="text"
           >修改</el-button
         >
       </div>
@@ -16,11 +22,14 @@
             <el-input disabled v-model="blogInformation.userName"></el-input>
           </el-form-item>
           <el-form-item label="默认图片">
-            <el-input disabled v-model="blogInformation.defcoverPicture"></el-input>
+            <el-input
+              disabled
+              v-model="blogInformation.defcoverPicture"
+            ></el-input>
           </el-form-item>
           <el-form-item label="公告" size="normal">
             <el-input
-            disabled
+              disabled
               type="textarea"
               :rows="2"
               placeholder="请输入内容"
@@ -29,10 +38,10 @@
             </el-input>
           </el-form-item>
           <el-form-item label="博客开始时间">
-            <div class="block" >
+            <div class="block">
               <span class="demonstration"></span>
               <el-date-picker
-              disabled
+                disabled
                 v-model="blogInformation.startTime"
                 placeholder="选择日期"
                 type="date"
@@ -42,9 +51,12 @@
               </el-date-picker>
             </div>
           </el-form-item>
-            <el-form-item label="备案号">
-              <el-input disabled v-model="blogInformation.recordNumber"></el-input>
-            </el-form-item>
+          <el-form-item label="备案号">
+            <el-input
+              disabled
+              v-model="blogInformation.recordNumber"
+            ></el-input>
+          </el-form-item>
         </el-form>
       </div>
     </el-card>
@@ -54,25 +66,27 @@
 export default {
   data() {
     return {
-        blogInformation:{}
+      blogInformation: {},
     };
   },
   methods: {
-      async GetBlogData(){
-          const result = await this.$http.get('/blog')
-          this.blogInformation = result.data[0]
-      },
-      async OnSubmit(){
-        this.$router.push({name:'editorBlogInfor',params:this.blogInformation})
-      }
+    async GetBlogData() {
+      const result = await this.$http.get("/blog");
+      this.blogInformation = result.data[0];
+    },
+    async OnSubmit() {
+      this.$router.push({
+        name: "editorBlogInfor",
+        params: this.blogInformation,
+      });
+    },
   },
   created() {
-      this.GetBlogData()
+    this.GetBlogData();
   },
 };
 </script>
 <style lang="scss" scoped>
-
 .text {
   font-size: 14px;
 }
@@ -98,7 +112,5 @@ export default {
   transform: translate(-30%, -50%);
   background-size: cover;
   background-position: center;
-
 }
-
 </style>

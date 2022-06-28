@@ -59,7 +59,7 @@ export default {
       bulletinStr: "jiodjfdoisjfods",
       totalArticle: [],
       page: 1,
-      pageSize: 8,
+      pageSize: 5,
       continues: 3,
     };
   },

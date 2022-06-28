@@ -15,8 +15,8 @@ require('./router/fontend/index')(app)
 require('./router/admin/admin')(app)
 
 // app.use(history()); 
-// app.use('/',express.static(__dirname + '/fontend'))
-// app.use('/admin',express.static(__dirname + '/admin'))
+app.use('/',express.static(__dirname + '/fontend'))
+app.use('/admin',express.static(__dirname + '/admin'))
 
 app.listen(3000,() => {
     console.log("服务启动成功，请访问：http://localhost:3000")

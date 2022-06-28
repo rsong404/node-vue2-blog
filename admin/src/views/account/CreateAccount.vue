@@ -10,14 +10,14 @@
           <el-form-item label="用户名">
             <el-input
               v-model="form.userName"
-              placeholder="不能少于6位"
-              minlength="6"
+              placeholder="不能少于5位"
+              minlength="5"
             ></el-input>
           </el-form-item>
           <el-form-item label="密码">
             <el-input
               v-model="form.password"
-              placeholder="不能少于6位"
+              placeholder="不能少于5位"
             ></el-input>
           </el-form-item>
           <el-form-item label="确认密码">
@@ -58,7 +58,7 @@ export default {
         this.$message.error("表格不能为空，请检查！");
         return;
       }
-      if (this.form.userName.length < 6 || this.form.password.length < 6) {
+      if (this.form.userName.length < 5 || this.form.password.length < 5) {
         this.$message.error("账号或密码不能小于6位，请检查！");
         return;
       }

@@ -59,15 +59,19 @@ export default {
         return;
       }
       if (this.form.userName.length < 5 || this.form.password.length < 5) {
-        this.$message.error("账号或密码不能小于6位，请检查！");
+        this.$message.error("账号或密码不能小于5位，请检查！");
         return;
       }
       if (this.form.password !== this.verifyPassword) {
         this.$message.error("密码不一致，请检查！");
         return;
       }
-      await this.$http.post("/account", this.form);
-      this.$message.success("创建成功");
+      let result = await this.$http.post("/account", this.form);
+      if(!result.data.result) {
+        this.$message.error(result.data.wrongMessage);
+      }else{
+        this.$message.success('创建成功！');
+      }
       this.$router.push({ name: "accountList" });
     },
   },

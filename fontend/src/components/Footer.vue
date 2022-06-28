@@ -9,7 +9,7 @@
         <i class="iconfont icon-heart-rate-full" style="color: red"></i>
         <span>{{ blogInf.startTime }}</span>
       </div>
-      <div><i class="iconfont icon-beian"></i> {{ blogInf.recordNumber }}</div>
+      <a href="https://beian.miit.gov.cn/" target='_blank'><i class="iconfont icon-beian"></i> {{ blogInf.recordNumber }}</a>
     </div>
   </footer>
 </template>

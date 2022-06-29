@@ -72,10 +72,10 @@
     &:hover{
       border-color: var(--blue3);
     }
-    &:active {
-      background-color: var(--blue3);
-      border: none;
-    }
+    // &:active {
+    //   background-color: var(--blue3);
+    //   border: none;
+    // }
   }
   // 一下为音乐播放器相关样式的修改
   .aplayer-list{

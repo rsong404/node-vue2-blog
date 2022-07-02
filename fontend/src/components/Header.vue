@@ -16,7 +16,7 @@
           <div id="searchIconUp"></div>
           <input
             type="text"
-            v-model="searchValue"
+            v-model.trim="searchValue"
             @input="Search(searchValue)"
             placeholder="请输入搜索"
             @focus="Focus"

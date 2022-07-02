@@ -108,6 +108,7 @@ export default {
       });
     },
   },
+  
   created() {
     this.GetBloguser();
     this.TypeEffect();

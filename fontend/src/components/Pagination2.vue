@@ -10,7 +10,7 @@
       <button
         class="page"
         :id="clickNum === item ? 'active' : ''"
-        v-for="item in 5"
+        v-for="item in Page"
         :key="item"
       >
         {{ item }}
@@ -34,40 +34,29 @@ export default {
       clickNum: 1,
       currenPage: 0,
       totalPages: 0,
-      //   TotalPage: 0,
+      TotalPage: 0,
     };
   },
   computed: {
     //   计算分页数
-    TotalPage() {
-    //   let Pages = Math.ceil(this.totalNumber / this.pageSize);
-    //   let list = []
-    //   if (this.continuePage < Pages) {
-    //     for (let i = this.clickNum; i < this.clickNum + this.continuePage; i++) {
-    //         list.push(i)
-            
-    //     }
-    //         // console.log(list);
-    //   }
-      //   this.TotalPage = Pages
-      //   let List = [];
-      //   console.log(this.totalNumber)
-      //   if (this.continuePage < Pages) {
-      //       console.log(this.clickNum)
-      //     for (
-      //       let i = this.clickNum;
-      //       i < this.clickNum + this.continuePage;
-      //       i++
-      //     ) {
-      //         console.log(this.clickNum)
-      //       List.push(i);
-      //     }
-      //     console.log(List);
-      //     return List;
-      //   }
-      //   return List;
-      //   return List.length ? List : TotalPages;
-    //   return [2,4,5];
+    Page() {
+      let { TotalPage, continuePage, pageSize } = this;
+      TotalPage = Math.ceil(this.totalNumber / pageSize);
+      let list = [];
+      console.log(typeof continuePage);
+      let pageBoundary = Math.ceil(continuePage / 2);
+      console.log(pageBoundary);
+      if (continuePage < TotalPage) {
+        for (
+          let i = this.clickNum;
+          i < this.clickNum + continuePage;
+          i++
+        ) {
+          list.push(i);
+        }
+        console.log(list);
+      }
+      return list.length ? list : TotalPage;
     },
   },
   methods: {
@@ -85,11 +74,11 @@ export default {
     // 点击上下一页
     JumpPage(num) {
       this.clickNum += num;
-      if (this.clickNum > this.TotalPage) {
+      if (this.clickNum > TotalPage) {
         this.clickNum = 1;
       }
       if (this.clickNum < 1) {
-        this.clickNum = this.TotalPage;
+        this.clickNum = TotalPage;
       }
       this.$emit("ClickPage", this.clickNum);
     },
@@ -106,7 +95,7 @@ export default {
   },
   mounted() {
     let pageList = document.querySelector("#pageList");
-    console.log(pageList);
+    // console.log(pageList);
     if (pageList) pageList.addEventListener("mouseover", this.HoverButton);
   },
 };

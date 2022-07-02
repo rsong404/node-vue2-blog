@@ -67,7 +67,6 @@ export default {
       },
     };
   },
-
   mounted() {
     this.initAudio();
     this.FlexMusicBox();

@@ -20,7 +20,7 @@
           >
         </div>
       </div>
-      <div id="bulletin" v-if="!GetBulletinState">
+      <div id="bulletin" v-show="!GetBulletinState">
         <span>{{ $store.state.bulletin }}</span>
       </div>
     </div>
@@ -38,9 +38,7 @@ export default {
   computed: {
     GetBulletinState() {
       let state = this.$store.state.bulletin;
-      return Object.prototype.toString.call(state) === "[object Object]"
-        ? true
-        : false;
+      return typeof state === 'string' ? false : true
     },
     ...mapState(["bulletin"]),
   },

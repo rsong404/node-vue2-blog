@@ -17,6 +17,7 @@ export default {
       catalog: [],
     };
   },
+  
   computed: {
     GetArticleItem() {
       return this.$store.state.checkArticle;

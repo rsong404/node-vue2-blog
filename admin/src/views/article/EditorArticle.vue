@@ -42,7 +42,7 @@
         <el-col :span="12">
           <el-upload
             class="avatar-uploader"
-            action="http://localhost:3000/admin/api/upload"
+            action="https://kkan.top/admin/api/upload"
             list-type="picture"
             :headers="headers"
             :on-success="SuccessUpload"
@@ -123,9 +123,6 @@ export default {
     },
     async onSubmit() {
       if (this.if_obj_is_null(this.form) == 0) {
-        if (this.form.coverPicture === "")
-          this.form.coverPicture =
-            "https://gitee.com/rs404/picgo_img/raw/master/images/wanye.jpg";
         await this.$http.put(
           "/article",
           this.CompareObj(this.$route.params, this.form),

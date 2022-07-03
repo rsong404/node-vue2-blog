@@ -267,6 +267,8 @@ export default {
   #picture {
     position: relative;
     background-image: url("../../assets/wanye.jpg");
+    background-position: center;
+    background-size: cover;
     width: 40%;
     height: 100%;
     overflow: hidden;

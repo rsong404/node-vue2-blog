@@ -18,7 +18,7 @@
           <div id="articleContainer">
             <div id="article" v-for="item in articleData" :key="item._id">
               <div id="picture">
-                <img :src="item.coverPicture?item.coverPicture:'./img/wanye.jpg'" alt="" />
+                <img :src="item.coverPicture?item.coverPicture:''" alt="" />
               </div>
               <div id="main">
                 <div id="deleteButton">
@@ -270,6 +270,7 @@ export default {
     height: 100%;
     overflow: hidden;
     border-radius: 8px 0 0 8px;
+
     img {
       height: 100%;
       position: absolute;

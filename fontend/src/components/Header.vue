@@ -125,8 +125,6 @@ export default {
       this.$store.state.showModel = this.turnModel;
     },
     ReturnIndex() {
-      //更新文章title状态
-      this.$store.dispatch("bulletin");
       $eventBus.$emit('IndexPage')
       if (this.$route.name !== "index") this.$router.push({ name: "index" });
     },

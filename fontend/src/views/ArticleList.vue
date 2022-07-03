@@ -112,6 +112,7 @@ export default {
   },
   created() {
     this.GetArticleList();
+    this.$store.dispatch('bulletin')
     $eventBus.$on('IndexPage',this.getPageNo)
   },
 };

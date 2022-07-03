@@ -8,6 +8,7 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -19,9 +20,7 @@ export default {
   },
   
   computed: {
-    GetArticleItem() {
-      return this.$store.state.checkArticle;
-    },
+    ...mapState({GetArticleItem:'checkArticle'})
   },
   methods: {
     CreateCatalog() {
@@ -82,6 +81,7 @@ export default {
    this.CreateCatalog()
   },
   mounted() {
+    this.$store.dispatch('bulletin',this.GetArticleItem) //更新标题状态
     this.CreateCatalog();
     this.$store.commit('ISCATALOG',true)
   },

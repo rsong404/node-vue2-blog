@@ -87,7 +87,6 @@
 </template>
 <script>
 import emoji from "../utils/emoji";
-import dayjs from "dayjs";
 export default {
   data() {
     return {
@@ -189,7 +188,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('bulletin','有问题可以留言。')
+    this.$store.dispatch('bulletin','有问题欢迎留言。')
     document.addEventListener("keydown", this.KeyDown);
     this.GetMessageList();
   },

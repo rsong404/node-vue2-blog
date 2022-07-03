@@ -34,6 +34,7 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch('bulletin','闲言碎语') //更新标题状态
     this.GetCommentList();
   },
 };

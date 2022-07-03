@@ -21,7 +21,7 @@ export default new Vuex.Store({
     // 选中的文章
     checkArticle(context, value) {
       context.commit('CHECKARTICLE', value)
-      context.dispatch('bulletin', value)
+      // context.dispatch('bulletin', value)
     },
 
     // tittle组件相关

@@ -79,10 +79,10 @@
             <div @click="ReturnIndex" class="navigationItem">
               <i class="iconfont icon-shouye-m"></i><span>首页</span>
             </div>
-            <div @click="Resume" class="navigationItem"
-              ><i class="iconfont icon-a-mingpianzhengjian-m"></i
-              ><span>简历</span></div
-            >
+            <div @click="Resume" class="navigationItem">
+              <i class="iconfont icon-a-mingpianzhengjian-m"></i
+              ><span>简历</span>
+            </div>
             <a href="https://rs404.top" target="_blank" class="navigationItem"
               ><i class="iconfont icon-zhengcewenjian-m"></i
               ><span>技术博客</span></a
@@ -124,7 +124,7 @@
   </div>
 </template>
 <script>
-import $eventBus from '../utils/eventBus'
+import $eventBus from "../utils/eventBus";
 export default {
   data() {
     return {
@@ -145,7 +145,8 @@ export default {
       for (const item of this.categoryList) {
         if (item.cateName === "简历") {
           this.$store.dispatch("checkArticle", item.items[0]);
-          if(this.$route.name !== 'article') this.$router.push({ name: "article" });
+          if (this.$route.name !== "article")
+            this.$router.push({ name: "article" });
         }
       }
     },
@@ -154,19 +155,17 @@ export default {
       if (this.$route.name !== "index") {
         this.$router.push({ name: "index", params: { items } });
       }
-      // 修改状态
-      this.$store.dispatch("bulletin", `分类`);
+      
       this.$store.dispatch("checkCategory", items);
     },
     // 返回首页
     ReturnIndex() {
       // 更文章title状态
-      this.$store.dispatch("bulletin");
-      $eventBus.$emit('IndexPage') //返回首页
+
+      $eventBus.$emit("IndexPage"); //返回首页
       if (this.$route.name !== "index") this.$router.push({ name: "index" });
     },
     GoComment() {
-      this.$store.dispatch("bulletin", "说说");
       if (this.$route.name !== "comment") {
         this.$router.push({ name: "comment" });
       }
@@ -176,7 +175,7 @@ export default {
     this.GetCategory();
   },
   beforeDestroy() {
-    $eventBus.$off('IndexPage')
+    $eventBus.$off("IndexPage");
   },
 };
 </script>

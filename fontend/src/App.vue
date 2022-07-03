@@ -9,6 +9,7 @@
 export default {
   beforeCreate() {
     this.$store.commit("REFRESH");
+    
   },
   created() {
     window.addEventListener("beforeunload", () => {

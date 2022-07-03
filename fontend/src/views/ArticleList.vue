@@ -51,6 +51,7 @@
 <script>
 import Pagination from "../components/Pagination.vue";
 import { mapState } from "vuex";
+import $eventBus from '../utils/eventBus'
 export default {
   components: {
     Pagination,
@@ -87,7 +88,7 @@ export default {
       if (JSON.stringify(this.$route.params) !== "{}") {
         this.$store.dispatch("getArticleList", this.$route.params.items);
       } else {
-        this.$store.dispatch("getArticleList", {index:true,articleList}); //index,在vuex里缓存首页的数据
+        this.$store.dispatch("getArticleList", articleList); 
       }
       this.$store.state.totalArticle = this.totalArticle;
     },
@@ -97,7 +98,7 @@ export default {
       this.$router.push({ name: "article" });
     },
     //点击分页
-    getPageNo(page) {
+    getPageNo(page = 1) {
       this.page = page;
       let pageArticleList;
       let start = (page - 1) * this.pageSize - 1;
@@ -111,6 +112,7 @@ export default {
   },
   created() {
     this.GetArticleList();
+    $eventBus.$on('IndexPage',this.getPageNo)
   },
 };
 </script>

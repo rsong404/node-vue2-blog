@@ -67,6 +67,7 @@
   </div>
 </template>
 <script>
+import $eventBus from '../utils/eventBus'
 export default {
   data() {
     return {
@@ -126,6 +127,7 @@ export default {
     ReturnIndex() {
       //更新文章title状态
       this.$store.dispatch("bulletin");
+      $eventBus.$emit('IndexPage')
       if (this.$route.name !== "index") this.$router.push({ name: "index" });
     },
     // 搜索栏失去焦点
@@ -161,6 +163,9 @@ export default {
       }
       this.$store.dispatch("checkArticle", item);
     },
+  },
+  created() {
+    $eventBus.$off('IndexPage')
   },
 };
 </script>

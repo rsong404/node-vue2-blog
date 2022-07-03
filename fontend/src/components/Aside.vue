@@ -124,6 +124,7 @@
   </div>
 </template>
 <script>
+import $eventBus from '../utils/eventBus'
 export default {
   data() {
     return {
@@ -161,7 +162,7 @@ export default {
     ReturnIndex() {
       // 更文章title状态
       this.$store.dispatch("bulletin");
-      this.$store.dispatch("getArticleList");
+      $eventBus.$emit('IndexPage') //返回首页
       if (this.$route.name !== "index") this.$router.push({ name: "index" });
     },
     GoComment() {
@@ -173,6 +174,9 @@ export default {
   },
   created() {
     this.GetCategory();
+  },
+  beforeDestroy() {
+    $eventBus.$off('IndexPage')
   },
 };
 </script>

@@ -87,7 +87,7 @@ export default {
       if (JSON.stringify(this.$route.params) !== "{}") {
         this.$store.dispatch("getArticleList", this.$route.params.items);
       } else {
-        this.$store.dispatch("getArticleList", articleList);
+        this.$store.dispatch("getArticleList", {index:true,articleList}); //index,在vuex里缓存首页的数据
       }
       this.$store.state.totalArticle = this.totalArticle;
     },

@@ -14,7 +14,8 @@ export default new Vuex.Store({
     showModel: true,
     isOpenFold: false,
     totalArticle: [],
-    motto: ''
+    motto: '',
+    indexArticleList: []
   },
   actions: {
     // 选中的文章
@@ -34,9 +35,10 @@ export default new Vuex.Store({
     },
 
     //获取文章列表
-    async getArticleList(context, value) {
-      let result = await Vue.prototype.$http.get('/article')
-      context.commit('GETARTICLELIST', value || result.data.reverse())
+    getArticleList(context, value) {
+      // let result = await Vue.prototype.$http.get('/article')
+      if(!Array.isArray(value)) context.state.indexArticleList = value.articleList
+      context.commit('GETARTICLELIST', value || context.state.indexArticleList)
     },
   },
   mutations: {

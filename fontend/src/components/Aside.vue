@@ -72,7 +72,7 @@
         <div class="navigationContainer relatedColors">
           <div>
             <div class="navigation"><span>导航</span></div>
-            <router-link to="/main" class="navigationItem"
+            <router-link to="/" class="navigationItem"
               ><i class="iconfont icon-biaoji-m"></i
               ><span>主页</span></router-link
             >

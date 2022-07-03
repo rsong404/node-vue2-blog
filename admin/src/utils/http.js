@@ -1,8 +1,9 @@
 import axios from 'axios'
 import Vue from 'vue'
 import router from '../router/index'
+import baseUrl from './baseUrlConfig'
 const http = axios.create({
-  baseURL: 'http://localhost:3000/admin/api/',
+  baseURL: baseUrl.baseurl,
 })
 
 //请求拦截器

@@ -45,22 +45,15 @@
       @getPageNo="getPageNo"
       v-if="totalArticle.length > pageSize"
     ></Pagination>
-    <pagination2
-    :pageSize="4"
-    :totalNumber="20"
-    :continuePage='3'
-    @ClickPage ='ClickPage'
-    ></pagination2>
+    
   </div>
 </template>
 <script>
 import Pagination from "../components/Pagination.vue";
-import Pagination2 from "../components/Pagination2.vue";
 import { mapState } from "vuex";
 export default {
   components: {
     Pagination,
-    Pagination2,
   },
   data() {
     return {
@@ -115,10 +108,7 @@ export default {
       });
       this.$store.dispatch("getArticleList", pageArticleList);
     },
-    // 自我分页组件
-    ClickPage(num){
-      console.log(num)
-    }
+   
   },
   created() {
     this.GetArticleList();

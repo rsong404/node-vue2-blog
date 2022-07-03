@@ -112,7 +112,7 @@
           </div>
         </div>
         <div class="adminBox">
-          <a href="http://localhost:3000/admin/" target="_blank"
+          <a href="https://kkan.top:6666/admin/" target="_blank"
             ><div class="adminContainer">
               <i class="iconfont icon-shezhi-m"></i>
               <div>后台管理</div>

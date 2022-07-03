@@ -17,8 +17,8 @@
         <el-col>
           <div id="articleContainer">
             <div id="article" v-for="item in articleData" :key="item._id">
-              <div id="picture">
-                <img :src="item.coverPicture?item.coverPicture:''" alt="" />
+              <div id="picture" :style="item.coverPicture?`backgroundImage:url(${item.coverPicture })`:''">
+                <!-- <img :src="item.coverPicture?item.coverPicture:''" alt="" /> -->
               </div>
               <div id="main">
                 <div id="deleteButton">
@@ -266,6 +266,7 @@ export default {
   display: flex;
   #picture {
     position: relative;
+    background-image: url("../../assets/wanye.jpg");
     width: 40%;
     height: 100%;
     overflow: hidden;

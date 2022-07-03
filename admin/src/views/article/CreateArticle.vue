@@ -45,6 +45,12 @@
           </el-upload>
         </el-col>
       </el-form-item>
+      <el-form-item label="图片地址">
+        <el-col :span="12">
+          <el-input placeholder="请输入图片地址" v-model="form.coverPicture">
+          </el-input>
+        </el-col>
+      </el-form-item>
       <el-form-item label="置顶数">
         <el-col :span="12">
           <el-input-number

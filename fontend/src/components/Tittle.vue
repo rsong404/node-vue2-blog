@@ -21,7 +21,7 @@
         </div>
       </div>
       <div id="bulletin" v-show="!GetBulletinState">
-        <span>{{ $store.state.bulletin }}</span>
+        <span>{{ bulletin }}</span>
       </div>
     </div>
     <div id="wave">

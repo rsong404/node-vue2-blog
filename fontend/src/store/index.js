@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     checkArticle: null,
-    bulletin: 'tittle',
+    bulletin: '时间把你往前送，到了该努力的年龄，该是你背负的时候了，努力吧！',
     checkCategory: [],
     articleList: [],
     isCatalog: false,

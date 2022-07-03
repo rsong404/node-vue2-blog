@@ -35,7 +35,7 @@
         <el-col :span="12">
           <el-upload
             class="avatar-uploader"
-            action="http://localhost:3000/admin/api/upload"
+            action="https://kkan.top/admin/api/upload"
             list-type="picture"
             :headers="headers"
             :on-success="SuccessUpload"
@@ -105,9 +105,6 @@ export default {
         }
         await this.$http.post("/tag", tagList);
         //添加文章
-        if (this.form.coverPicture === "")
-          this.form.coverPicture =
-            "https://cdn.jsdelivr.net/gh/rsong404/vuepress_img@master/images/articleCover.jpg";
         await this.$http.post("/article", this.form);
         this.$message.success("文章发表成功！");
         //跳转到文章列表页面

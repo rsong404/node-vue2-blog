@@ -18,7 +18,7 @@
           <div id="articleContainer">
             <div id="article" v-for="item in articleData" :key="item._id">
               <div id="picture">
-                <img :src="item.coverPicture" alt="" />
+                <img :src="item.coverPicture?item.coverPicture:'../../assets/wanye.jpg'" alt="" />
               </div>
               <div id="main">
                 <div id="deleteButton">

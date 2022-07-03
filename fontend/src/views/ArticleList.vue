@@ -11,7 +11,7 @@
       >
         <div>
           <div id="coverPicture"
-            :style="`backgroundImage:url(${item.coverPicture});`">
+            :style="`backgroundImage:url(${item.coverPicture ? item.coverPicture : '../assets/wanye.jpg'});`">
             <div id="articleTitle">
               <h2>{{ item.title }}</h2>
             </div>
@@ -57,7 +57,6 @@ export default {
   },
   data() {
     return {
-      bulletinStr: "jiodjfdoisjfods",
       totalArticle: [],
       page: 1,
       pageSize: 4,

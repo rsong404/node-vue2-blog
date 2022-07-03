@@ -126,9 +126,7 @@ export default {
     ReturnIndex() {
       //更新文章title状态
       this.$store.dispatch("bulletin");
-      if (this.$route.path !== "/index") {
-        this.$router.push({ name: "index" });
-      }
+      if (this.$route.name !== "index") this.$router.push({ name: "index" });
     },
     // 搜索栏失去焦点
     Blur() {

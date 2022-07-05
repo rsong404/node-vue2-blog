@@ -38,12 +38,11 @@ export default {
       });
 
       articleTittleList.forEach((item, index) => {
-        let nodeText = item.innerHTML;
+        let nodeText = item.innerHTML.replace(/&nbsp;/ig,"").replace(/<\/?b>/ig,'')
         let level = parseInt(item.tagName.replace("H", ""));
         let id = `catalog_${index}`;
         let key = item.tagName.toLocaleLowerCase();
         item.setAttribute("id", id);
-
         this.catalog.push({ title: nodeText, id, level, key });
       });
       this.$store.commit("CATALOG", this.catalog);
@@ -125,4 +124,3 @@ export default {
     }
   }
 }
-</style>

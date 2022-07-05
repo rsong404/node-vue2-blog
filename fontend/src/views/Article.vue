@@ -38,7 +38,8 @@ export default {
       });
 
       articleTittleList.forEach((item, index) => {
-        let nodeText = item.innerHTML.replace(/&nbsp;/ig,"").replace(/<\/?b>/ig,'')
+        let nodeText = item.innerHTML.replace(/&nbsp;/ig,"").replace(/<\/?b>/g,'')
+        console.log(nodeText)
         let level = parseInt(item.tagName.replace("H", ""));
         let id = `catalog_${index}`;
         let key = item.tagName.toLocaleLowerCase();
@@ -124,3 +125,4 @@ export default {
     }
   }
 }
+</style>

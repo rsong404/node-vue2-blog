@@ -24,21 +24,10 @@ export default {
   },
   methods: {
     CreateCatalog() {
-      //获取整个HTML中的标题
-      let allTittle = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
-      //获取 #articleContent 文章里的标题
       this.articleElement = document.querySelector("#articleContent");
-      this.titleList.forEach((item) => {
-        let title = this.articleElement.getElementsByTagName(item);
-        this.articleTittleList.push(...title);
-      });
-      //过滤出文章的标题，使文章标题顺序正确
-      let articleTittleList = Array.from(allTittle).filter((item) => {
-        return Array.from(this.articleTittleList).includes(item);
-      });
-
+      let articleTittleList = this.articleElement.querySelectorAll("h1,h2,h3,h4,h5,h6")
       articleTittleList.forEach((item, index) => {
-        let nodeText = item.innerHTML.replace(/&nbsp;/ig,"").replace(/<\/?b>/g,'')
+        let nodeText = item.innerHTML.replace(/&nbsp;/ig,"").replace(/<\/?[\s\S]>/g,'')
         console.log(nodeText)
         let level = parseInt(item.tagName.replace("H", ""));
         let id = `catalog_${index}`;

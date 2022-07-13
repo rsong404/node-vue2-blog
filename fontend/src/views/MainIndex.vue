@@ -4,10 +4,7 @@
     <div ref="mainBox" class="box1">
       <div style="position: relative; width: 120px; height: 120px">
         <div id="avatar">努力奋斗！</div>
-        <div
-          class="avatar"
-          ref="avatar"
-        ></div>
+        <div class="avatar" ref="avatar"></div>
       </div>
       <div id="nick"><h2>YRsong</h2></div>
       <h4 id="motto"><span ref="motto"></span><span id="cursor"></span></h4>
@@ -75,6 +72,7 @@ export default {
       this.userInformation = result.data[0];
       // console.log(this.userInformation.avatar)
       this.$store.state.motto = this.userInformation.motto;
+      this.TypeEffect();
     },
     TypeEffect() {
       let CharIndex = 0;
@@ -108,13 +106,12 @@ export default {
       });
     },
   },
-  
+
   created() {
     this.GetBloguser();
-    this.TypeEffect();
   },
   mounted() {
-    this.GetCarousel()
+    this.GetCarousel();
     let avatar = document.querySelector(".avatar");
     avatar.addEventListener("mouseenter", this.EnterAvatar);
   },
@@ -209,7 +206,7 @@ export default {
     transition: all 2s cubic-bezier(0.87, 0.08, 0.01, 0.98);
     background-image: url("../assets/logo.jpg");
   }
-  
+
   #nick {
     margin: 20px 0 30px 0;
   }

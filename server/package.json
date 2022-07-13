@@ -4,7 +4,7 @@
   "description": "个人博客node服务",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon main.js"
   },
   "author": "rs404",
   "license": "ISC",

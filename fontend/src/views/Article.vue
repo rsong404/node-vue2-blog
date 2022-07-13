@@ -28,7 +28,6 @@ export default {
       let articleTittleList = this.articleElement.querySelectorAll("h1,h2,h3,h4,h5,h6")
       articleTittleList.forEach((item, index) => {
         let nodeText = item.innerHTML.replace(/&nbsp;/ig,"").replace(/<[^>]+>/g,'')
-        console.log(nodeText)
         let level = parseInt(item.tagName.replace("H", ""));
         let id = `catalog_${index}`;
         let key = item.tagName.toLocaleLowerCase();

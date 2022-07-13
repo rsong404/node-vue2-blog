@@ -21,8 +21,6 @@ export default new Vuex.Store({
     // 选中的文章
     checkArticle(context, value) {
       context.commit('CHECKARTICLE', value)
-      console.log('context',context)
-      // context.dispatch('bulletin', value)
     },
 
     // tittle组件相关
@@ -50,8 +48,6 @@ export default new Vuex.Store({
     //选中的文章相关
     CHECKARTICLE(state, value) {
       state.checkArticle = value
-      console.log('state',state)
-
     },
     //刷新tittle组件时，向sessionStorage中获取数据重新赋值给state，时数据持久化，保持状态
     REFRESHARTICLE(state) {

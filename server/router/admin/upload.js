@@ -2,13 +2,14 @@ const verifyAuthorize = require('../../middleware/verifyAuthorize')
 const model = require('../../model/carousel')
 const multer = require('multer')
 const MAO = require('multer-aliyun-oss');
+// 上传到阿里云存储上的相关操作
 const upload = multer({
     storage: MAO({
         config: {
             region: 'oss-cn-shenzhen',
-            accessKeyId: 'LTAI5t6RGrh1Fd7tEkW7Ykok',
-            accessKeySecret: 'kBwrUeKRMEM87vwJjMZo2uGW4z7yVB',
-            bucket: 'myblog-public-image',
+            accessKeyId: 'xxxx',
+            accessKeySecret: 'xxxx',
+            bucket: 'xxxx',
         },
         
     })

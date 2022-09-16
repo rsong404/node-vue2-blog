@@ -52,7 +52,7 @@
           </div>
         </div>
         <div class="adminBox">
-          <a href="https://kkan.top/admin/" target="_blank"
+          <a href="https://localhost:3000/admin/" target="_blank"
             ><div class="adminContainer">
               <i class="iconfont icon-shezhi-m"></i>
               <div>后台管理</div>
@@ -83,7 +83,7 @@
               <i class="iconfont icon-a-mingpianzhengjian-m"></i
               ><span>简历</span>
             </div>
-            <a href="https://rs404.top" target="_blank" class="navigationItem"
+            <a href="https://localhost:3000" target="_blank" class="navigationItem"
               ><i class="iconfont icon-zhengcewenjian-m"></i
               ><span>技术博客</span></a
             >

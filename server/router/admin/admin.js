@@ -9,12 +9,12 @@ module.exports = (app) => {
 
   //回复留言相关
   let transporter = nodemailer.createTransport({
-    host: 'smtp.163.com',
+    host: 'smtp.qq.com',
     secure: true,
     auth: {
-      user: 'rsong404@163.com',
-      pass: 'OKOXKBWPLGXYLAHC',
-    },
+      user: '填写你的QQ邮箱', //填写你的QQ邮箱，当别人在你博客留言时将用此邮箱通知提醒你
+      pass: '填写你的授权码' //邮箱的授权码 QQ邮箱为例，需要在自己的邮箱设置/账号下面的SMTP服务开启配置生成,并不是邮件的登录密码
+    }
   })
   //查询数据
   router.get('/', async (req, res) => {
@@ -29,7 +29,6 @@ module.exports = (app) => {
   router.post('/', async (req, res) => {
     const data = await req.model.create(req.body)
     res.send(data)
-    // console.log('添加数据' + data)
   })
 
   //修改数据
@@ -41,14 +40,14 @@ module.exports = (app) => {
       let contents = info.content
       let replyEmail = info.email
       let sendHtml = `<div>
-        <div>留言者：YRsong丶博客</div>
+        <div>留言者：YRsong丶博客</div>//
         <div>内容：${contents}</div>
         </div>`
       let emailOptions = {
-        from: 'rsong404@163.com',
+        from: 'xxxx@163.com', //这里改成你的邮箱，和上面的邮箱相同，将用此邮箱给留言者回复
         to: replyEmail,
         // 邮件主题
-        subject: '你在YRsong丶博客的留言有回复了！',
+        subject: '你在YRsong丶博客的留言有回复了！', //改成你想要的主题
         html: sendHtml,
       }
       transporter.sendMail(emailOptions, function (err, info) {

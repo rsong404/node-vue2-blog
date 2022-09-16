@@ -7,9 +7,9 @@ const upload = multer({
     storage: MAO({
         config: {
             region: 'oss-cn-shenzhen',
-            accessKeyId: 'xxxx',
-            accessKeySecret: 'xxxx',
-            bucket: 'xxxx',
+            accessKeyId: 'xxxx', //改成你自己的云存储id
+            accessKeySecret: 'xxxx',//改成你自己的云存储accessKeySecret
+            bucket: 'xxxx',//改成你自己的云存储bucket
         },
         
     })
@@ -21,7 +21,7 @@ module.exports = (app) => {
     })
 
     app.post('/admin/api/upload', verifyAuthorize, upload.single('file'), async(req,res) => {
-        const file = `https://myblog-public-image.oss-cn-shenzhen.aliyuncs.com/${req.file.filename}`
+        const file = `改成你自己的云存储地址如https://xxxxx.oss-cn-shenzhen.aliyuncs.com/${req.file.filename}`
         
         res.send(file)
     })
